@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-wheat-50 relative z-10 h-screen overflow-hidden">
-    <div class="flex justify-center px-4 py-8 md:justify-end md:px-16">
+  <div class="bg-wheat-50 relative min-h-screen z-10 overflow-hidden">
+    <div class="flex justify-center px-4 pt-8 pb-8 md:justify-end md:px-16 md:pb-0">
       <NavPanel class="relative z-100 w-xs"></NavPanel>
     </div>
     <div
@@ -14,16 +14,13 @@
           opacity: Math.max(0, 1 - scrollY / 500),
         }"
       >
-        <img src="../assets/logo-see.png" />
+        <img src="../assets/logo-see.svg" />
       </RouterLink>
       <SearchBar class="relative w-xs sm:w-sm md:w-md"></SearchBar>
     </div>
-    <FloatingImages class="absolute top-0 hidden md:block"></FloatingImages>
+     <WordsDeck></WordsDeck>
   </div>
-  <div class="bg-wheat-100 relative z-5 h-[100vh] overflow-hidden">
-    <WordsDeck></WordsDeck>
-  </div>
-  <Footer class="relative z-10 -mt-[10vh]"></Footer>
+  <Footer class="relative"></Footer>
 </template>
 
 <script setup lang="ts">
@@ -31,7 +28,6 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 import NavPanel from '../components/NavPanel.vue';
 import SearchBar from '../components/SearchBar.vue';
-import FloatingImages from '../components/FloatingImages.vue';
 import Footer from '../components/Footer.vue';
 import WordsDeck from '../components/WordsDeck.vue';
 
