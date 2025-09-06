@@ -12,12 +12,13 @@
       v-on-click-outside="
         () => {
           isHistoryVisible = false;
+          selectedIndex = -1;
         }
       "
     >
       <i-material-symbols-search-rounded
-        width="28"
-        height="28"
+        width="36"
+        height="36"
         class="text-rosybrown-400 hover:text-rosybrown-700 cursor-pointer pl-1"
         @click.stop="handleSubmit"
       />
@@ -26,6 +27,9 @@
         v-model.trim="searchQuery"
         @input="filterHistory"
         @focus="filterHistory"
+        @keydown.down.prevent="handleKeyDown('down')"
+        @keydown.up.prevent="handleKeyDown('up')"
+        @keydown.enter.prevent="handleEnterKey"
       />
       <ul
         v-show="isHistoryVisible && filteredHistory.length > 0"
@@ -34,7 +38,14 @@
         <li
           v-for="(history, index) in filteredHistory"
           :key="index"
-          class="hover:border-l-rosybrown-700 hover:text-rosybrown-700 hover:bg-rosybrown-50 box-border flex flex-row items-center justify-between border-l-3 border-l-transparent px-4 py-1"
+          class=" hover:text-rosybrown-700 box-border flex flex-row items-center justify-between border-l-3 px-4 py-1 transition-colors duration-150"
+          :class="[
+            index === selectedIndex
+              ? 'border-l-rosybrown-700 bg-rosybrown-50 text-rosybrown-700'
+              : 'border-l-transparent',
+          ]"
+          @mouseenter="handleMouseEnter(index)"
+          @mouseleave="handleMouseLeave"
         >
           <div
             class="flex w-7/8 cursor-pointer flex-row items-center font-sans"
@@ -81,10 +92,14 @@ const router = useRouter();
 const searchQuery = ref('');
 const filteredHistory = ref<string[]>([]);
 const isHistoryVisible = ref(false);
-const isInputFocused = ref(false); // 新增：跟踪输入框焦点状态
+const isInputFocused = ref(false);
+const selectedIndex = ref(-1);
+const isMouseHovering = ref(false);
 
 const handleScroll = () => {
   isHistoryVisible.value = false;
+  selectedIndex.value = -1;
+  isMouseHovering.value = false;
 };
 
 onMounted(() => {
@@ -120,6 +135,8 @@ const handleSubmit = () => {
 
   isHistoryVisible.value = false;
   isInputFocused.value = false;
+  selectedIndex.value = -1;
+  isMouseHovering.value = false;
   router.push({ name: 'search', query: { q: query } });
 };
 
@@ -127,6 +144,9 @@ const filterHistory = () => {
   isHistoryVisible.value = true;
   const query = searchQuery.value;
   const matchedHistory = trieHistory.findWords(query);
+  selectedIndex.value = -1;
+  isMouseHovering.value = false;
+
   if (matchedHistory.length < 2) {
     filteredHistory.value = matchedHistory.map((item) => item.word);
     return;
@@ -149,18 +169,77 @@ const selectHistory = (index: number) => {
 const deleteHistory = (index: number) => {
   trieHistory.delete(filteredHistory.value.splice(index, 1)[0]);
   localStorage.setItem('searchHistory', trieHistory.serialize());
+  if (index === selectedIndex.value) {
+    selectedIndex.value = -1;
+    isMouseHovering.value = false;
+  }
 };
 
 const clearHistory = () => {
   filteredHistory.value = [];
   trieHistory.clear();
   localStorage.removeItem('searchHistory');
+  selectedIndex.value = -1;
+  isMouseHovering.value = false;
 };
 
 const onFormClick = (event: MouseEvent) => {
   if ((event.target as HTMLElement).tagName === 'INPUT') {
     isHistoryVisible.value = true;
     isInputFocused.value = true;
+  }
+};
+
+const handleKeyDown = (direction: 'up' | 'down') => {
+  if (isMouseHovering.value) {
+    isMouseHovering.value = false;
+  }
+
+  if (!isHistoryVisible.value || filteredHistory.value.length === 0) {
+    return;
+  }
+
+  if (direction === 'down') {
+    selectedIndex.value =
+      selectedIndex.value === filteredHistory.value.length - 1
+        ? 0
+        : selectedIndex.value + 1;
+  } else {
+    selectedIndex.value =
+      selectedIndex.value <= 0
+        ? filteredHistory.value.length - 1
+        : selectedIndex.value - 1;
+  }
+
+  searchQuery.value = filteredHistory.value[selectedIndex.value];
+
+  scrollToSelectedItem();
+};
+
+const handleEnterKey = () => {
+  if (selectedIndex.value !== -1 && filteredHistory.value.length > 0) {
+    selectHistory(selectedIndex.value);
+  } else {
+    handleSubmit();
+  }
+};
+
+const handleMouseEnter = (index: number) => {
+  isMouseHovering.value = true;
+  selectedIndex.value = index;
+  searchQuery.value = filteredHistory.value[index];
+};
+
+const handleMouseLeave = () => {
+  isMouseHovering.value = false;
+};
+
+const scrollToSelectedItem = () => {
+  const element = document.querySelector(
+    `li:nth-child(${selectedIndex.value + 1})`
+  );
+  if (element) {
+    element.scrollIntoView({ block: 'nearest' });
   }
 };
 
