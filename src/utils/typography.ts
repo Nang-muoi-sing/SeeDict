@@ -18,3 +18,10 @@ export const toggleGlyph = (
 export const circleExplanations = (expls: string[]): string => {
   return expls.map((item) => `◯${item}`).join('');
 };
+
+export const clipLength = (text: string, length: number): string => {
+  const chars = [...text];
+  return chars.length <= length
+    ? text
+    : chars.slice(0, length - 2).join("") + '……';
+};

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex h-screen w-screen items-center justify-center overflow-hidden"
+    class="relative flex h-[40vh] min-h-100 w-screen items-center justify-center overflow-hidden"
   >
     <div
       v-for="(spring, index) in springs"
@@ -16,30 +16,30 @@
         @touchstart="onDragStart(index)"
         @touchmove="onDragMove(index, $event)"
         @touchend="onDragEnd(index)"
-        class="border-wheat-200 bg-wheat-50 relative h-[60vh] w-[75vw] rounded-xl border-1 p-4 select-none lg:h-[450px] lg:w-[600px]"
+        class="border-wheat-200 bg-rosybrown-50 relative h-60 w-[75vw] rounded-xl border-1 p-4 select-none lg:h-65 lg:w-120"
       >
-        <div
-          class="flex h-1/1 flex-col items-center space-y-5 px-5 pt-5 font-sans"
-        >
-          <RouterLink
-            class="block"
-            :to="{ name: 'word', query: { w: cards[index].w } }"
+        <div class="h-1/1 font-sans">
+          <span class="text-wheat-400 text-base italic lg:text-lg"
+            >#汝會八儥？</span
           >
-            <div
-              class="text-rosybrown-800 text-4xl font-bold break-all whitespace-normal md:text-5xl lg:text-6xl"
+          <div class="flex flex-col items-center space-y-5">
+            <RouterLink
+              class="block"
+              :to="{ name: 'word', query: { w: cards[index].w } }"
             >
-              <RubyText
-                :text="cards[index].text"
-                :yngping="cards[index].pron"
-              ></RubyText></div
-          ></RouterLink>
-          <p
-            class="text-rosybrown-800 max-w-lg overflow-hidden text-base text-ellipsis lg:text-lg"
-          >
-            释义：{{ cards[index].expl }}
-          </p>
-          <div class="absolute bottom-0 min-h-[110px] scale-75 overflow-hidden">
-            <img src="../assets/logo-daily.png" draggable="false" />
+              <div
+                class="text-rosybrown-800 text-3xl font-bold break-all whitespace-normal md:text-4xl lg:text-5xl"
+              >
+                <RubyText
+                  :text="cards[index].text"
+                  :yngping="cards[index].pron"
+                ></RubyText></div
+            ></RouterLink>
+            <p
+              class="text-rosybrown-800 max-w-lg overflow-hidden text-base text-ellipsis lg:text-lg"
+            >
+              释义：{{ cards[index].expl }}
+            </p>
           </div>
         </div>
       </div>
@@ -51,7 +51,11 @@
 import gsap from 'gsap';
 import { computed, onMounted, reactive, ref } from 'vue';
 import RubyText from './RubyText.vue';
-import { replaceChineseQuotes, circleExplanations } from '../utils/typography';
+import {
+  replaceChineseQuotes,
+  circleExplanations,
+  clipLength,
+} from '../utils/typography';
 
 type Word = {
   w: string;
@@ -83,7 +87,7 @@ const cards = computed(() => {
   return words.value.map((word) => {
     return {
       ...word,
-      expl: replaceChineseQuotes(circleExplanations(word.expl)),
+      expl: clipLength(replaceChineseQuotes(circleExplanations(word.expl)), 60),
     };
   });
 });
