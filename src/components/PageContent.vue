@@ -1,6 +1,6 @@
 <template>
   <div class="bg-wheat-50 h-full min-h-[100vh] w-full">
-    <NavBar></NavBar>
+    <NavBar :show-search-bar="props.showSearchBar"></NavBar>
     <div
       class="items-center py-5"
       style="min-height: calc(100vh - 130px - var(--spacing) * 56)"
@@ -18,4 +18,12 @@
 <script setup lang="ts">
 import NavBar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
+
+interface Props {
+  showSearchBar?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  showSearchBar: true,
+});
 </script>
