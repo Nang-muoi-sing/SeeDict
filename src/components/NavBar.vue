@@ -6,7 +6,10 @@
       <RouterLink :to="{ name: 'home' }" class="z-100 hidden min-w-35 md:block">
         <img src="../assets/logo.png" />
       </RouterLink>
-      <SearchBar class="w-xs sm:w-sm md:w-md"></SearchBar>
+      <SearchBar
+        v-if="props.showSearchBar"
+        class="w-xs sm:w-sm md:w-md"
+      ></SearchBar>
       <NavPanel class="z-100 hidden w-xs lg:flex"></NavPanel>
       <button
         class="text-rosybrown-600 hover:text-rosybrown-800 flex cursor-pointer items-center rounded-md p-2 focus:outline-none lg:hidden"
@@ -55,22 +58,31 @@
           <div
             class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
           >
-            <a class="inline-flex w-full items-center" href="#"
+            <a
+              class="inline-flex w-full items-center"
+              href="https://jcnf40n3hvft.feishu.cn/wiki/IjlswECJRi4L5tkbM2bcuwQGnWf"
+              target="_blank"
               ><i-material-symbols-school-rounded class="mr-1" />入门</a
             >
           </div>
           <div
             class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
           >
-            <a class="inline-flex w-full items-center" href="#"
+            <a
+              class="inline-flex w-full items-center"
+              href="https://jcnf40n3hvft.feishu.cn/docx/FSqidtsgjo25x0x6R1KcChopnTc"
+              target="_blank"
               ><i-material-symbols-help-rounded class="mr-1" />帮助</a
             >
           </div>
           <div
             class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
           >
-            <a class="inline-flex w-full items-center" href="#"
-              ><i-material-symbols-crowdsource class="mr-1" />关于</a
+            <RouterLink
+              class="inline-flex w-full items-center"
+              :to="{ name: 'about' }"
+            >
+              ><i-material-symbols-crowdsource class="mr-1" />关于</RouterLink
             >
           </div>
         </div>
@@ -83,6 +95,14 @@
 import SearchBar from './SearchBar.vue';
 import NavPanel from './NavPanel.vue';
 import { ref } from 'vue';
+
+interface Props {
+  showSearchBar?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  showSearchBar: true,
+});
 
 // 控制侧边栏显示状态
 const isSidebarOpen = ref(false);

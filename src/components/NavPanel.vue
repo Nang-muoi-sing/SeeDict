@@ -26,7 +26,7 @@
     <div
       class="hover:bg-wheat-50 text-rosybrown-600 hover:text-rosybrown-800 m-1 content-center rounded-xs px-3 py-1.5 font-bold transition-all ease-in-out"
     >
-      <a href="#">关于</a>
+      <RouterLink :to="{ name: 'about' }">关于</RouterLink>
     </div>
   </div>
 </template>
