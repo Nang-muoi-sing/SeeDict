@@ -1,7 +1,7 @@
 {
   "name": "seedict",
   "private": true,
-  "version": "0.1.7",
+  "version": "0.1.8",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,15 +13,17 @@
     "@vueuse/components": "^13.0.0",
     "@vueuse/core": "^13.0.0",
     "flowbite": "^3.1.2",
-    "seedict": "file:",
     "gsap": "^3.12.7",
+    "seedict": "file:",
     "tailwindcss": "^4.1.1",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@iconify-json/ic": "^1.2.4",
     "@iconify-json/material-symbols": "^1.2.29",
     "@iconify-json/mdi": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.50",
     "@types/node": "^24.0.12",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
