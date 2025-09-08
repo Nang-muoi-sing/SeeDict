@@ -21,8 +21,9 @@
       <!-- TODO: 暂时隐藏只有词性没义项的释义部分 -->
       <template
         v-if="
-          wordResponse.data.result.seedict.expls.length > 0 &&
-          wordResponse.data.result.seedict.expls[0].expl
+          (wordResponse.data.result.seedict.expls.length > 0 &&
+            wordResponse.data.result.seedict.expls[0].expl) ||
+          wordResponse.data.result.seedict.commentExpl
         "
       >
         <Subtitle text="本站释义"></Subtitle>
@@ -75,12 +76,20 @@
         ></WordCikLingCard>
       </template>
 
-      <template v-if="wordResponse.data.result.seedict.prons.length > 0">
+      <template
+        v-if="
+          wordResponse.data.result.seedict.prons.length > 0 ||
+          wordResponse.data.result.seedict.commentPron
+        "
+      >
         <Subtitle text="各地方音"></Subtitle>
         <div
           class="text-rosybrown-800 mt-2 mb-5 overflow-hidden rounded-lg bg-white"
         >
-          <table class="w-full border-collapse">
+          <table
+            v-if="wordResponse.data.result.seedict.prons.length > 0"
+            class="w-full border-collapse"
+          >
             <thead class="bg-rosybrown-300 text-center">
               <tr>
                 <th class="py-1 text-white">读音</th>
@@ -112,12 +121,21 @@
               </tr>
             </tbody>
           </table>
-
+          <hr
+            v-if="
+              wordResponse.data.result.seedict.prons.length > 0 &&
+              wordResponse.data.result.seedict.commentPron
+            "
+            class="border-rosybrown-100 border-t-2"
+          />
           <div
-            class="px-8 pb-6"
+            class="px-8"
+            :class="{
+              'pt-2 pb-4': wordResponse.data.result.seedict.prons.length > 0,
+              'py-6': wordResponse.data.result.seedict.prons.length <= 0,
+            }"
             v-if="wordResponse.data.result.seedict.commentPron"
           >
-            <hr class="border-rosybrown-100 my-2 border-t-2" />
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋 </SeeSymbol
               >{{ wordResponse.data.result.seedict.commentPron }}
@@ -139,12 +157,20 @@
         ></WordPhoneticCard>
       </template>
 
-      <template v-if="wordResponse.data.result.seedict.glyphs.length > 0">
+      <template
+        v-if="
+          wordResponse.data.result.seedict.glyphs.length > 0 ||
+          wordResponse.data.result.seedict.commentGlyph
+        "
+      >
         <Subtitle text="用字一览"></Subtitle>
         <div
           class="text-rosybrown-800 mt-2 mb-5 overflow-hidden rounded-lg bg-white"
         >
-          <table class="w-full border-collapse">
+          <table
+            v-if="wordResponse.data.result.seedict.glyphs.length > 0"
+            class="w-full border-collapse"
+          >
             <thead class="bg-rosybrown-300 text-center">
               <tr>
                 <th class="py-1 text-white">用字</th>
@@ -168,11 +194,22 @@
             </tbody>
           </table>
 
+          <hr
+            v-if="
+              wordResponse.data.result.seedict.glyphs.length > 0 &&
+              wordResponse.data.result.seedict.commentGlyph
+            "
+            class="border-rosybrown-100 border-t-2"
+          />
+
           <div
-            class="px-8 pb-6"
+            class="px-8"
+            :class="{
+              'pt-2 pb-4': wordResponse.data.result.seedict.glyphs.length > 0,
+              'py-6': wordResponse.data.result.seedict.glyphs.length <= 0,
+            }"
             v-if="wordResponse.data.result.seedict.commentGlyph"
           >
-            <hr class="border-rosybrown-100 my-2 border-t-2" />
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol>
               {{ wordResponse.data.result.seedict.commentGlyph }}
