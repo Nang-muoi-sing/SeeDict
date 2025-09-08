@@ -22,7 +22,7 @@
     </div>
 
     <p class="text-rosybrown-200 mt-2 flex justify-end text-sm">
-      李如龙. 2001. 戚林八音校注. 福州: 福建人民出版社.
+      李如龙, 王升魁. 戚林八音校注. 福州: 福建人民出版社, 2001.
     </p>
     <template v-if="props.isCommentedCikLing">
       <hr class="border-rosybrown-100 my-2 border-t-2" />
