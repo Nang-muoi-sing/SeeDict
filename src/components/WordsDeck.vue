@@ -20,7 +20,7 @@
       >
         <div class="h-1/1 font-sans">
           <span class="text-wheat-400 text-base italic lg:text-lg"
-            >#汝會八儥？</span
+            >#汝会八儥？</span
           >
           <div class="flex flex-col items-center space-y-5">
             <RouterLink
