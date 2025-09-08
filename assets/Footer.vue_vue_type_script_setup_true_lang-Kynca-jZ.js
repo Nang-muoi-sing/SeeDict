@@ -1,1 +1,0 @@
-import{d as s,c as o,e as t,q as n,b as r}from"./index-cgs05pQZ.js";const a={class:"bg-rosybrown-800 h-56 rounded-t-[48px] text-center"},c={class:"flex flex-col pt-20"},l=s({__name:"Footer",setup(_){return(d,e)=>(r(),o("div",a,[t("div",c,[e[1]||(e[1]=t("span",{class:"text-sans text-rosybrown-50 mb-2"},"© 2025 米时典 SeeDict ",-1)),n("",!0)])]))}});export{l as _};
