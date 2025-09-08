@@ -30,8 +30,8 @@
     <p class="text-rosybrown-200 mt-2 flex justify-end text-sm">
       {{
         props.data.refPage
-          ? `冯爱珍. 1998. 福州方言词典. 南京: 江苏教育出版社. 第 ${props.data.refPage} 页.`
-          : '冯爱珍. 1998. 福州方言词典. 南京: 江苏教育出版社.'
+          ? `冯爱珍. 福州方言词典. 南京: 江苏教育出版社, 1998: ${props.data.refPage}.`
+          : '冯爱珍. 福州方言词典. 南京: 江苏教育出版社, 1998.'
       }}
     </p>
     <template v-if="props.data.correction">
