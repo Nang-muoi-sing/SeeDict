@@ -78,7 +78,7 @@ export const yngpingToIPA = (
     // ng 既作声母也作韵母，当没有其他韵母时就是韵母
     if (initial === 'ng' && final === '') {
       initial = '';
-      final = finalMap['ng'];
+      final = 'ng';
     }
 
     tone =
