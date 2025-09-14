@@ -3,10 +3,11 @@
 @plugin "flowbite/plugin";
 @source "~flowbite";
 /* @source "../node_modules/flowbite"; */
+@import './assets/fonts/seefont/style.css';
 
 @theme {
   --font-sans:
-    'Noto Sans', 'Noto Sans CJK SC', 'Arial', ui-sans-serif, system-ui, sans-serif,
+    'Noto Sans', 'Noto Sans CJK SC', 'seefont', 'Arial', ui-sans-serif, system-ui, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   --font-slogan: 'Smiley Sans', ui-sans-serif, system-ui, sans-serif;
