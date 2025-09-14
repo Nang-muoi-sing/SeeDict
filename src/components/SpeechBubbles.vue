@@ -15,7 +15,8 @@
       :arrow-class="'border-t-wheat-100'"
       :bubble-class="'bg-wheat-100'"
       ><p class="text-wheat-600 text-sm">
-        和做玻当𬖞一样，需要社会上每一分子都为福州话保护添上「芝麻」「豆粉」「白砂糖」，
+        和做「<RubyText :text="'玻当𬖞'" :yngping="'bo55 loung55 si53'"></RubyText
+        >」一样，需要社会上每一分子都为福州话保护添上「芝麻」「豆粉」「白砂糖」，
         才能做大做强，把福州话保护好
       </p></SpeechBubble
     >
@@ -33,13 +34,21 @@
       :arrow-class="'border-t-wheat-100'"
       :bubble-class="'bg-wheat-100'"
       ><p class="text-wheat-600 text-sm">
-        「𬖞」和英文的 see
-        谐音，在平话和普通话里，「𬖞典」又和「词典」谐音，我们就是一部希望平话被更多人看见的词典
+        「<RubyText :text="'𬖞'" :yngping="'si53'"></RubyText>」和英文的 see
+        谐音，在平话和普通话里，「<RubyText
+          :text="'𬖞典'"
+          :yngping="'si33 dieng33'"
+        ></RubyText
+        >」又和「<RubyText :text="'词典'" :yngping="'sy33 dieng33'"></RubyText
+        >」谐音，我们就是一部希望平话被更多人<ruby
+          >看见<rp>(</rp><rt>see</rt><rp>)</rp></ruby
+        >的词典
       </p></SpeechBubble
     >
   </div>
 </template>
 
 <script setup lang="ts">
+import RubyText from './RubyText.vue';
 import SpeechBubble from './SpeechBubble.vue';
 </script>
