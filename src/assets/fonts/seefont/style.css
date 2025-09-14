@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'seefont';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url('./fonts/SeeFont-Regular.ttf') format('truetype'),
+    url('./fonts/SeeFont-Regular.woff2') format('woff2'),
+    url('./fonts/SeeFont-Regular.woff') format('woff');
+  font-display: swap;
+}

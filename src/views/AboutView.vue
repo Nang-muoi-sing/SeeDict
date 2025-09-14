@@ -102,4 +102,5 @@ import PageContent from '../components/PageContent.vue';
 import SpeechBubbles from '../components/SpeechBubbles.vue';
 import Subtitle from '../components/Subtitle.vue';
 import Timeline from '../components/Timeline.vue';
+import RubyText from '../components/RubyText.vue';
 </script>
