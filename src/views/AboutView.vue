@@ -1,35 +1,52 @@
 <template>
   <PageContent :show-search-bar="false">
-    <BannerTitle
-      class="-mt-8 mb-16"
-      :text="'关于'"
-      :yngping="'guang55 y53'"
-    ></BannerTitle>
-    <div class="bg-wheat-100 text-wheat-800 mx-5 mb-5 rounded-xl px-6 py-3">
-      <p>每个人都有珍藏的平话故事：</p>
-      <div class="pt-2 pl-8">
-        <p>或许是儿时在公奶身边绕膝唱的月光光；</p>
-        <p>或许是记忆中窗前吆喝着担过的鱼丸汤；</p>
-        <p>或许是母语意识下一次次对身份的叩问；</p>
-        <p>或许是千里外的乡音将思绪牵回到故乡……</p>
-      </div>
+    <div class="h-fill flex">
+      <LetterPaper>
+        <div class="text-rosybrown-800 mb-5 flex flex-row text-4xl font-bold">
+          <RubyText :text="'关于'" :yngping="'guang55 y53'"></RubyText>
+        </div>
+
+        <div class="text-rosybrown-600 space-y-2 text-sm font-semibold">
+          <p>每个人都有珍藏的平话故事：</p>
+          <p>
+            或许是儿时在公奶身边绕膝唱的月光光；或许是记忆中窗前吆喝着担过的鱼丸汤；或许是母语意识下一次次对身份的叩问；或许是千里外的乡音将思绪牵回到故乡……
+          </p>
+        </div>
+        <h3
+          class="text-wheat-600 mt-5 mb-2 text-lg font-bold before:content-['■']"
+        >
+          你是否意识到？
+        </h3>
+        <div class="text-wheat-600 space-y-2 text-sm">
+          <p>
+            平话不仅是一种语言，同时是这座城市记忆与情感的载体，跨越世代建立起理解和共鸣的桥梁。这方水土养出的腔调，藏着我们未说尽的乡愁。它不该是博物馆里蒙尘的标本，而是深深烙印在每一代人心底里的独特记忆。榕城日新月异，而陪伴这座城市相生相长的平话却渐渐少了声响。正因为抱着让平话在新时代依然保持鲜活可亲的共同信念，我们聚集在一起，《米时典》也便有了诞生的理由。
+          </p>
+          <p>
+            ——我们希望使用平话和喜欢平话的人们通过《米时典》增加对平话的认识、规范平话文字的使用，让平话能继续被使用、被传递、被热爱。
+          </p>
+        </div>
+      </LetterPaper>
+      <div class="bg-wheat-100 mt-2 w-30 xl:hidden"></div>
+    </div>
+    <div class="bg-wheat-100 text-wheat-600 ml-2 px-10 py-3 text-sm xl:hidden">
+      *「
+      <RubyText :text="'平话'" :yngping="'bang21 ua242'"></RubyText>
+      」是闽东一带人们对于自己母语的称呼，意思是「听得懂」的语言。
     </div>
 
-    <div class="text-wheat-800 mx-2 space-y-2">
-      <p>你是否意识到？</p>
-      <p>
-        平话不仅是一种语言，同时是这座城市记忆与情感的载体，跨越世代建立起理解和共鸣的桥梁。这方水土养出的腔调，藏着我们未说尽的乡愁。它不该是博物馆里蒙尘的标本，而是深深烙印在每一代人心底里的独特记忆。榕城日新月异，而陪伴这座城市相生相长的平话却渐渐少了声响。正因为抱着让平话在新时代依然保持鲜活可亲的共同信念，我们聚集在一起，《米时典》也便有了诞生的理由。
-      </p>
-      <p>
-        ——我们希望使用平话和喜欢平话的人们通过《米时典》增加对平话的认识、规范平话文字的使用，让平话能继续被使用、被传递、被热爱。
-      </p>
+    <div class="relative hidden xl:block">
+      <img
+        class="absolute -top-35 -left-75 w-60"
+        src="../assets/memo-bangua.webp"
+      />
     </div>
+
     <Subtitle text="沿革" class="mt-8 mb-2"></Subtitle>
-    <div class="text-wheat-800 mx-2">
+    <div class="text-wheat-600 mx-2">
       <p>
-        《米时典》（SeeDict）是一款面向大众的、具有公益性质的线上平话词典，目前由蓝尾星团队维护。《米时典》继承了原《榕典》的平话数据，并在此基础上加以更新和扩展，截至目前已收录
-        22,748 条平话词条（字、词、俗语）、51,282 条读音（榕拼）、4,201
-        条本站释义。
+        《米时典》（SeeDict）是一款面向大众的、具有公益性质的线上平话词典，目前由蓝尾星团队维护。《米时典》继承了原《榕典》的平话数据，并在此基础上加以更新和扩展，截至
+        2025 年 9 月 15 日已收录 20,000+ 条平话词条（字、词、俗语）、50,000+
+        条读音（榕拼）、4,000+ 条本站释义。
       </p>
 
       <DashboardCard></DashboardCard>
@@ -40,7 +57,7 @@
     </div>
     <Timeline></Timeline>
     <Subtitle text="愿景" class="mt-8 mb-2"></Subtitle>
-    <div class="text-wheat-800 mx-2">
+    <div class="text-wheat-600 mx-2">
       <div class="flex flex-row justify-between space-x-5">
         <div class="flex-2 content-end">
           <img class="mb-5" src="../assets/seedict-names.webp" />
@@ -49,15 +66,15 @@
       </div>
 
       <p>
-        在上线之初，就已经有朋友给我们取了许多「爱称」，不论是「糍粑典」还是「团子典」,我们全部欣然接受。我们团队中的每个人对「米时典」都有着自己的理解，我们也希望这个称呼能在众人心中生长出独属于自己的诠释——只有具有大家的关注、参与与守护，平话的保育事业才能走得更久、行得更远……
+        在上线之初，就已经有朋友给我们取了许多「爱称」，不论是「糍粑典」还是「团子典」，我们全部欣然接受。我们团队中的每个人对「米时典」都有着自己的理解，我们也希望这个称呼能在众人心中生长出独属于自己的诠释——只有具有大家的关注、参与与守护，平话的保育事业才能走得更久、行得更远……
       </p>
     </div>
 
     <Subtitle text="联系" class="mt-8 mb-2"></Subtitle>
-    <div class="text-wheat-800 mx-2"><ContactCard></ContactCard></div>
+    <div class="text-wheat-600 mx-2"><ContactCard></ContactCard></div>
 
     <Subtitle text="致谢" class="mt-8 mb-2"></Subtitle>
-    <ul class="text-wheat-800 list-disc px-5">
+    <ul class="text-wheat-600 list-disc px-5">
       <li>感谢每位选择《米时典》的用户</li>
       <li>
         感谢<span class="border-1">陈泽平</span>老师、冯爱珍老师提供的数据授权
@@ -78,9 +95,9 @@
 </template>
 
 <script setup lang="ts">
-import BannerTitle from '../components/BannerTitle.vue';
 import ContactCard from '../components/ContactCard.vue';
 import DashboardCard from '../components/DashboardCard.vue';
+import LetterPaper from '../components/LetterPaper.vue';
 import PageContent from '../components/PageContent.vue';
 import SpeechBubbles from '../components/SpeechBubbles.vue';
 import Subtitle from '../components/Subtitle.vue';
