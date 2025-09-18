@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'SeeFont';
+    src: url('fonts/SeeFont-Regular.woff2') format('woff2'),
+         url('fonts/SeeFont-Regular.woff') format('woff'),
+         url('fonts/SeeFont-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+20546, U+206BA, U+206D2, U+207AD, U+207F6, U+2082B, U+20BCF, U+20C33, U+20C9B, U+20CA5, U+20D90, U+20EAA, U+20EAE, U+20F6E, U+20FA6, U+210F3, U+21145, U+2114F, U+213AE, U+2179F, U+217D1, U+22A45, U+22ADD, U+22AED, U+22B33, U+22BFD-22BFE, U+231AF, U+23350, U+238AF, U+240F6, U+241FA, U+24E2C, U+25139, U+2519D, U+25349, U+25B58, U+25DD2, U+25EF5, U+26067, U+26FB3, U+273EB, U+27F28, U+2847E, U+2913B, U+294E5, U+297D7, U+29A4D, U+29E1E, U+2A3F8, U+2A895, U+2ABA1, U+2B95D, U+2BA85, U+2BA8C, U+2BAFA, U+2C1F4, U+2C23A, U+2C59E, U+31C4E;
+}
