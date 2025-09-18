@@ -74,23 +74,24 @@
     <div class="text-wheat-600 mx-2"><ContactCard></ContactCard></div>
 
     <Subtitle text="致谢" class="mt-8 mb-2"></Subtitle>
-    <ul class="text-wheat-600 list-disc px-5">
+    <ul class="text-wheat-600 list-disc space-y-1.5 px-5">
       <li>感谢每位选择《米时典》的用户</li>
       <li>
-        感谢<span class="border-1">陈泽平</span>老师、冯爱珍老师提供的数据授权
+        感谢<span class="border-1 px-0.5 py-[1px]">陈泽平</span>老师与冯爱珍老师慷慨授权使用其著作数据
       </li>
       <li>
-        感谢「福老爷」<span class="border-1">林圜</span>先生曾经提供的帮助
+        感谢「福老爷」<span class="border-1 px-0.5 py-[1px]">林圜</span>先生曾经提供的帮助
       </li>
       <li>感谢福州厝边公司曾经提供的帮助</li>
       <li>感谢真鸟囝团队和《榕典》为平话保育做出的探索和贡献</li>
-      <li>感谢大秀为《米时典》提供美术支持</li>
-      <li>感谢所有参与文本数位化工作的志愿者</li>
-      <li>感谢所有关心与支持平话保育事业的人们</li>
+      <li>
+        感谢《<Link href="https://fzcuo.com/">福州老建筑百科</Link>》薛纪天提供的帮助
+      </li>
+      <li>感谢大秀为《米时典》提供的精心美术设计与支持</li>
+      <li>感谢所有参与文本数位化工作志愿者的无私奉献</li>
+      <li>特别感谢 Hector 大黑对文献数位化的贡献</li>
+      <li>最后感谢所有关心、热心与支持平话保育事业的人们</li>
     </ul>
-    <!-- <p>
-      * 本文中 “平话” 即为福州方言，意为：本地人听起来没有外乡腔调的语言。
-    </p> -->
   </PageContent>
 </template>
 
@@ -99,8 +100,9 @@ import ContactCard from '../components/ContactCard.vue';
 import DashboardCard from '../components/DashboardCard.vue';
 import LetterPaper from '../components/LetterPaper.vue';
 import PageContent from '../components/PageContent.vue';
+import RubyText from '../components/RubyText.vue';
 import SpeechBubbles from '../components/SpeechBubbles.vue';
 import Subtitle from '../components/Subtitle.vue';
 import Timeline from '../components/Timeline.vue';
-import RubyText from '../components/RubyText.vue';
+import Link from '../components/Link.vue';
 </script>
