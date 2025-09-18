@@ -8,11 +8,7 @@
     <div
       class="hover:bg-wheat-50 text-rosybrown-600 hover:text-rosybrown-800 m-1 content-center rounded-xs px-3 py-1.5 font-bold transition-all ease-in-out"
     >
-      <a
-        href="https://jcnf40n3hvft.feishu.cn/wiki/IjlswECJRi4L5tkbM2bcuwQGnWf"
-        target="_blank"
-        >入门</a
-      >
+      <RouterLink :to="{ name: 'tutorial' }">入门</RouterLink>
     </div>
     <div
       class="hover:bg-wheat-50 text-rosybrown-600 hover:text-rosybrown-800 m-1 content-center rounded-xs px-3 py-1.5 font-bold transition-all ease-in-out"

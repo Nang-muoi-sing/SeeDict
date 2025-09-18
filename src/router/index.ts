@@ -17,9 +17,9 @@ const routes = [
     component: () => import('../views/WordView.vue'),
   },
   {
-    path: '/resource',
-    name: 'resource',
-    component: () => import('../views/ResourceView.vue'),
+    path: '/tutorial',
+    name: 'tutorial',
+    component: () => import('../views/TutorialView.vue'),
   },
   {
     path: '/help',
