@@ -5,9 +5,12 @@
         <span class="text-sans text-rosybrown-50 mb-2"
           >© 2025 米时典 SeeDict
         </span>
-        <div v-if="showBeian" class="text-rosybrown-400">
+        <div v-if="showBeian" class="text-rosybrown-400 text-sm mx-auto gap-x-5 gap-y-0.5 flex flex-col md:flex-row">
           <a href="beian.miit.gov.cn" target="_blank"
             >闽 ICP 备 2025111999 号 - 1</a
+          >
+          <a href="https://beian.mps.gov.cn/#/query/webSearch" target="_blank"
+            >闽公网安备 35010202001966 号</a
           >
         </div>
       </div>
