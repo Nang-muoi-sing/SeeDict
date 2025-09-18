@@ -4,7 +4,7 @@
       class="flex flex-row items-center justify-between gap-5 px-4 py-2 sm:px-16 sm:py-8"
     >
       <RouterLink :to="{ name: 'home' }" class="z-100 hidden min-w-35 md:block">
-        <img src="../assets/logo.png" />
+        <img src="../assets/logo.svg" />
       </RouterLink>
       <SearchBar
         v-if="props.showSearchBar"
@@ -45,7 +45,7 @@
         <div
           class="flex w-full flex-col items-center justify-center px-2 py-4 font-sans text-lg"
         >
-          <img class="mb-8" src="../assets/logo.png" draggable="false" />
+          <img class="mb-8" src="../assets/logo.svg" draggable="false" />
           <div
             class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
           >
