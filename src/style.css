@@ -4,11 +4,12 @@
 @source "~flowbite";
 /* @source "../node_modules/flowbite"; */
 @import './assets/fonts/SeeFont/style.css';
+@import './assets/fonts/SeeFontEx/style.css';
 @import './assets/fonts/SeeYngping/style.css';
 
 @theme {
   --font-sans:
-    'SeeYngping', 'Noto Sans', 'Noto Sans CJK SC', 'SeeFont', 'Arial',
+    'SeeYngping', 'Noto Sans', 'Noto Sans CJK SC', 'SeeFont', 'SeeFontEx', 'Arial',
     ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 
