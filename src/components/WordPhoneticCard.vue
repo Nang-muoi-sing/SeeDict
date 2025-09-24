@@ -9,7 +9,7 @@
     <p v-if="processedData.banguace">
       <Badge>教会罗马字</Badge>{{ processedData.banguace }}
     </p>
-    <p v-if="processedData.ipa"><Badge>IPA</Badge>/{{ processedData.ipa }}/</p>
+    <p v-if="processedData.ipa"><Badge>国际音标</Badge>/{{ processedData.ipa }}/</p>
     <p v-if="processedData.yngping">
       <Badge>榕拼键入</Badge
       ><span v-html="makeYngpingsSup(processedData.yngping)"></span>
