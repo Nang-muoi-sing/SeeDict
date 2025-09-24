@@ -58,11 +58,11 @@
           <div
             class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
           >
-            <a
+            <RouterLink
               class="inline-flex w-full items-center"
-              href="https://jcnf40n3hvft.feishu.cn/wiki/IjlswECJRi4L5tkbM2bcuwQGnWf"
-              target="_blank"
-              ><i-material-symbols-school-rounded class="mr-1" />入门</a
+              :to="{ name: 'tutorial' }"
+            >
+              <i-material-symbols-school-rounded class="mr-1" />入门</RouterLink
             >
           </div>
           <div
@@ -82,7 +82,7 @@
               class="inline-flex w-full items-center"
               :to="{ name: 'about' }"
             >
-              ><i-material-symbols-crowdsource class="mr-1" />关于</RouterLink
+              <i-material-symbols-crowdsource class="mr-1" />关于</RouterLink
             >
           </div>
         </div>
