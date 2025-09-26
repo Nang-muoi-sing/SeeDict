@@ -50,7 +50,7 @@
 <script lang="ts" setup>
 import gsap from 'gsap';
 import { computed, onMounted, reactive, ref } from 'vue';
-import RubyText from './RubyText.vue';
+import RubyText from './common/RubyText.vue';
 import {
   replaceChineseQuotes,
   circleExplanations,

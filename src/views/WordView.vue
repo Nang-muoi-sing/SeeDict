@@ -224,13 +224,13 @@
 <script lang="ts" setup>
 import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import Badge from '../components/Badge.vue';
+import Badge from '../components/common/Badge.vue';
+import RubyText from '../components/common/RubyText.vue';
+import SeeSymbol from '../components/common/SeeSymbol.vue';
+import Subtitle from '../components/common/Subtitle.vue';
 import Explanations from '../components/Explanations.vue';
 import PageContent from '../components/PageContent.vue';
-import RubyText from '../components/RubyText.vue';
-import SeeSymbol from '../components/SeeSymbol.vue';
 import SideBar from '../components/SideBar.vue';
-import Subtitle from '../components/Subtitle.vue';
 import WordCikLingCard from '../components/WordCikLingCard.vue';
 import WordFengBlock from '../components/WordFengCard.vue';
 import WordPhoneticCard from '../components/WordPhoneticCard.vue';

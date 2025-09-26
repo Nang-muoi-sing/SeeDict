@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import RubyText from './RubyText.vue';
+import RubyText from './common/RubyText.vue';
 
 const props = defineProps<{
   text: string;

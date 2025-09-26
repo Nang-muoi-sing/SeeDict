@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { makeYngpingCursive, makeYngpingsCursive } from '../utils/phonetics';
+import { makeYngpingCursive, makeYngpingsCursive } from '../../utils/phonetics';
 import { computed } from 'vue';
 
 const props = defineProps<{

@@ -49,8 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import SeeSymbol from './SeeSymbol.vue';
-import Badge from './Badge.vue';
+import SeeSymbol from './common/SeeSymbol.vue';
+import Badge from './common/Badge.vue';
 import type { WordCikLing } from '../utils/typing';
 
 const props = defineProps<{
