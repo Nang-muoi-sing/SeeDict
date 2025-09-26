@@ -77,15 +77,18 @@
     <ul class="text-wheat-600 list-disc space-y-1.5 px-5">
       <li>感谢每位选择《米时典》的用户</li>
       <li>
-        感谢<span class="border-1 px-0.5 py-[1px]">陈泽平</span>老师与冯爱珍老师慷慨授权使用其著作数据
+        感谢<span class="border-1 px-0.5 py-[1px]">陈泽平</span
+        >老师与冯爱珍老师慷慨授权使用其著作数据
       </li>
       <li>
-        感谢「福老爷」<span class="border-1 px-0.5 py-[1px]">林圜</span>先生曾经提供的帮助
+        感谢「福老爷」<span class="border-1 px-0.5 py-[1px]">林圜</span
+        >先生曾经提供的帮助
       </li>
       <li>感谢福州厝边公司曾经提供的帮助</li>
       <li>感谢真鸟囝团队和《榕典》为平话保育做出的探索和贡献</li>
       <li>
-        感谢《<Link href="https://fzcuo.com/">福州老建筑百科</Link>》薛纪天提供的帮助
+        感谢《<Link href="https://fzcuo.com/">福州老建筑百科</Link
+        >》薛纪天提供的帮助
       </li>
       <li>感谢大秀为《米时典》提供的精心美术设计与支持</li>
       <li>感谢所有参与文本数位化工作志愿者的无私奉献</li>
@@ -100,9 +103,9 @@ import ContactCard from '../components/ContactCard.vue';
 import DashboardCard from '../components/DashboardCard.vue';
 import LetterPaper from '../components/LetterPaper.vue';
 import PageContent from '../components/PageContent.vue';
-import RubyText from '../components/RubyText.vue';
 import SpeechBubbles from '../components/SpeechBubbles.vue';
-import Subtitle from '../components/Subtitle.vue';
 import Timeline from '../components/Timeline.vue';
-import Link from '../components/Link.vue';
+import Link from '../components/common/Link.vue';
+import RubyText from '../components/common/RubyText.vue';
+import Subtitle from '../components/common/Subtitle.vue';
 </script>

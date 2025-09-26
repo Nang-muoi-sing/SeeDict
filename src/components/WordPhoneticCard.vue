@@ -9,7 +9,9 @@
     <p v-if="processedData.banguace">
       <Badge>教会罗马字</Badge>{{ processedData.banguace }}
     </p>
-    <p v-if="processedData.ipa"><Badge>国际音标</Badge>/{{ processedData.ipa }}/</p>
+    <p v-if="processedData.ipa">
+      <Badge>国际音标</Badge>/{{ processedData.ipa }}/
+    </p>
     <p v-if="processedData.yngping">
       <Badge>榕拼键入</Badge
       ><span v-html="makeYngpingsSup(processedData.yngping)"></span>
@@ -25,13 +27,13 @@
 import { computed } from 'vue';
 import { toneCikLingMap } from '../utils/mapping';
 import {
-  yngpingToIPA,
-  yngpingToCursive,
+  makeYngpingsSup,
   phonologyToBanguace,
-  makeYngpingsSup
+  yngpingToCursive,
+  yngpingToIPA,
 } from '../utils/phonetics';
 import type { Phonetics } from '../utils/typing';
-import Badge from './Badge.vue';
+import Badge from './common/Badge.vue';
 
 const props = defineProps<{
   data: Phonetics;
