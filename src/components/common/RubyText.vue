@@ -6,9 +6,9 @@
       :key="`${char}-${index}`"
     >
       <span
-        class="rb"
+        class="rb relative inline-block"
         :class="{
-          'after:bg-rosybrown-700 relative inline-block w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:content-[\'\']':
+          'after:bg-rosybrown-700 w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:content-[\'\']':
             markedChars[index],
         }"
         >{{ char }}
@@ -17,7 +17,7 @@
 
     <span v-else class="rb"></span>
     <rp>(</rp
-    ><rt class="text-rosybrown-700">{{
+    ><rt class="text-rosybrown-700 relative top-[0.5em]">{{
       makeYngpingsCursive(props.yngping) ?? ''
     }}</rt
     ><rp>)</rp>
@@ -26,18 +26,20 @@
   <ruby v-else>
     <template v-for="(char, index) in baldChars" :key="`${char}-${index}`">
       <span
-        class="rb"
+        class="rb relative inline-block"
         :class="{
-          'after:bg-rosybrown-700 relative inline-block w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:content-[\'\']':
+          'after:bg-rosybrown-700 w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:content-[\'\']':
             markedChars[index],
         }"
         >{{ char }}
       </span>
 
       <rp>(</rp
-      ><rt v-if="baldChars.length > 1" class="text-rosybrown-700"
+      ><rt
+        v-if="baldChars.length > 1"
+        class="text-rosybrown-700 relative top-[0.5em]"
         >&thinsp;{{ makeYngpingCursive(syllables[index]) }}&thinsp;</rt
-      ><rt v-else class="text-rosybrown-700">{{
+      ><rt v-else class="text-rosybrown-700 relative top-[0.5em]">{{
         makeYngpingCursive(syllables[index])
       }}</rt>
       <rp>)</rp>
