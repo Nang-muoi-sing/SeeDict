@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { parseText } from '../utils/typography';
+import { parseText, correctStops } from '../utils/typography';
 import type { FengExplNode } from '../utils/typing';
 
 interface Props {
@@ -34,7 +34,7 @@ const parseNestedExplanations = (
     style="font-size: 20px; display: inline-block; width: 1em;"
     >${item.lexical}</span>`
         : '';
-      const processedExpl = `${lexicalIcon}${parseText(item.expl, props.currentGlyph)}`;
+      const processedExpl = `${lexicalIcon}${correctStops(parseText(item.expl, props.currentGlyph))}`;
 
       return `
     <li class="mb-2">
@@ -48,7 +48,9 @@ const parseNestedExplanations = (
           ? `<ul class="list-none pl-2 md:pl-6 mt-1 space-y-1">${item.sent
               .map((sent) => {
                 // 替换例句中的 {A,B} 格式
-                const processedSent = parseText(sent, props.currentGlyph);
+                const processedSent = correctStops(
+                  parseText(sent, props.currentGlyph)
+                );
                 return `
           <li class="flex items-start text-wheat-400">
             <span class="mr-2">•</span>

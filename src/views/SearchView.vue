@@ -40,7 +40,7 @@
             <RubyText :text="result.text" :yngping="result.pron"></RubyText>
           </div>
           <p class="text-wheat-600 mt-2">
-            {{ replaceChineseQuotes(toggleGlyph(result.brief)) }}
+            {{ correctStops(parseText(result.brief)) }}
           </p>
         </div></RouterLink
       >
@@ -87,7 +87,7 @@ import PageContent from '../components/PageContent.vue';
 import SearchSkeleton from '../components/SearchSkeleton.vue';
 import { sourceMap } from '../utils/mapping';
 import type { SearchResponse } from '../utils/typing';
-import { replaceChineseQuotes, toggleGlyph } from '../utils/typography';
+import { correctStops, parseText } from '../utils/typography';
 
 const route = useRoute();
 
