@@ -6,6 +6,12 @@ export const replaceChineseQuotes = (text: string): string => {
     .replace(/”/g, '」'); // 右双引号 ” → 」
 };
 
+export const correctStops = (text: string): string => {
+  if (!text.trim()) return text;
+  const endsWithValidStop = /([。？！」』]|。）|？）|！）)$/.test(text);
+  return endsWithValidStop ? text : text + '。';
+};
+
 export const replaceChinesePunctuation = (text: string): string => {
   const punctuationMap: Record<string, string> = {
     '‘': '『',
@@ -19,9 +25,10 @@ export const replaceChinesePunctuation = (text: string): string => {
     '!': '！',
     ',': '，',
     '.': '。',
+    '<書>': '〈書〉',
   };
 
-  const regex = /‘|’|“|”|\(|\)|!|,|\.|\?/g;
+  const regex = /‘|’|“|”|\(|\)|~|\?|!|,|(?<!\d)\.|<書>/g;
   return text.replace(regex, (match) => punctuationMap[match]);
 };
 
