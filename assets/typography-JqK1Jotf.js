@@ -1,1 +1,0 @@
-const a=e=>e.replace(/“/g,"「").replace(/”/g,"」"),o=(e,r="second")=>{const n=/\{([^,]+),([^}]+)\}/g;return e.replace(n,(t,c,s)=>r==="first"?c:s)},l=e=>e.map(r=>`◯${r}`).join(""),p=(e,r)=>{const n=[...e];return n.length<=r?e:n.slice(0,r-2).join("")+"……"};export{l as a,p as c,a as r,o as t};
