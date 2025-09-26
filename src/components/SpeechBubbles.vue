@@ -49,6 +49,6 @@
 </template>
 
 <script setup lang="ts">
-import RubyText from './RubyText.vue';
-import SpeechBubble from './SpeechBubble.vue';
+import RubyText from './common/RubyText.vue';
+import SpeechBubble from './common/SpeechBubble.vue';
 </script>
