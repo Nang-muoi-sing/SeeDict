@@ -33,7 +33,11 @@
           ></Explanations>
           <p v-if="wordResponse.data.result.seedict.commentExpl">
             <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol
-            >{{ wordResponse.data.result.seedict.commentExpl }}
+            >{{
+              replaceChinesePunctuation(
+                wordResponse.data.result.seedict.commentExpl
+              )
+            }}
           </p>
           <template
             v-if="
@@ -138,7 +142,11 @@
           >
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋 </SeeSymbol
-              >{{ wordResponse.data.result.seedict.commentPron }}
+              >{{
+                replaceChinesePunctuation(
+                  wordResponse.data.result.seedict.commentPron
+                )
+              }}
             </p>
           </div>
         </div>
@@ -212,7 +220,11 @@
           >
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol>
-              {{ wordResponse.data.result.seedict.commentGlyph }}
+              {{
+                replaceChinesePunctuation(
+                  wordResponse.data.result.seedict.commentGlyph
+                )
+              }}
             </p>
           </div>
         </div>
@@ -237,6 +249,8 @@ import WordPhoneticCard from '../components/WordPhoneticCard.vue';
 import WordSkeleton from '../components/WordSkeleton.vue';
 import { yngpingToIPA } from '../utils/phonetics';
 import type { WordResponse, WordSeeDict } from '../utils/typing';
+import { replaceChinesePunctuation } from '../utils/typography';
+
 const apiUrl = import.meta.env.VITE_API_URL || '/';
 const route = useRoute();
 const router = useRouter();
