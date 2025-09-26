@@ -113,6 +113,6 @@
 
 <script setup lang="ts">
 import PageContent from '../components/PageContent.vue';
-import Subtitle from '../components/Subtitle.vue';
-import Link from '../components/Link.vue';
+import Link from '../components/common/Link.vue';
+import Subtitle from '../components/common/Subtitle.vue';
 </script>

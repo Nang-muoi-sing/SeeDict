@@ -24,11 +24,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
+import Footer from '../components/common/Footer.vue';
 import NavPanel from '../components/NavPanel.vue';
 import SearchBar from '../components/SearchBar.vue';
-import Footer from '../components/Footer.vue';
 import WordsDeck from '../components/WordsDeck.vue';
 
 const scrollY = ref(0);

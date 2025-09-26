@@ -42,8 +42,8 @@
 import { computed } from 'vue';
 import { toneCikLingMap } from '../utils/mapping';
 import type { WordCikLing } from '../utils/typing';
-import Badge from './Badge.vue';
-import SeeSymbol from './SeeSymbol.vue';
+import Badge from './common/Badge.vue';
+import SeeSymbol from './common/SeeSymbol.vue';
 import WordCikLingEntry from './WordCikLingEntry.vue';
 
 const props = defineProps<{

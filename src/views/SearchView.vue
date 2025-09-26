@@ -82,8 +82,8 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import RubyText from '../components/common/RubyText.vue';
 import PageContent from '../components/PageContent.vue';
-import RubyText from '../components/RubyText.vue';
 import SearchSkeleton from '../components/SearchSkeleton.vue';
 import { sourceMap } from '../utils/mapping';
 import type { SearchResponse } from '../utils/typing';

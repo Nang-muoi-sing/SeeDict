@@ -50,7 +50,7 @@ import { yngpingToIPA } from '../utils/phonetics';
 import type { WordFeng } from '../utils/typing';
 import { replaceChineseQuotes } from '../utils/typography';
 import Explanations from './Explanations.vue';
-import SeeSymbol from './SeeSymbol.vue';
+import SeeSymbol from './common/SeeSymbol.vue';
 
 const props = defineProps<{
   data: WordFeng;
