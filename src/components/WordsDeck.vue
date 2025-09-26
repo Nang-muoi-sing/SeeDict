@@ -51,11 +51,7 @@
 import gsap from 'gsap';
 import { computed, onMounted, reactive, ref } from 'vue';
 import RubyText from './common/RubyText.vue';
-import {
-  replaceChineseQuotes,
-  circleExplanations,
-  clipLength,
-} from '../utils/typography';
+import { parseText, circleExplanations, clipLength } from '../utils/typography';
 
 type Word = {
   w: string;
@@ -87,7 +83,7 @@ const cards = computed(() => {
   return words.value.map((word) => {
     return {
       ...word,
-      expl: clipLength(replaceChineseQuotes(circleExplanations(word.expl)), 60),
+      expl: clipLength(parseText(circleExplanations(word.expl)), 60),
     };
   });
 });

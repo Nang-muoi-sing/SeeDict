@@ -25,7 +25,7 @@
     ></Explanations>
     <p v-if="props.data.comment">
       <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol
-      >{{ replaceChineseQuotes(props.data.comment) }}
+      >{{ parseText(props.data.comment) }}
     </p>
     <p class="text-rosybrown-200 mt-2 flex justify-end text-sm">
       {{
@@ -38,7 +38,7 @@
       <hr class="border-rosybrown-100 my-2 border-t-2" />
       <p>
         <SeeSymbol class="text-rosybrown-700">校注</SeeSymbol
-        >{{ props.data.correction }}
+        >{{ replaceChinesePunctuation(props.data.correction) }}
       </p>
     </template>
   </div>
@@ -48,7 +48,7 @@
 import { ref } from 'vue';
 import { yngpingToIPA } from '../utils/phonetics';
 import type { WordFeng } from '../utils/typing';
-import { replaceChineseQuotes } from '../utils/typography';
+import { parseText, replaceChinesePunctuation } from '../utils/typography';
 import Explanations from './Explanations.vue';
 import SeeSymbol from './common/SeeSymbol.vue';
 
