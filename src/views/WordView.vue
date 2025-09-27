@@ -7,16 +7,10 @@
     <!-- {{ wordResponse }} -->
     <WordSkeleton v-if="loading"></WordSkeleton>
     <template v-else>
-      <div class="bg-wheat-100 mt-5 mb-8 rounded-lg px-8 py-6">
-        <div
-          class="text-rosybrown-800 text-4xl font-bold break-all whitespace-normal md:text-5xl"
-        >
-          <RubyText
-            :text="wordResponse.data.result.seedict.text"
-            :yngping="wordResponse.data.result.seedict.pronPrimary"
-          ></RubyText>
-        </div>
-      </div>
+      <WordHead
+        :text="wordResponse.data.result.seedict.text"
+        :yngping="wordResponse.data.result.seedict.pronPrimary"
+      ></WordHead>
 
       <!-- TODO: 暂时隐藏只有词性没义项的释义部分 -->
       <template
@@ -237,7 +231,6 @@
 import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Badge from '../components/common/Badge.vue';
-import RubyText from '../components/common/RubyText.vue';
 import SeeSymbol from '../components/common/SeeSymbol.vue';
 import Subtitle from '../components/common/Subtitle.vue';
 import Explanations from '../components/Explanations.vue';
@@ -245,6 +238,7 @@ import PageContent from '../components/PageContent.vue';
 import SideBar from '../components/SideBar.vue';
 import WordCikLingCard from '../components/WordCikLingCard.vue';
 import WordFengBlock from '../components/WordFengCard.vue';
+import WordHead from '../components/WordHead.vue';
 import WordPhoneticCard from '../components/WordPhoneticCard.vue';
 import WordSkeleton from '../components/WordSkeleton.vue';
 import { yngpingToIPA } from '../utils/phonetics';
