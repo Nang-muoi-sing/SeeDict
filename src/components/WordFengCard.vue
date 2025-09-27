@@ -25,7 +25,7 @@
     ></Explanations>
     <p v-if="props.data.comment">
       <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol
-      >{{ parseText(props.data.comment) }}
+      >{{ parseText(props.data.comment, currentGlyph) }}
     </p>
     <p class="text-rosybrown-200 mt-2 flex justify-end text-sm">
       {{
