@@ -97,3 +97,14 @@ export interface WordResponse {
     };
   };
 }
+
+export interface VoiceResponse {
+  status: number;
+  data: {
+    yngping: string;
+    result: {
+      yngping: string;
+      md5: string;
+    };
+  };
+}
