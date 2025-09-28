@@ -153,7 +153,7 @@ export const makeYngpingSup = (yngping: string): string => {
 
 export const makeYngpingsSup = (yngping: string): string => {
   const yngpings = yngping.trim().split(' ');
-  return yngpings.map(makeYngpingSup).join('');
+  return yngpings.map(makeYngpingSup).join(' ');
 };
 
 export const makeYngpingCursive = (yngping: string): string => {

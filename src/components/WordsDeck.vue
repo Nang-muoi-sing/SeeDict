@@ -83,7 +83,7 @@ const cards = computed(() => {
   return words.value.map((word) => {
     return {
       ...word,
-      expl: clipLength(parseText(circleExplanations(word.expl)), 60),
+      expl: clipLength(parseText(circleExplanations(word.expl)), 55),
     };
   });
 });
