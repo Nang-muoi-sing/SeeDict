@@ -10,6 +10,11 @@
       <WordHead
         :text="wordResponse.data.result.seedict.text"
         :yngping="wordResponse.data.result.seedict.pronPrimary"
+        :voiceUrl="
+          voiceResponse.data.result.md5
+            ? `${ossUrl}/wvoice/${voiceResponse.data.result.md5}.mp3`
+            : ''
+        "
       ></WordHead>
 
       <!-- TODO: 暂时隐藏只有词性没义项的释义部分 -->
@@ -242,10 +247,11 @@ import WordHead from '../components/WordHead.vue';
 import WordPhoneticCard from '../components/WordPhoneticCard.vue';
 import WordSkeleton from '../components/WordSkeleton.vue';
 import { yngpingToIPA } from '../utils/phonetics';
-import type { WordResponse, WordSeeDict } from '../utils/typing';
+import type { WordResponse, WordSeeDict, VoiceResponse } from '../utils/typing';
 import { replaceChinesePunctuation } from '../utils/typography';
 
 const apiUrl = import.meta.env.VITE_API_URL || '/';
+const ossUrl = import.meta.env.VITE_OSS_URL || '/';
 const route = useRoute();
 const router = useRouter();
 const w = ref(route.query.w as string);
@@ -265,6 +271,16 @@ const wordResponse = ref<WordResponse>({
       } as WordSeeDict,
       fengs: [],
       ciklings: [],
+    },
+  },
+});
+const voiceResponse = ref<VoiceResponse>({
+  status: 0,
+  data: {
+    yngping: '',
+    result: {
+      yngping: '',
+      md5: '',
     },
   },
 });
@@ -321,6 +337,11 @@ const fetchWordResponse = async () => {
     if (!response.ok) throw new Error('Response Error');
     wordResponse.value = await response.json();
     updateTitle();
+
+    const yngping = wordResponse.value.data.result.seedict.pronPrimary;
+    if (yngping) {
+      fetchVoiceResponse(yngping);
+    }
   } catch (error) {
     console.error(error);
   } finally {
@@ -330,6 +351,19 @@ const fetchWordResponse = async () => {
     }, 100);
   }
 };
+
+const fetchVoiceResponse = async (yngping: string) => {
+  try {
+    const response = await fetch(
+      `${apiUrl}/voice?yngping=${encodeURIComponent(yngping)}`
+    );
+    if (!response.ok) throw new Error('Response Error');
+    voiceResponse.value = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 watch(
   () => route.query.w,
   (newWord) => {
