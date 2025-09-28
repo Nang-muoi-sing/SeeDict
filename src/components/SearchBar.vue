@@ -38,7 +38,7 @@
         <li
           v-for="(history, index) in filteredHistory"
           :key="index"
-          class=" hover:text-rosybrown-700 box-border flex flex-row items-center justify-between border-l-3 px-4 py-1 transition-colors duration-150"
+          class="hover:text-rosybrown-700 box-border flex flex-row items-center justify-between border-l-3 px-4 py-1 transition-colors duration-150"
           :class="[
             index === selectedIndex
               ? 'border-l-rosybrown-700 bg-rosybrown-50 text-rosybrown-700'
@@ -87,6 +87,7 @@ import { vOnClickOutside } from '@vueuse/components';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Trie } from '../utils/trie';
+import { useDebounceFn } from '@vueuse/core';
 
 const router = useRouter();
 const searchQuery = ref('');
@@ -123,24 +124,27 @@ const trieHistory = deserializeTrie(localStorage.getItem('searchHistory'));
 
 const handleSubmit = () => {
   const query = searchQuery.value;
-
-  if (query) {
-    trieHistory.insert(query);
-    try {
-      localStorage.setItem('searchHistory', trieHistory.serialize());
-    } finally {
-      searchQuery.value = '';
-    }
-  }
+  if (!query) return;
 
   isHistoryVisible.value = false;
   isInputFocused.value = false;
   selectedIndex.value = -1;
   isMouseHovering.value = false;
+  searchQuery.value = '';
   router.push({ name: 'search', query: { q: query } });
+
+  queueMicrotask(() => {
+    try {
+      trieHistory.insert(query);
+      const serializedTrie = trieHistory.serialize();
+      localStorage.setItem('searchHistory', serializedTrie);
+    } catch (error) {
+      console.error('存储搜索历史失败:', error);
+    }
+  });
 };
 
-const filterHistory = () => {
+const filterHistory = useDebounceFn(() => {
   isHistoryVisible.value = true;
   const query = searchQuery.value;
   const matchedHistory = trieHistory.findWords(query);
@@ -159,7 +163,7 @@ const filterHistory = () => {
     ) => b.timestamp - a.timestamp
   );
   filteredHistory.value = matchedHistory.map((item) => item.word).slice(0, 10);
-};
+}, 100);
 
 const selectHistory = (index: number) => {
   searchQuery.value = filteredHistory.value[index];
