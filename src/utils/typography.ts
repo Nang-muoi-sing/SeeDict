@@ -21,14 +21,14 @@ export const replaceChinesePunctuation = (text: string): string => {
     '(': '（',
     ')': '）',
     '~': '～',
+    ':': '：',
     '?': '？',
     '!': '！',
     ',': '，',
-    '.': '。',
     '<書>': '〈書〉',
   };
 
-  const regex = /‘|’|“|”|\(|\)|~|\?|!|,|(?<!\d)\.|<書>/g;
+  const regex = /‘|’|“|”|~|\?|!|<書>|:(?!\s)|(?<!\()(?<!\d)\((?!\d)|(?<!\d)\)(?!\d)(?!\s)|,(?!\s)/g;
   return text.replace(regex, (match) => punctuationMap[match]);
 };
 
