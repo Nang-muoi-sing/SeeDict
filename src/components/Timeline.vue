@@ -4,7 +4,7 @@
       <li class="relative">
         <div class="grid grid-cols-[auto_1fr] items-center gap-0">
           <div
-            class="bg-wheat-50 border-wheat-300 z-10 h-2.5 w-2.5 shrink-0 rounded-full border-3"
+            class="bg-wheat-50 border-wheat-300 z-10 h-2.5 w-2.5 shrink-0 rounded-full border-[3px]"
           ></div>
           <div class="bg-wheat-200 hidden h-0.5 w-full sm:block"></div>
         </div>
@@ -25,7 +25,7 @@
       <li class="relative">
         <div class="grid grid-cols-[auto_1fr] items-center gap-0">
           <div
-            class="bg-wheat-50 border-wheat-300 z-10 h-2.5 w-2.5 shrink-0 rounded-full border-3"
+            class="bg-wheat-50 border-wheat-300 z-10 h-2.5 w-2.5 shrink-0 rounded-full border-[3px]"
           ></div>
           <div class="bg-wheat-200 hidden h-0.5 w-full sm:block"></div>
         </div>
@@ -48,7 +48,7 @@
       <li class="relative">
         <div class="grid grid-cols-[auto_1fr] items-center gap-0">
           <div
-            class="bg-wheat-50 border-wheat-300 z-10 h-2.5 w-2.5 shrink-0 rounded-full border-3"
+            class="bg-wheat-50 border-wheat-300 z-10 h-2.5 w-2.5 shrink-0 rounded-full border-[3px]"
           ></div>
           <div class="bg-wheat-200 hidden h-0.5 w-full sm:block"></div>
         </div>

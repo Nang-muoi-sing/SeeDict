@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex h-[40vh] min-h-100 w-screen items-center justify-center overflow-hidden"
+    class="relative flex h-[40vh] min-h-[24rem] w-screen items-center justify-center overflow-hidden"
   >
     <div
       v-for="(spring, index) in springs"
@@ -16,7 +16,7 @@
         @touchstart="onDragStart(index)"
         @touchmove="onDragMove(index, $event)"
         @touchend="onDragEnd(index)"
-        class="border-wheat-200 bg-rosybrown-50 relative h-60 w-[75vw] rounded-xl border-1 p-4 select-none lg:h-65 lg:w-120"
+        class="border-wheat-200 bg-rosybrown-50 border-solid relative h-60 w-[75vw] rounded-xl border-[1px] p-4 select-none lg:h-64 lg:w-[30rem]"
       >
         <div class="h-1/1 font-sans">
           <span class="text-wheat-400 text-base italic lg:text-lg"

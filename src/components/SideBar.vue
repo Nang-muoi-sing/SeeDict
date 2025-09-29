@@ -1,5 +1,5 @@
 <template>
-  <aside class="fixed z-50 w-54 rounded-lg bg-white p-5">
+  <aside class="fixed z-10 w-52 rounded-lg bg-white p-5">
     <ol class="space-y-1">
       <li v-for="(heading, index) in headings" :key="index">
         <a
