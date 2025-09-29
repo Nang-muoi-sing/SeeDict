@@ -55,7 +55,7 @@ const isAudioClicking = ref(false);
 
 const handleCopyClick = async () => {
   try {
-    const textToCopy = props.text.replace('*', '');
+    const textToCopy = props.text.replace(/\*/g, '');
     await navigator.clipboard.writeText(textToCopy);
 
     if (copyTip.value) {
