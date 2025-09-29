@@ -1,7 +1,7 @@
 <template>
   <SideBar
     v-show="!loading"
-    class="top-[170px] left-[2%] hidden xl:block 2xl:left-25"
+    class="top-[170px] left-[2%] hidden xl:block 2xl:left-24"
   ></SideBar>
   <PageContent>
     <!-- {{ wordResponse }} -->

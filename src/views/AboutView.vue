@@ -36,7 +36,7 @@
 
     <div class="relative hidden xl:block">
       <img
-        class="absolute -top-35 -left-75 w-60"
+        class="absolute -top-36 -left-72 min-w-60 max-w-60"
         src="../assets/memo-bangua.webp"
       />
     </div>

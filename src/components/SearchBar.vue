@@ -1,11 +1,11 @@
 <template>
   <div>
     <div
-      class="fixed top-0 left-0 z-50 h-screen w-screen"
+      class="fixed top-0 left-0 z-20 h-screen w-screen"
       :class="toggleDimmer"
     ></div>
     <form
-      class="outline-rosybrown-300 hover:outline-rosybrown-400 relative z-100 flex h-12 flex-row items-center space-x-2 bg-white px-3 outline-2 hover:outline-3"
+      class="outline-rosybrown-300 hover:outline-rosybrown-400 outline relative z-40 flex h-12 flex-row items-center bg-white px-3 outline-2 hover:outline-[3px]"
       :class="toggleInputFocusStyle"
       @submit.prevent="handleSubmit"
       @click="onFormClick"
@@ -19,11 +19,11 @@
       <i-material-symbols-search-rounded
         width="36"
         height="36"
-        class="text-rosybrown-400 hover:text-rosybrown-700 cursor-pointer pl-1"
+        class="text-rosybrown-400 hover:text-rosybrown-700 cursor-pointer pl-1 mr-2"
         @click.stop="handleSubmit"
       />
       <input
-        class="text-rosybrown-800 h-full w-full"
+        class="text-rosybrown-800 h-full w-full mr-2"
         v-model.trim="searchQuery"
         @input="filterHistory"
         @focus="filterHistory"
@@ -33,12 +33,12 @@
       />
       <ul
         v-show="isHistoryVisible && filteredHistory.length > 0"
-        class="outline-rosybrown-300 absolute top-full right-0 left-0 rounded-b-md bg-white pt-2 outline"
+        class="outline-rosybrown-300 absolute top-full right-0 left-0 rounded-b-md bg-white pt-2 outline outline-1"
       >
         <li
           v-for="(history, index) in filteredHistory"
           :key="index"
-          class="hover:text-rosybrown-700 box-border flex flex-row items-center justify-between border-l-3 px-4 py-1 transition-colors duration-150"
+          class="hover:text-rosybrown-700 box-border flex flex-row items-center justify-between border-l-4 px-4 py-1 transition-colors duration-150"
           :class="[
             index === selectedIndex
               ? 'border-l-rosybrown-700 bg-rosybrown-50 text-rosybrown-700'
@@ -48,7 +48,7 @@
           @mouseleave="handleMouseLeave"
         >
           <div
-            class="flex w-7/8 cursor-pointer flex-row items-center font-sans"
+            class="flex w-5/6 cursor-pointer flex-row items-center font-sans"
             @click.stop="selectHistory(index)"
           >
             <i-material-symbols-history-rounded

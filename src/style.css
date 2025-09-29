@@ -1,53 +1,11 @@
-@import 'tailwindcss';
-@import 'flowbite/src/themes/default';
-@plugin "flowbite/plugin";
-@source "~flowbite";
-/* @source "../node_modules/flowbite"; */
 @import './assets/fonts/SeeFont/style.css';
 @import './assets/fonts/SeeFontEx/style.css';
 @import './assets/fonts/SeeYngping/style.css';
+@import './assets/fonts/seesymbol/style.css';
 
-@theme {
-  --font-sans:
-    'SeeYngping', 'Noto Sans', 'Noto Sans CJK SC', 'SeeFont', 'SeeFontEx', 'Arial',
-    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol', 'Noto Color Emoji';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  --font-slogan: 'Smiley Sans', ui-sans-serif, system-ui, sans-serif;
-
-  --color-logo-50: #efdccb;
-  --color-logo-100: #ddba98;
-  --color-logo-200: #b37838;
-  --color-logo-300: #9b6832;
-  --color-logo-400: #83592c;
-  --color-logo-500: #6d4a26;
-  --color-logo-600: #573c20;
-  --color-logo-700: #422e1a;
-  --color-logo-800: #2e2114;
-  --color-logo-900: #1b140c;
-  --color-logo-950: #110c06;
-
-  --color-wheat-50: #f7f5f0;
-  --color-wheat-100: #efe6dc;
-  --color-wheat-200: #e6d1ba;
-  --color-wheat-300: #bf9a78;
-  --color-wheat-400: #b0947d;
-  --color-wheat-500: #8e725a;
-  --color-wheat-600: #6d563d;
-  --color-wheat-700: #422e1a;
-  --color-wheat-800: #2e2114;
-  --color-wheat-900: #1b140c;
-  --color-wheat-950: #110c06;
-
-  --color-rosybrown-50: #f6f3f1;
-  --color-rosybrown-100: #eee7e4;
-  --color-rosybrown-200: #dcceca;
-  --color-rosybrown-300: #cbb7b0;
-  --color-rosybrown-400: #b9a097;
-  --color-rosybrown-500: #a8897e;
-  --color-rosybrown-600: #967367;
-  --color-rosybrown-700: #855e50;
-  --color-rosybrown-800: #573f36;
-  --color-rosybrown-900: #2e221e;
-  --color-rosybrown-950: #1b1513;
-}
+/* @import 'flowbite/src/themes/default'; */
+/* @import 'flowbite/dist/flowbite.css'; */
