@@ -1,4 +1,3 @@
-import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 import IconsResolver from "unplugin-icons/resolver";
 import Icons from "unplugin-icons/vite";
@@ -11,7 +10,6 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       vue(),
-      tailwindcss(),
       Components({
         resolvers: [IconsResolver()],
       }),

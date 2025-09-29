@@ -1,14 +1,14 @@
 <template>
   <div class="bg-wheat-50 relative min-h-screen z-10 overflow-hidden">
     <div class="flex justify-center px-4 pt-8 pb-8 md:justify-end md:px-16 md:pb-0">
-      <NavPanel class="relative z-100 w-xs"></NavPanel>
+      <NavPanel class="relative z-30 w-xs"></NavPanel>
     </div>
     <div
       class="relative mx-auto mt-5 flex w-fit flex-col items-center space-y-8 text-center"
     >
       <RouterLink
         :to="{ name: 'home' }"
-        class="z-100 block pl-10"
+        class="z-30 block pl-10"
         :style="{
           transform: `translateY(-${Math.min(scrollY * 1, 200)}px)`,
           opacity: Math.max(0, 1 - scrollY / 500),
