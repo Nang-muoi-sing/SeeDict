@@ -25,7 +25,7 @@ jobs:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_OSS_URL: ${{ secrets.VITE_OSS_URL }}
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Deploy 🚀
