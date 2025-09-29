@@ -332,7 +332,7 @@ const fetchWordResponse = async () => {
   loading.value = true;
   try {
     const response = await fetch(
-      `${apiUrl}/word?w=${encodeURIComponent(w.value)}`
+      `${apiUrl}/word/?w=${encodeURIComponent(w.value)}`
     );
     if (!response.ok) throw new Error('Response Error');
     wordResponse.value = await response.json();
@@ -355,7 +355,7 @@ const fetchWordResponse = async () => {
 const fetchVoiceResponse = async (yngping: string) => {
   try {
     const response = await fetch(
-      `${apiUrl}/voice?yngping=${encodeURIComponent(yngping)}`
+      `${apiUrl}/voice/?yngping=${encodeURIComponent(yngping)}`
     );
     if (!response.ok) throw new Error('Response Error');
     voiceResponse.value = await response.json();

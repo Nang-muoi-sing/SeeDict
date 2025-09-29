@@ -24,8 +24,8 @@ const parseBrace = (syllable: string): [string, boolean] => {
     return [syllable, false];
   }
 
-  syllable = syllable.replace('{', '');
-  syllable = syllable.replace('}', '');
+  syllable = syllable.replace(/\{/g, '');
+  syllable = syllable.replace(/\}/g, '');
   return [syllable, true];
 };
 
