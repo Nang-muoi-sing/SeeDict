@@ -1,11 +1,11 @@
 <template>
   <div
-    class="bg-wheat-100 before:bg-wheat-200 relative z-10 mt-5 mb-8 cursor-pointer overflow-hidden rounded-lg px-8 py-6 transition-all duration-300 ease-in-out before:absolute before:top-[100%] before:left-[100%] before:-z-10 before:h-300 before:w-300 before:rounded-full before:transition-all before:duration-700 before:content-[''] hover:before:-top-50 hover:before:-left-50 active:before:transition-colors active:before:duration-0"
+    class="relative z-10 mb-8 mt-5 cursor-pointer overflow-hidden rounded-lg bg-wheat-100 px-8 py-6 transition-all duration-300 ease-in-out before:absolute before:left-[100%] before:top-[100%] before:-z-10 before:h-[100rem] before:w-[100rem] before:rounded-full before:bg-wheat-200 before:transition-all before:duration-700 before:content-[''] hover:before:-left-[16rem] hover:before:-top-[16rem] active:before:transition-colors active:before:duration-0"
     :class="isAudioClicking ? '' : 'active:scale-95'"
     @click.prevent="handleCopyClick"
   >
     <div
-      class="text-rosybrown-800 flex flex-row items-baseline gap-5 text-4xl font-bold break-all whitespace-normal md:text-5xl"
+      class="flex flex-row items-baseline gap-5 whitespace-normal break-all text-4xl font-bold text-rosybrown-800 md:text-5xl"
     >
       <RubyText :text="props.text" :yngping="props.yngping"></RubyText>
       <div
@@ -23,18 +23,20 @@
           class="hidden"
         ></audio>
         <i-material-symbols-play-circle-rounded
-          class="text-wheat-600/60 hover:text-wheat-600 cursor-pointer transition-colors"
+          class="cursor-pointer text-wheat-600/60 transition-colors hover:text-wheat-600"
         />
       </div>
     </div>
   </div>
-  <div
-    ref="copyTip"
-    class="flex-inline text-wheat-800 fixed -bottom-10 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 rounded-lg bg-white px-6 py-3 font-medium shadow-lg"
-  >
-    <i-material-symbols-check-circle-rounded class="text-green-600" />
-    已复制词条
-  </div>
+    <div
+      ref="copyTip"
+      class="fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-[-10rem]"
+    >
+      <div class=" flex-row flex items-center gap-1 rounded-lg bg-white px-6 py-3 font-medium text-wheat-800 shadow-lg">
+        <i-material-symbols-check-circle-rounded class="text-green-600" />
+        已复制词条
+      </div>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -84,7 +86,6 @@ const handleCopyClick = async () => {
 };
 
 const handleAudioClick = () => {
-  console.log('h');
   if (!audioPlayer.value) return;
 
   if (isPlaying.value) {

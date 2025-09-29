@@ -3,14 +3,14 @@
     <nav
       class="flex flex-row items-center justify-between gap-5 px-4 py-2 sm:px-16 sm:py-8"
     >
-      <RouterLink :to="{ name: 'home' }" class="z-100 hidden min-w-35 md:block">
+      <RouterLink :to="{ name: 'home' }" class="z-30 hidden min-w-35 md:block">
         <img src="../assets/logo.svg" />
       </RouterLink>
       <SearchBar
         v-if="props.showSearchBar"
         class="w-xs sm:w-sm md:w-md"
       ></SearchBar>
-      <NavPanel class="z-100 hidden w-xs lg:flex"></NavPanel>
+      <NavPanel class="z-30 hidden w-xs lg:flex"></NavPanel>
       <button
         class="text-rosybrown-600 hover:text-rosybrown-800 flex cursor-pointer items-center rounded-md p-2 focus:outline-none lg:hidden"
         @click="isSidebarOpen = true"
@@ -20,7 +20,7 @@
     </nav>
 
     <div
-      class="fixed inset-0 z-500 flex lg:hidden"
+      class="fixed inset-0 z-50 flex lg:hidden"
       :class="{ hidden: !isSidebarOpen }"
     >
       <div
