@@ -82,7 +82,7 @@ const markedChars = computed<boolean[]>(() => {
   return marks;
 });
 
-const baldText = computed(() => rawText.value.replace(/\*/gu, ''));
+const baldText = computed(() => rawText.value.replace(/\*/g, ''));
 const baldChars = computed(() => baldText.value.split(/(?:)/u));
 const syllables = computed(() => rawYngping.value.split(' '));
 

@@ -91,7 +91,7 @@ const cards = computed(() => {
 const fetchWords = async () => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL || '/'}/shuffle`
+      `${import.meta.env.VITE_API_URL || '/'}/shuffle/`
     );
 
     if (!response.ok) {

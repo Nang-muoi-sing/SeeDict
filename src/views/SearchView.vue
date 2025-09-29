@@ -88,6 +88,7 @@ import SearchSkeleton from '../components/SearchSkeleton.vue';
 import { sourceMap } from '../utils/mapping';
 import type { SearchResponse } from '../utils/typing';
 import { correctStops, parseText } from '../utils/typography';
+const apiUrl = import.meta.env.VITE_API_URL || '/';
 
 const route = useRoute();
 
@@ -129,7 +130,7 @@ const performSearch = async () => {
     const params = new URLSearchParams();
     params.append('q', state.value.q);
 
-    const url = `${import.meta.env.VITE_API_URL || '/'}/search?${params}`;
+    const url = `${import.meta.env.VITE_API_URL || '/'}/search/?${params}`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -159,8 +160,7 @@ const loadMore = async () => {
     params.append('q', state.value.q);
     params.append('cursor', nextCursor.value!);
 
-    const url = `${import.meta.env.VITE_API_URL || '/'}/search?${params}`;
-    const response = await fetch(url);
+    const response = await fetch(`${apiUrl}/search/?${params}`);
 
     if (!response.ok) {
       throw new Error(`HTTP错误: ${response.status}`);
