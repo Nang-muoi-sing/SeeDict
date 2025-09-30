@@ -3,7 +3,7 @@
     <NavBar :show-search-bar="props.showSearchBar"></NavBar>
     <div
       class="items-center py-5"
-      style="min-height: calc(100vh - 130px - var(--spacing) * 56)"
+      style="min-height: calc(100vh - 130px - 0.25rem * 56)"
     >
       <!-- 内联样式暂时没有优雅的方法 -->
       <div class="mx-auto w-[90vw] sm:w-md md:w-2xl lg:w-3xl">

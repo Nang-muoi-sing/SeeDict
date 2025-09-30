@@ -6,7 +6,7 @@
       </div>
       <div class="flex flex-row" :class="{ 'justify-end': !props.leftArrow }">
         <div
-          class="relative mx-5 h-3 w-7 border-t-8 border-r-14 border-b-8 border-l-14 border-r-transparent border-b-transparent border-l-transparent"
+          class="relative mx-5 h-3 w-7 border-t-8 border-r-[14px] border-b-8 border-l-[14px] border-r-transparent border-b-transparent border-l-transparent"
           :class="props.arrowClass"
         ></div>
       </div>
