@@ -1,0 +1,1 @@
+import{d as o,b as r,f as s,t as n}from"./index-CF6lht-1.js";const p=["id"],x=o({__name:"Subtitle",props:{text:{}},setup(e){const t=e;return(a,c)=>(s(),r("h2",{id:t.text,class:"border-rosybrown-800 text-rosybrown-800 w-fit border-t-[6px] p-1 text-xl font-bold"},n(t.text),9,p))}});export{x as _};
