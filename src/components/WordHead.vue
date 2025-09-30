@@ -30,7 +30,7 @@
   </div>
     <div
       ref="copyTip"
-      class="fixed bottom-0 left-0 right-0 z-50 flex justify-center pb-[-10rem]"
+      class="fixed bottom-0 left-0 right-0 z-50 flex justify-center -mb-12"
     >
       <div class=" flex-row flex items-center gap-1 rounded-lg bg-white px-6 py-3 font-medium text-wheat-800 shadow-lg">
         <i-material-symbols-check-circle-rounded class="text-green-600" />

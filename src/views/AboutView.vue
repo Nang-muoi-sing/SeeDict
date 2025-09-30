@@ -77,11 +77,11 @@
     <ul class="text-wheat-600 list-disc space-y-1.5 px-5">
       <li>感谢每位选择《米时典》的用户</li>
       <li>
-        感谢<span class="border-1 px-0.5 py-[1px]">陈泽平</span
+        感谢<span class="border-[1px] border-wheat-600 px-0.5">陈泽平</span
         >老师与冯爱珍老师慷慨授权使用其著作数据
       </li>
       <li>
-        感谢「福老爷」<span class="border-1 px-0.5 py-[1px]">林圜</span
+        感谢「福老爷」<span class="border-[1px] border-wheat-600 px-0.5">林圜</span
         >先生曾经提供的帮助
       </li>
       <li>感谢福州厝边公司曾经提供的帮助</li>
