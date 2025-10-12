@@ -216,6 +216,7 @@ export const yngpingIPAFinalMap: Record<string, string> = {
   yng: 'yŋ',
   eoyng: 'øyŋ',
   ooyng: 'ɒyŋ',
+  ng: 'ŋ̍',
   ah: 'aʔ',
   ak: 'aʔ',
   iah: 'iaʔ',
