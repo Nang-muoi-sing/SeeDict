@@ -75,11 +75,6 @@
     <Subtitle text="相关链接" class="mt-8 mb-2"></Subtitle>
     <ul class="text-wheat-600 space-y-1.5">
       <li class="flex items-center gap-2">
-        <i-mdi-link-variant /><Link href="https://www.ydict.net/"
-          >榕典 | 福州话电子词典</Link
-        >
-      </li>
-      <li class="flex items-center gap-2">
         <i-mdi-link-variant /><Link
           href="https://jcnf40n3hvft.feishu.cn/wiki/QJ9WwaEHvihROKkEJ6uc2kzsnCc?fromScene=spaceOverview"
           >榕拼方案规范文档</Link
