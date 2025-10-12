@@ -33,7 +33,7 @@
           <p v-if="wordResponse.data.result.seedict.commentExpl">
             <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol
             >{{
-              replaceChinesePunctuation(
+              correctChinesePunctuation(
                 wordResponse.data.result.seedict.commentExpl
               )
             }}
@@ -142,7 +142,7 @@
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋 </SeeSymbol
               >{{
-                replaceChinesePunctuation(
+                correctChinesePunctuation(
                   wordResponse.data.result.seedict.commentPron
                 )
               }}
@@ -220,7 +220,7 @@
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol>
               {{
-                replaceChinesePunctuation(
+                correctText(
                   wordResponse.data.result.seedict.commentGlyph
                 )
               }}
@@ -236,9 +236,9 @@
 import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Badge from '../components/common/Badge.vue';
+import Explanations from '../components/common/Explanations.vue';
 import SeeSymbol from '../components/common/SeeSymbol.vue';
 import Subtitle from '../components/common/Subtitle.vue';
-import Explanations from '../components/common/Explanations.vue';
 import PageContent from '../components/PageContent.vue';
 import SideBar from '../components/SideBar.vue';
 import WordCikLingCard from '../components/WordCikLingCard.vue';
@@ -247,8 +247,8 @@ import WordHead from '../components/WordHead.vue';
 import WordPhoneticCard from '../components/WordPhoneticCard.vue';
 import WordSkeleton from '../components/WordSkeleton.vue';
 import { yngpingToIPA } from '../utils/phonetics';
-import type { WordResponse, WordSeeDict, VoiceResponse } from '../utils/typing';
-import { replaceChinesePunctuation } from '../utils/typography';
+import type { VoiceResponse, WordResponse, WordSeeDict } from '../utils/typing';
+import { correctText } from '../utils/typography';
 
 const apiUrl = import.meta.env.VITE_API_URL || '/';
 const ossUrl = import.meta.env.VITE_OSS_URL || '/';

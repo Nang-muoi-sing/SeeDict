@@ -38,7 +38,7 @@
       <hr class="border-rosybrown-100 my-2 border-t-2" />
       <p>
         <SeeSymbol class="text-rosybrown-700">校注</SeeSymbol
-        >{{ replaceChinesePunctuation(props.data.correction) }}
+        >{{ correctText(props.data.correction) }}
       </p>
     </template>
   </div>
@@ -48,7 +48,7 @@
 import { ref } from 'vue';
 import { yngpingToIPA } from '../utils/phonetics';
 import type { WordFeng } from '../utils/typing';
-import { parseText, replaceChinesePunctuation } from '../utils/typography';
+import { parseText, correctText } from '../utils/typography';
 import Explanations from './common/Explanations.vue';
 import SeeSymbol from './common/SeeSymbol.vue';
 
