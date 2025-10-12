@@ -42,7 +42,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  document.title = "米时典 SeeDict"
+  document.title = "米时典 SeeDict | 福州平话词典"
   window.addEventListener('scroll', handleScroll);
 });
 
