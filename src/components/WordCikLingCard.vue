@@ -30,7 +30,7 @@
         <template v-for="(cikling, index) in processedEntries" :key="index"
           ><p v-if="cikling.comment">
             <SeeSymbol class="text-rosybrown-700">校注</SeeSymbol
-            >{{ replaceChinesePunctuation(cikling.comment) }}
+            >{{ correctText(cikling.comment) }}
           </p>
         </template>
       </div>
@@ -42,7 +42,7 @@
 import { computed } from 'vue';
 import { toneCikLingMap } from '../utils/mapping';
 import type { WordCikLing } from '../utils/typing';
-import { replaceChinesePunctuation } from '../utils/typography';
+import { correctText } from '../utils/typography';
 import Badge from './common/Badge.vue';
 import SeeSymbol from './common/SeeSymbol.vue';
 import WordCikLingEntry from './WordCikLingEntry.vue';
