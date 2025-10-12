@@ -8,7 +8,7 @@
       <span
         class="rb relative inline-block"
         :class="{
-          'after:bg-rosybrown-700 w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:content-[\'\']':
+          'w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:bg-rosybrown-700 after:content-[\'\']':
             markedChars[index],
         }"
         >{{ char }}
@@ -17,7 +17,7 @@
 
     <span v-else class="rb"></span>
     <rp>(</rp
-    ><rt class="text-rosybrown-700 relative top-[0.5em]">{{
+    ><rt class="relative top-[0.5em] text-rosybrown-700">{{
       makeYngpingsCursive(props.yngping) ?? ''
     }}</rt
     ><rp>)</rp>
@@ -28,7 +28,7 @@
       <span
         class="rb relative inline-block"
         :class="{
-          'after:bg-rosybrown-700 w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:content-[\'\']':
+          'w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:bg-rosybrown-700 after:content-[\'\']':
             markedChars[index],
         }"
         >{{ char }}
@@ -37,9 +37,9 @@
       <rp>(</rp
       ><rt
         v-if="baldChars.length > 1"
-        class="text-rosybrown-700 relative top-[0.5em]"
+        class="relative top-[0.5em] text-rosybrown-700"
         >&thinsp;{{ makeYngpingCursive(syllables[index]) }}&thinsp;</rt
-      ><rt v-else class="text-rosybrown-700 relative top-[0.5em]">{{
+      ><rt v-else class="relative top-[0.5em] text-rosybrown-700">{{
         makeYngpingCursive(syllables[index])
       }}</rt>
       <rp>)</rp>
@@ -90,3 +90,13 @@ const isMatchedTextSyllable = computed(() => {
   return baldChars.value.length === syllables.value.length;
 });
 </script>
+
+<style scoped>
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media,
+  _:future,
+  ruby > rt {
+    top: 1em !important;
+  }
+}
+</style>
