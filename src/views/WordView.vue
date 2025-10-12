@@ -33,7 +33,7 @@
           <p v-if="wordResponse.data.result.seedict.commentExpl">
             <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol
             >{{
-              correctChinesePunctuation(
+              correctText(
                 wordResponse.data.result.seedict.commentExpl
               )
             }}
@@ -142,7 +142,7 @@
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋 </SeeSymbol
               >{{
-                correctChinesePunctuation(
+                correctText(
                   wordResponse.data.result.seedict.commentPron
                 )
               }}
