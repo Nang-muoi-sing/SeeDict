@@ -49,7 +49,7 @@ import { ref } from 'vue';
 import { yngpingToIPA } from '../utils/phonetics';
 import type { WordFeng } from '../utils/typing';
 import { parseText, replaceChinesePunctuation } from '../utils/typography';
-import Explanations from './Explanations.vue';
+import Explanations from './common/Explanations.vue';
 import SeeSymbol from './common/SeeSymbol.vue';
 
 const props = defineProps<{
