@@ -216,7 +216,6 @@ export const yngpingIPAFinalMap: Record<string, string> = {
   yng: 'yŋ',
   eoyng: 'øyŋ',
   ooyng: 'ɒyŋ',
-  ng: 'ŋ̍',
   ah: 'aʔ',
   ak: 'aʔ',
   iah: 'iaʔ',
@@ -241,13 +240,15 @@ export const yngpingIPAFinalMap: Record<string, string> = {
   aik: 'aiʔ',
   uh: 'uʔ',
   uk: 'uʔ',
+  ouh: 'ouʔ',
   ouk: 'ouʔ',
   oouk: 'ɒuʔ',
   yh: 'yʔ',
   yk: 'yʔ',
   eoyh: 'øyʔ',
   eoyk: 'øyʔ',
-  ooyk: 'ɒy',
+  ooyk: 'ɒyʔ',
+  ng: 'ŋ̍',
 };
 
 export const yngpingIPAToneMap: Record<string, string> = {
@@ -976,6 +977,13 @@ export const yngpingTypingCursiveFinalToneMap: Record<string, string> = {
   uk24: 'úk',
   uk53: 'ùk',
   uk0: 'ụk',
+  ouh5: 'ouh',
+  ouh55: 'ouh',
+  ouh33: 'ōuh',
+  ouh213: 'ǒuh',
+  ouh21: 'ǒuh',
+  ouh24: 'óuh',
+  ouh53: 'òuh',
   ouk5: 'ouk',
   ouk55: 'ouk',
   ouk33: 'ōuk',
@@ -1020,4 +1028,5 @@ export const yngpingTypingCursiveFinalToneMap: Record<string, string> = {
   eoyk0: 'ẹ̈ük',
   ooyk24: 'ö́ük',
   ooyk0: 'ọ̈ük',
+  ng242: 'n̂g'
 };
