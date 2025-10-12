@@ -238,7 +238,7 @@ import { useRoute, useRouter } from 'vue-router';
 import Badge from '../components/common/Badge.vue';
 import SeeSymbol from '../components/common/SeeSymbol.vue';
 import Subtitle from '../components/common/Subtitle.vue';
-import Explanations from '../components/Explanations.vue';
+import Explanations from '../components/common/Explanations.vue';
 import PageContent from '../components/PageContent.vue';
 import SideBar from '../components/SideBar.vue';
 import WordCikLingCard from '../components/WordCikLingCard.vue';
