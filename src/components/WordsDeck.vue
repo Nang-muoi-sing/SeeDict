@@ -16,10 +16,10 @@
         @touchstart="onDragStart(index)"
         @touchmove="onDragMove(index, $event)"
         @touchend="onDragEnd(index)"
-        class="border-wheat-200 bg-rosybrown-50 border-solid relative h-60 w-[75vw] rounded-xl border-[1px] p-4 select-none lg:h-64 lg:w-[30rem]"
+        class="relative h-60 w-[75vw] select-none rounded-xl border-[1px] border-solid border-wheat-200 bg-rosybrown-50 p-4 lg:h-64 lg:w-[30rem]"
       >
         <div class="h-1/1 font-sans">
-          <span class="text-wheat-400 text-base italic lg:text-lg"
+          <span class="text-base italic text-wheat-400 lg:text-lg"
             >#汝会仈儥？</span
           >
           <div class="flex flex-col items-center space-y-5">
@@ -28,7 +28,7 @@
               :to="{ name: 'word', query: { w: cards[index].w } }"
             >
               <div
-                class="text-rosybrown-800 text-3xl font-bold break-all whitespace-normal md:text-4xl lg:text-5xl"
+                class="whitespace-normal break-all text-3xl font-bold text-rosybrown-800 md:text-4xl lg:text-5xl"
               >
                 <RubyText
                   :text="cards[index].text"
@@ -36,7 +36,7 @@
                 ></RubyText></div
             ></RouterLink>
             <p
-              class="text-rosybrown-800 max-w-lg overflow-hidden text-base text-ellipsis lg:text-lg"
+              class="line-clamp-4 lg:line-clamp-2 max-w-lg overflow-hidden text-ellipsis whitespace-normal text-base text-rosybrown-800 lg:text-lg"
             >
               释义：{{ cards[index].expl }}
             </p>
@@ -51,7 +51,7 @@
 import gsap from 'gsap';
 import { computed, onMounted, reactive, ref } from 'vue';
 import RubyText from './common/RubyText.vue';
-import { parseText, circleExplanations, clipLength } from '../utils/typography';
+import { parseText, circleExplanations } from '../utils/typography';
 
 type Word = {
   w: string;
@@ -83,7 +83,7 @@ const cards = computed(() => {
   return words.value.map((word) => {
     return {
       ...word,
-      expl: clipLength(parseText(circleExplanations(word.expl)), 55),
+      expl: parseText(circleExplanations(word.expl)),
     };
   });
 });
