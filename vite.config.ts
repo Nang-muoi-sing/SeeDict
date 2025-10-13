@@ -1,3 +1,4 @@
+import legacy from "@vitejs/plugin-legacy";
 import vue from "@vitejs/plugin-vue";
 import IconsResolver from "unplugin-icons/resolver";
 import Icons from "unplugin-icons/vite";
@@ -14,6 +15,7 @@ export default defineConfig(({ mode }) => {
         resolvers: [IconsResolver()],
       }),
       Icons({ autoInstall: true }),
+      legacy(),
     ],
     base: env.VITE_BASE_URL || "/",
   };
