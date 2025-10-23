@@ -1,19 +1,20 @@
 <template>
   <div>
     <nav
-      class="flex flex-row items-top justify-between gap-5 px-4 py-2 sm:px-16 sm:py-8"
+      class="items-top flex flex-row justify-between gap-5 px-4 py-2 sm:px-16 sm:py-8"
     >
-      <RouterLink :to="{ name: 'home' }" class="z-30 hidden min-w-35 md:block">
+      <RouterLink :to="{ name: 'home' }" class="min-w-35 z-30 hidden md:block">
         <img src="../assets/logo.svg" />
       </RouterLink>
       <SearchBar
         v-if="props.showSearchBar"
         class="w-xs sm:w-sm md:w-md"
       ></SearchBar>
+      <div v-else class="w-xs sm:w-sm md:w-md"></div>
       <NavPanel class="z-30 hidden w-xs lg:flex"></NavPanel>
       <button
-        class="text-rosybrown-600 hover:text-rosybrown-800 flex cursor-pointer items-center rounded-md p-2 focus:outline-none lg:hidden"
-        @click="isSidebarOpen = true"
+        class="flex cursor-pointer items-center rounded-md p-2 text-rosybrown-600 hover:text-rosybrown-800 focus:outline-none lg:hidden"
+        @click="openSidebar"
       >
         <i-material-symbols-menu-rounded style="font-size: 36px" />
       </button>
@@ -21,23 +22,21 @@
 
     <div
       class="fixed inset-0 z-50 flex lg:hidden"
-      :class="{ hidden: !isSidebarOpen }"
+      :class="{ hidden: !isSidebarOpen && !isAnimating }"
     >
       <div
-        class="fixed inset-0 backdrop-blur-xs backdrop-brightness-90 transition-all duration-500 ease-in-out"
-        @click="isSidebarOpen = false"
+        class="backdrop-blur-xs fixed inset-0 backdrop-brightness-90"
+        @click="closeSidebar"
+        ref="backdrop"
       ></div>
 
       <div
-        class="bg-wheat-50 absolute top-0 right-0 h-full w-full max-w-xs transform flex-col transition-transform duration-300 ease-in-out"
-        :class="{
-          'translate-x-full': !isSidebarOpen,
-          'translate-x-0': isSidebarOpen,
-        }"
+        class="absolute right-0 top-0 h-full w-full max-w-xs transform flex-col bg-wheat-50"
+        ref="sidebar"
       >
         <button
-          class="text-rosybrown-600 hover:text-rosybrown-800 flex cursor-pointer items-center rounded-md p-2 focus:outline-none lg:hidden"
-          @click="isSidebarOpen = false"
+          class="flex cursor-pointer items-center rounded-md p-2 text-rosybrown-600 hover:text-rosybrown-800 focus:outline-none lg:hidden"
+          @click="closeSidebar"
         >
           <i-material-symbols-menu-rounded style="font-size: 36px" />
         </button>
@@ -47,7 +46,7 @@
         >
           <img class="mb-8" src="../assets/logo.svg" draggable="false" />
           <div
-            class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
+            class="rounded-xs m-1 w-full content-center px-3 py-1.5 align-middle font-bold text-rosybrown-600 transition-all ease-in-out hover:bg-wheat-100 hover:text-rosybrown-800"
           >
             <RouterLink
               :to="{ name: 'home' }"
@@ -56,7 +55,7 @@
             >
           </div>
           <div
-            class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
+            class="rounded-xs m-1 w-full content-center px-3 py-1.5 align-middle font-bold text-rosybrown-600 transition-all ease-in-out hover:bg-wheat-100 hover:text-rosybrown-800"
           >
             <RouterLink
               class="inline-flex w-full items-center"
@@ -66,7 +65,7 @@
             >
           </div>
           <div
-            class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
+            class="rounded-xs m-1 w-full content-center px-3 py-1.5 align-middle font-bold text-rosybrown-600 transition-all ease-in-out hover:bg-wheat-100 hover:text-rosybrown-800"
           >
             <a
               class="inline-flex w-full items-center"
@@ -76,7 +75,7 @@
             >
           </div>
           <div
-            class="hover:bg-wheat-100 text-rosybrown-600 hover:text-rosybrown-800 m-1 w-full content-center rounded-xs px-3 py-1.5 align-middle font-bold transition-all ease-in-out"
+            class="rounded-xs m-1 w-full content-center px-3 py-1.5 align-middle font-bold text-rosybrown-600 transition-all ease-in-out hover:bg-wheat-100 hover:text-rosybrown-800"
           >
             <RouterLink
               class="inline-flex w-full items-center"
@@ -92,9 +91,10 @@
 </template>
 
 <script setup lang="ts">
-import SearchBar from './SearchBar.vue';
+import { animate } from 'animejs';
+import { onMounted, ref } from 'vue';
 import NavPanel from './NavPanel.vue';
-import { ref } from 'vue';
+import SearchBar from './SearchBar.vue';
 
 interface Props {
   showSearchBar?: boolean;
@@ -104,19 +104,69 @@ const props = withDefaults(defineProps<Props>(), {
   showSearchBar: true,
 });
 
-// 控制侧边栏显示状态
 const isSidebarOpen = ref(false);
+const isAnimating = ref(false);
+const sidebar = ref<HTMLDivElement | null>(null);
+const backdrop = ref<HTMLDivElement | null>(null);
+
+onMounted(() => {
+  if (sidebar.value) {
+    sidebar.value.style.transform = 'translateX(100%)';
+  }
+  if (backdrop.value) {
+    backdrop.value.style.opacity = '0';
+    backdrop.value.style.pointerEvents = 'none';
+  }
+});
+
+const openSidebar = () => {
+  if (isAnimating.value) return;
+  isAnimating.value = true;
+  isSidebarOpen.value = true;
+
+  if (sidebar.value) {
+    animate(sidebar.value, {
+      translateX: 0,
+      duration: 300,
+      easing: 'easeInQuad',
+      onComplete: () => {
+        if (backdrop.value) backdrop.value.style.pointerEvents = 'auto';
+        isAnimating.value = false;
+      },
+    });
+  }
+
+  if (backdrop.value) {
+    animate(backdrop.value, {
+      opacity: 1,
+      duration: 300,
+      easing: 'linear',
+    });
+  }
+};
+
+const closeSidebar = () => {
+  if (isAnimating.value) return;
+  isAnimating.value = true;
+  if (backdrop.value) backdrop.value.style.pointerEvents = 'none';
+  if (sidebar.value) {
+    animate(sidebar.value, {
+      translateX: 100,
+      duration: 300,
+      easing: 'easeOutQuad',
+      onComplete: () =>  {
+        isSidebarOpen.value = false;
+        isAnimating.value = false;
+      },
+    });
+  }
+
+  if (backdrop.value) {
+    animate(backdrop.value, {
+      opacity: 0,
+      duration: 300,
+      easing: 'linear',
+    });
+  }
+};
 </script>
-
-<style scoped>
-/* 侧边栏动画过渡效果 */
-.sidebar-enter-from,
-.sidebar-leave-to {
-  transform: translateX(-100%);
-}
-
-.sidebar-enter-active,
-.sidebar-leave-active {
-  transition: transform 0.3s ease;
-}
-</style>
