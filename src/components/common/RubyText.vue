@@ -1,11 +1,9 @@
 <template>
   <ruby v-if="!props.text || !props.yngping || !isMatchedTextSyllable">
-    <template
-      v-if="props.text"
-      v-for="(char, index) in baldChars"
-      :key="`${char}-${index}`"
-    >
+    <template v-if="props.text">
       <span
+        v-for="(char, index) in baldChars"
+        :key="`${char}-${index}`"
         class="rb relative inline-block"
         :class="{
           'w-fit after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:bg-rosybrown-700 after:content-[\'\']':
@@ -92,6 +90,13 @@ const isMatchedTextSyllable = computed(() => {
 </script>
 
 <style scoped>
+rt:before {
+  /* 用于防止调号在 <rt> 中偏移 */
+  content: '';
+  display: inline-block;
+  width: 0;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   _::-webkit-full-page-media,
   _:future,
