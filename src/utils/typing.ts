@@ -98,13 +98,16 @@ export interface WordResponse {
   };
 }
 
-export interface VoiceResponse {
+export interface Audio {
+  yngping: string;
+  md5: string;
+  speaker: string;
+}
+
+export interface AudioResponse {
   status: number;
   data: {
     yngping: string;
-    result: {
-      yngping: string;
-      md5: string;
-    };
+    results: Audio[];
   };
 }
