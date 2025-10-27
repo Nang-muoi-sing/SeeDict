@@ -1,7 +1,7 @@
 <template>
   <SideBar
     v-show="!loading"
-    class="top-[170px] left-[2%] hidden xl:block 2xl:left-24"
+    class="left-[2%] top-[170px] hidden xl:block 2xl:left-24"
   ></SideBar>
   <PageContent>
     <!-- {{ wordResponse }} -->
@@ -11,8 +11,8 @@
         :text="wordResponse.data.result.seedict.text"
         :yngping="wordResponse.data.result.seedict.pronPrimary"
         :voiceUrl="
-          voiceResponse.data.result.md5
-            ? `${ossUrl}/wvoice/${voiceResponse.data.result.md5}.mp3`
+          audioResponse.data.results[0]
+            ? `${ossUrl}/audio/${audioResponse.data.results[0].speaker}/${audioResponse.data.results[0].md5}.mp3`
             : ''
         "
       ></WordHead>
@@ -26,17 +26,13 @@
         "
       >
         <Subtitle text="本站释义"></Subtitle>
-        <div class="text-rosybrown-800 mt-2 mb-5 rounded-lg bg-white px-8 py-6">
+        <div class="mb-5 mt-2 rounded-lg bg-white px-8 py-6 text-rosybrown-800">
           <Explanations
             :data="wordResponse.data.result.seedict.expls"
           ></Explanations>
           <p v-if="wordResponse.data.result.seedict.commentExpl">
             <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol
-            >{{
-              correctText(
-                wordResponse.data.result.seedict.commentExpl
-              )
-            }}
+            >{{ correctText(wordResponse.data.result.seedict.commentExpl) }}
           </p>
           <template
             v-if="
@@ -44,7 +40,7 @@
               wordResponse.data.result.seedict.antonym
             "
           >
-            <hr class="border-rosybrown-100 my-2 border-t-2" />
+            <hr class="my-2 border-t-2 border-rosybrown-100" />
             <div class="space-y-1">
               <p v-if="wordResponse.data.result.seedict.synonym">
                 <SeeSymbol class="text-rosybrown-700">近義詞</SeeSymbol
@@ -87,7 +83,7 @@
       >
         <Subtitle text="各地方音"></Subtitle>
         <div
-          class="text-rosybrown-800 mt-2 mb-5 overflow-hidden rounded-lg bg-white"
+          class="mb-5 mt-2 overflow-hidden rounded-lg bg-white text-rosybrown-800"
         >
           <table
             v-if="wordResponse.data.result.seedict.prons.length > 0"
@@ -129,23 +125,19 @@
               wordResponse.data.result.seedict.prons.length > 0 &&
               wordResponse.data.result.seedict.commentPron
             "
-            class="border-rosybrown-100 border-t-2"
+            class="border-t-2 border-rosybrown-100"
           />
           <div
             class="px-8"
             :class="{
-              'pt-2 pb-4': wordResponse.data.result.seedict.prons.length > 0,
+              'pb-4 pt-2': wordResponse.data.result.seedict.prons.length > 0,
               'py-6': wordResponse.data.result.seedict.prons.length <= 0,
             }"
             v-if="wordResponse.data.result.seedict.commentPron"
           >
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋 </SeeSymbol
-              >{{
-                correctText(
-                  wordResponse.data.result.seedict.commentPron
-                )
-              }}
+              >{{ correctText(wordResponse.data.result.seedict.commentPron) }}
             </p>
           </div>
         </div>
@@ -172,7 +164,7 @@
       >
         <Subtitle text="用字一览"></Subtitle>
         <div
-          class="text-rosybrown-800 mt-2 mb-5 overflow-hidden rounded-lg bg-white"
+          class="mb-5 mt-2 overflow-hidden rounded-lg bg-white text-rosybrown-800"
         >
           <table
             v-if="wordResponse.data.result.seedict.glyphs.length > 0"
@@ -206,24 +198,20 @@
               wordResponse.data.result.seedict.glyphs.length > 0 &&
               wordResponse.data.result.seedict.commentGlyph
             "
-            class="border-rosybrown-100 border-t-2"
+            class="border-t-2 border-rosybrown-100"
           />
 
           <div
             class="px-8"
             :class="{
-              'pt-2 pb-4': wordResponse.data.result.seedict.glyphs.length > 0,
+              'pb-4 pt-2': wordResponse.data.result.seedict.glyphs.length > 0,
               'py-6': wordResponse.data.result.seedict.glyphs.length <= 0,
             }"
             v-if="wordResponse.data.result.seedict.commentGlyph"
           >
             <p>
               <SeeSymbol class="text-rosybrown-700">注釋</SeeSymbol>
-              {{
-                correctText(
-                  wordResponse.data.result.seedict.commentGlyph
-                )
-              }}
+              {{ correctText(wordResponse.data.result.seedict.commentGlyph) }}
             </p>
           </div>
         </div>
@@ -247,7 +235,7 @@ import WordHead from '../components/WordHead.vue';
 import WordPhoneticCard from '../components/WordPhoneticCard.vue';
 import WordSkeleton from '../components/WordSkeleton.vue';
 import { yngpingToIPA } from '../utils/phonetics';
-import type { VoiceResponse, WordResponse, WordSeeDict } from '../utils/typing';
+import type { AudioResponse, WordResponse, WordSeeDict } from '../utils/typing';
 import { correctText } from '../utils/typography';
 
 const apiUrl = import.meta.env.VITE_API_URL || '/';
@@ -274,14 +262,12 @@ const wordResponse = ref<WordResponse>({
     },
   },
 });
-const voiceResponse = ref<VoiceResponse>({
+
+const audioResponse = ref<AudioResponse>({
   status: 0,
   data: {
     yngping: '',
-    result: {
-      yngping: '',
-      md5: '',
-    },
+    results: [],
   },
 });
 
@@ -340,7 +326,7 @@ const fetchWordResponse = async () => {
 
     const yngping = wordResponse.value.data.result.seedict.pronPrimary;
     if (yngping) {
-      fetchVoiceResponse(yngping);
+      fetchAudioResponse(yngping);
     }
   } catch (error) {
     console.error(error);
@@ -352,15 +338,40 @@ const fetchWordResponse = async () => {
   }
 };
 
-const fetchVoiceResponse = async (yngping: string) => {
+const fetchAudioResponse = async (yngping: string) => {
   try {
     const response = await fetch(
-      `${apiUrl}/voice/?yngping=${encodeURIComponent(yngping)}`
+      `${apiUrl}/audio/?yngping=${encodeURIComponent(yngping)}`
     );
     if (!response.ok) throw new Error('Response Error');
-    voiceResponse.value = await response.json();
+    audioResponse.value = await response.json();
+    sortAudioBySpeaker();
   } catch (error) {
     console.error(error);
+  }
+};
+
+const sortAudioBySpeaker = () => {
+  if (audioResponse.value.data?.results) {
+    const speakerPriority: {
+      hy: number;
+      lk: number;
+      [key: string]: number;
+    } = {
+      hy: 1,
+      lk: 2,
+    };
+
+    audioResponse.value.data.results.sort((a, b) => {
+      const priorityA = speakerPriority[a.speaker] || 3;
+      const priorityB = speakerPriority[b.speaker] || 3;
+
+      if (priorityA !== priorityB) {
+        return priorityA - priorityB;
+      }
+
+      return a.speaker.localeCompare(b.speaker);
+    });
   }
 };
 
