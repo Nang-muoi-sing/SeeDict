@@ -31,6 +31,11 @@ const routes = [
     name: 'about',
     component: () => import('../views/AboutView.vue'),
   },
+  {
+    path: '/phoneticConvert', 
+    name: 'phoneticConvert', 
+    component: () => import('../views/PhoneticConvertView.vue'), 
+  },
 ];
 
 const base = import.meta.env.VITE_BASE_URL || '/';
