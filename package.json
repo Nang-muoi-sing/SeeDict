@@ -29,6 +29,7 @@
     "@eslint/create-config": "^1.10.0",
     "@iconify-json/ic": "^1.2.4",
     "@iconify-json/line-md": "^1.2.11",
+    "@iconify-json/lucide": "^1.2.80",
     "@iconify-json/material-symbols": "^1.2.29",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/mi": "^1.2.2",

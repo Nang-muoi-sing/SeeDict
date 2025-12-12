@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <div class="relative mt-5 mb-16 space-y-5 rounded-lg bg-white">
+    <div class="relative mb-16 mt-5 space-y-5 rounded-lg bg-white">
       <div
         class="absolute flex w-full items-center justify-between gap-1 px-6 pt-5"
       >
@@ -28,7 +28,7 @@
           </option>
         </select>
         <div
-          class="mx-4 rounded-full bg-white text-rosybrown-700 ring-8 ring-wheat-50"
+          class="mx-2 rounded-full bg-white text-rosybrown-700 ring-8 ring-wheat-50"
         >
           <i-mi-switch class="m-2" />
         </div>
@@ -47,24 +47,35 @@
         </select>
       </div>
       <div class="flex w-full flex-col lg:flex-row">
-        <div class="my-3 ml-3 mr-3 flex-1 rounded-xl bg-wheat-50 pt-16 lg:mr-0">
+        <div
+          class="my-3 ml-3 mr-3 flex flex-1 flex-col rounded-xl bg-wheat-50 pt-16 lg:mr-0"
+        >
           <TextareaCard
             ref="inputArea"
             :placeholder="placeholders[sourceScheme]"
             :placeholder-class="'px-6 text-3xl font-bold text-wheat-600/50 leading-relaxed'"
             :input-area-class="{
-              'h-full min-h-[10rem] w-full break-all px-6 pb-6 leading-relaxed text-rosybrown-800 lg:min-h-[20rem]': true,
+              'h-full min-h-[10rem] w-full break-all px-6 leading-relaxed text-rosybrown-800 lg:min-h-[20rem]': true,
               'text-3xl font-bold': inputText.length < 120,
               'text-xl font-bold':
                 inputText.length >= 120 && inputText.length < 280,
             }"
           ></TextareaCard>
+          <div class="bg-red mt-auto px-6 py-3">
+            <button
+              @click="handleDeleteClick"
+              class="rounded-lg bg-wheat-100 p-1.5 text-wheat-500 duration-300 hover:bg-wheat-200 active:bg-wheat-200"
+            >
+              <i-material-symbols-delete />
+            </button>
+          </div>
         </div>
 
-        <div class="my-3 ml-3 mr-3 flex-1 rounded-xl bg-white lg:pl-0 lg:pt-16">
+        <div
+          class="my-3 ml-3 mr-3 flex flex-1 flex-col rounded-xl bg-white lg:pl-0 lg:pt-16"
+        >
           <div
-            class="h-full min-h-[10rem] w-full break-all px-6 pb-6 leading-relaxed text-rosybrown-800 lg:min-h-[20rem]"
-            style="position: relative"
+            class="h-full min-h-[10rem] w-full break-all px-6 leading-relaxed text-rosybrown-800 lg:min-h-[20rem]"
             :class="{
               'text-3xl font-bold': inputText.length < 120,
               'text-xl font-bold':
@@ -102,10 +113,22 @@
                 </div>
               </template>
             </template>
-            <span v-else class="text-3xl font-bold text-wheat-600/50">
+            <span
+              v-else
+              class="select-none text-3xl font-bold text-wheat-600/50"
+            >
               {{ placeholders[targetScheme] }}
             </span>
           </div>
+          <div class="mt-auto px-6 py-3">
+            <button
+              @click="handleCopyClick"
+              class="rounded-lg bg-wheat-100 p-1.5 text-wheat-500 duration-300 hover:bg-wheat-200 active:bg-wheat-200"
+            >
+              <i-material-symbols-content-copy />
+            </button>
+          </div>
+          <ToastTip ref="copyTip">已复制结果</ToastTip>
         </div>
       </div>
     </div>
@@ -117,6 +140,7 @@ import { initTooltips } from 'flowbite';
 import { computed, ref, watch } from 'vue';
 import PageContent from '../components/PageContent.vue';
 import TextareaCard from '../components/TextareaCard.vue';
+import ToastTip from '../components/ToastTip.vue';
 import {
   yngpingIPAFinalMap,
   yngpingIPAInitialMap,
@@ -159,6 +183,8 @@ const tonePattern = /\d+$/;
 const sourceScheme = ref<Scheme>('typing');
 const targetScheme = ref<Scheme>('cursive');
 const inputArea = ref<InstanceType<typeof TextareaCard> | null>(null);
+const copyTip = ref<InstanceType<typeof ToastTip> | null>(null);
+
 const inputText = computed(() => {
   return inputArea.value?.data?.() || '';
 });
@@ -377,6 +403,21 @@ function convertIPAToTyping(syllable: string): ConvertResult {
 
   return { success: true, value: `${initial}${finalTyping}${tone}` };
 }
+
+const handleDeleteClick = () => {
+  inputArea.value?.clear();
+};
+
+const handleCopyClick = async () => {
+  const content = resultTokens.value.map((token) => token.text).join('');
+  if (!content) return;
+  try {
+    await navigator.clipboard.writeText(content);
+    copyTip.value?.tip();
+  } catch (err) {
+    console.error('复制失败:', err);
+  }
+};
 
 watch(
   () => resultTokens.value,

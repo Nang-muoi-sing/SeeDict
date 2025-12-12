@@ -17,15 +17,15 @@
         },
         placeholderClass,
       ]"
-      style="line-height: inherit;"
+      style="line-height: inherit"
     >
       {{ props.placeholder }}
-      </span>
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps({
   placeholder: {
@@ -62,7 +62,15 @@ const handleKeyUp = (e: KeyboardEvent) => {
   }
 };
 
+const clear = () => {
+  if (inputArea.value) {
+    inputArea.value.textContent = '';
+    inputText.value = '';
+  }
+};
+
 defineExpose({
   data: () => inputText.value,
+  clear,
 });
 </script>
