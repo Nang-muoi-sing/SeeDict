@@ -28,31 +28,20 @@
       </div>
     </div>
   </div>
-  <div
-    ref="copyTip"
-    class="fixed bottom-0 left-0 right-0 z-50 -mb-12 flex justify-center"
-  >
-    <div
-      class="flex flex-row items-center gap-1 rounded-lg bg-white px-6 py-3 font-medium text-wheat-800 shadow-lg"
-    >
-      <i-material-symbols-check-circle-rounded class="text-green-600" />
-      已复制词条
-    </div>
-  </div>
+  <ToastTip ref="copyTip">已复制词条</ToastTip>
 </template>
 
 <script setup lang="ts">
-import { createTimeline } from 'animejs';
 import { ref } from 'vue';
 import RubyText from './common/RubyText.vue';
-
+import ToastTip from './ToastTip.vue';
 const props = defineProps<{
   text: string;
   yngping: string;
   voiceUrl?: string;
 }>();
 
-const copyTip = ref<HTMLElement | null>(null);
+const copyTip = ref<InstanceType<typeof ToastTip> | null>(null);
 const audioPlayer = ref<HTMLAudioElement | null>(null);
 const isPlaying = ref(false);
 const isAudioClicking = ref(false);
@@ -61,27 +50,7 @@ const handleCopyClick = async () => {
   try {
     const textToCopy = props.text.replace(/\*/g, '');
     await navigator.clipboard.writeText(textToCopy);
-
-    if (copyTip.value) {
-      createTimeline()
-        .add(copyTip.value, {
-          translateY: '-350%',
-          opacity: 1,
-          duration: 300,
-          ease: 'easeOutQuad',
-        })
-        .add(copyTip.value, {
-          opacity: { to: 0 },
-          duration: 1000,
-          ease: 'easeInQuad',
-          delay: 500,
-          onComplete: () => {
-            if (copyTip.value) {
-              copyTip.value.style.transform = 'inherit';
-            }
-          },
-        });
-    }
+    copyTip.value?.tip();
   } catch (err) {
     console.error('复制失败:', err);
   }
