@@ -81,7 +81,7 @@
               class="inline-flex w-full items-center"
               :to="{ name: 'phoneticConvert' }"
             >
-              <i-material-symbols-crowdsource class="mr-1" />工具</RouterLink
+              <i-lucide-tool-case class="mr-1" />工具</RouterLink
             >
           </div>
           <div
