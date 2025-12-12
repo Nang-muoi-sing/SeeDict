@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "node_modules/flowbite/**/*.{js,jsx,ts,tsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -10,6 +14,18 @@ export default {
           "Noto Sans CJK SC",
           "SeeFont",
           "SeeFontEx",
+          "Arial",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
+        plain: [
+          "Noto Sans",
+          "Noto Sans CJK SC",
           "Arial",
           "ui-sans-serif",
           "system-ui",
@@ -65,5 +81,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('flowbite/plugin')],
 };

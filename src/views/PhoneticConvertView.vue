@@ -1,117 +1,133 @@
 <template>
   <PageContent :show-search-bar="false">
-    <div class="flex flex-col gap-6 lg:flex-row">
-      <section class="flex-1 space-y-6">
-        <header class="space-y-2">
-          <p class="text-wheat-500 text-xs tracking-[0.3em]">gëüng guói</p>
-          <h1 class="text-rosybrown-800 text-3xl font-bold">
-            工具
-          </h1>
-          <p class="text-wheat-600 text-sm leading-6">
-            在榕拼键入、榕拼手写与国际音标之间实时转换，逐个音节校验并提示错误，帮助你快速完成不同注音方案之间的互换。
-          </p>
-        </header>
+    <div>
+      <div class="mb-5 flex flex-row text-4xl font-bold text-rosybrown-800">
+        <RubyText :text="'工具'" :yngping="'geoyng55 geoy242'"></RubyText>
+      </div>
+      <div class="space-y-2 text-sm font-semibold text-rosybrown-600">
+        <p>
+          在榕拼键入、榕拼手写与国际音标之间实时转换，逐个音节校验并提示错误，帮助你快速完成不同注音方案之间的互换。
+        </p>
+      </div>
+    </div>
 
-        <div
-          class="rounded-2xl bg-white p-8 md:p-10 shadow-sm ring-1 ring-wheat-200 space-y-10"
+    <div class="relative mt-5 mb-16 space-y-5 rounded-lg bg-white">
+      <div
+        class="absolute flex w-full items-center justify-between gap-1 px-6 pt-5"
+      >
+        <select
+          v-model="sourceScheme"
+          class="w-full rounded-lg border border-wheat-200 bg-wheat-50/50 px-3 py-1.5 font-plain text-sm text-rosybrown-700 ring-wheat-200 transition hover:border-wheat-400"
         >
-          <div class="grid gap-8 lg:grid-cols-2">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <p class="text-rosybrown-700 text-sm font-semibold">
-                  输入方案
-                </p>
-                <select
-                  v-model="sourceScheme"
-                  class="rounded-lg border border-wheat-200 px-3 py-2 text-sm text-rosybrown-700 outline-none ring-wheat-200 transition focus:border-wheat-400 focus:ring-2"
-                >
-                  <option
-                    v-for="option in schemeOptions"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </div>
-              <textarea
-                v-model="inputText"
-                class="min-h-[20rem] w-full rounded-2xl border border-wheat-200 bg-wheat-50/60 p-6 text-base leading-relaxed text-rosybrown-900 outline-none transition focus:border-wheat-400 focus:bg-white focus:ring-2 focus:ring-wheat-200"
-                :placeholder="placeholders[sourceScheme]"
-              ></textarea>
-              <p class="text-wheat-500 text-xs">
-                输入多个音节时用空格分隔，可直接粘贴整句。
-              </p>
-            </div>
+          <option
+            v-for="option in schemeOptions"
+            :key="option.value"
+            :value="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+        <div
+          class="mx-4 rounded-full bg-white text-rosybrown-700 ring-8 ring-wheat-50"
+        >
+          <i-mi-switch class="m-2" />
+        </div>
 
-            <div class="space-y-4">
-              <div class="flex items-center justify-between">
-                <p class="text-rosybrown-700 text-sm font-semibold">
-                  输出方案
-                </p>
-                <select
-                  v-model="targetScheme"
-                  class="rounded-lg border border-wheat-200 px-3 py-2 text-sm text-rosybrown-700 outline-none ring-wheat-200 transition focus:border-wheat-400 focus:ring-2"
+        <select
+          v-model="targetScheme"
+          class="w-full rounded-lg border border-wheat-200 bg-wheat-50/50 px-3 py-1.5 font-plain text-sm text-rosybrown-700 ring-wheat-200 transition hover:border-wheat-400"
+        >
+          <option
+            v-for="option in schemeOptions"
+            :key="option.value"
+            :value="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+      <div class="flex w-full flex-col lg:flex-row">
+        <div class="my-3 ml-3 mr-3 flex-1 rounded-xl bg-wheat-50 pt-16 lg:mr-0">
+          <TextareaCard
+            ref="inputArea"
+            :placeholder="placeholders[sourceScheme]"
+            :placeholder-class="'px-6 text-3xl font-bold text-wheat-600/50 leading-relaxed'"
+            :input-area-class="{
+              'h-full min-h-[10rem] w-full break-all px-6 pb-6 leading-relaxed text-rosybrown-800 lg:min-h-[20rem]': true,
+              'text-3xl font-bold': inputText.length < 120,
+              'text-xl font-bold':
+                inputText.length >= 120 && inputText.length < 280,
+            }"
+          ></TextareaCard>
+        </div>
+
+        <div class="my-3 ml-3 mr-3 flex-1 rounded-xl bg-white lg:pl-0 lg:pt-16">
+          <div
+            class="h-full min-h-[10rem] w-full break-all px-6 pb-6 leading-relaxed text-rosybrown-800 lg:min-h-[20rem]"
+            style="position: relative"
+            :class="{
+              'text-3xl font-bold': inputText.length < 120,
+              'text-xl font-bold':
+                inputText.length >= 120 && inputText.length < 280,
+            }"
+          >
+            <template v-if="hasResultContent">
+              <template v-for="(token, index) in resultTokens" :key="index">
+                <span
+                  :tabindex="
+                    token.type === 'error' && token.message ? 0 : undefined
+                  "
+                  :data-tooltip-target="
+                    token.type === 'error' && token.message
+                      ? `tooltip-${index}`
+                      : undefined
+                  "
+                  class="inline text-rosybrown-800"
+                  :class="{
+                    'cursor-pointer rounded-md bg-rose-50 px-1 ring-1 ring-rose-100':
+                      token.type === 'error',
+                    'whitespace-pre-wrap': token.type === 'whitespace',
+                  }"
                 >
-                  <option
-                    v-for="option in schemeOptions"
-                    :key="option.value"
-                    :value="option.value"
-                  >
-                    {{ option.label }}
-                  </option>
-                </select>
-              </div>
-              <div
-                class="min-h-[20rem] w-full rounded-2xl border border-wheat-200 bg-wheat-50/40 p-6 text-base leading-relaxed text-rosybrown-900"
-              >
-                <template v-if="hasResultContent">
-                  <span
-                    v-for="(token, index) in resultTokens"
-                    :key="index"
-                    :class="[
-                      'inline text-rosybrown-900',
-                      token.type === 'error' &&
-                        'rounded-md bg-rose-50 px-1 text-rose-700 ring-1 ring-rose-100',
-                      token.type === 'whitespace' && 'whitespace-pre',
-                    ]"
-                  >
-                    {{ token.text }}
-                  </span>
-                </template>
-                <p v-else class="text-wheat-500 text-sm">
-                  输入左侧内容后将在此处显示转换结果
-                </p>
-              </div>
-              <p
-                v-if="errorMessages.length"
-                class="rounded-xl bg-rose-50/80 px-3 py-2 text-sm text-rose-600"
-              >
-                检测到 {{ errorMessages.length }} 个音节未能转换：
-                <span class="font-semibold">{{ errorMessages.join('、') }}</span>
-              </p>
-            </div>
+                  {{ token.text }}
+                </span>
+                <div
+                  v-if="token.type === 'error' && token.message"
+                  :id="`tooltip-${index}`"
+                  role="tooltip"
+                  class="tooltip invisible absolute z-50 inline-block rounded-xl bg-rosybrown-900 px-3 py-2 text-sm text-wheat-50 opacity-0 transition-opacity duration-500"
+                >
+                  {{ token.message }}
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              </template>
+            </template>
+            <span v-else class="text-3xl font-bold text-wheat-600/50">
+              {{ placeholders[targetScheme] }}
+            </span>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   </PageContent>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { initTooltips } from 'flowbite';
+import { computed, ref, watch } from 'vue';
 import PageContent from '../components/PageContent.vue';
+import TextareaCard from '../components/TextareaCard.vue';
+import {
+  yngpingIPAFinalMap,
+  yngpingIPAInitialMap,
+  yngpingIPAToneMap,
+  yngpingTypingCursiveFinalToneMap,
+} from '../utils/mapping';
 import {
   makeYngpingCursive,
   yngpingInitialPattern,
   yngpingToIPA,
 } from '../utils/phonetics';
-import {
-  yngpingIPAInitialMap,
-  yngpingIPAFinalMap,
-  yngpingIPAToneMap,
-  yngpingTypingCursiveFinalToneMap,
-} from '../utils/mapping';
 
 type Scheme = 'typing' | 'cursive' | 'ipa';
 type TokenType = 'normal' | 'error' | 'whitespace';
@@ -134,15 +150,18 @@ const schemeOptions = [
 ] as const;
 
 const placeholders: Record<Scheme, string> = {
-  typing: '例如：uoh213 fe24 ny55',
-  cursive: '例如：uóh fé ńg',
-  ipa: '例如：uoʔ˨˦ fei˧˥ ŋ̍˥˥',
+  typing: 'huk21 ziu53 ua242',
+  cursive: 'hǔk zìu uâ',
+  ipa: 'huʔ˨˩ t͡siu˥˧ ua˨˦˨',
 };
 
 const tonePattern = /\d+$/;
-const inputText = ref('');
 const sourceScheme = ref<Scheme>('typing');
 const targetScheme = ref<Scheme>('cursive');
+const inputArea = ref<InstanceType<typeof TextareaCard> | null>(null);
+const inputText = computed(() => {
+  return inputArea.value?.data?.() || '';
+});
 
 const cursiveToTypingMap = Object.entries(
   yngpingTypingCursiveFinalToneMap
@@ -168,8 +187,7 @@ const ipaToneEntries = Object.entries(yngpingIPAToneMap)
   .map(([tone, ipa]) => ({ tone, ipa }))
   .sort((a, b) => b.ipa.length - a.ipa.length);
 
-const tokenize = (text: string): string[] =>
-  text.match(/\s+|\S+/g) ?? [];
+const tokenize = (text: string): string[] => text.match(/\s+|\S+/g) ?? [];
 
 const conversionResult = computed<ConversionResult>(() => {
   if (!inputText.value) {
@@ -194,11 +212,6 @@ const conversionResult = computed<ConversionResult>(() => {
 const resultTokens = computed(() => conversionResult.value.tokens);
 const hasResultContent = computed(() =>
   resultTokens.value.some((token) => token.type !== 'whitespace')
-);
-const errorMessages = computed(() =>
-  resultTokens.value
-    .filter((token) => token.type === 'error' && token.message)
-    .map((token) => `${token.raw}（${token.message}）`)
 );
 
 function convertFragment(
@@ -364,117 +377,14 @@ function convertIPAToTyping(syllable: string): ConvertResult {
 
   return { success: true, value: `${initial}${finalTyping}${tone}` };
 }
+
+watch(
+  () => resultTokens.value,
+  () => {
+    setTimeout(() => {
+      initTooltips();
+    }, 0);
+  },
+  { deep: true }
+);
 </script>
-
-<style scoped>
-.convert-container {
-  max-width: 1200px;
-  margin: 50px auto;
-  padding: 0 20px 60px;
-}
-
-.convert-title {
-  text-align: center;
-  margin-bottom: 32px;
-  color: #262626;
-}
-
-.convert-content {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-@media (min-width: 960px) {
-  .convert-content {
-    flex-direction: row;
-    align-items: stretch;
-  }
-}
-
-.convert-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.panel-title {
-  font-weight: 600;
-  color: #555;
-}
-
-.scheme-select {
-  border: 1px solid #d9d9d9;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 14px;
-  min-width: 140px;
-}
-
-.convert-input {
-  width: 100%;
-  height: 240px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 16px;
-  font-size: 16px;
-  line-height: 1.6;
-  resize: none;
-}
-
-.convert-input:focus {
-  outline: none;
-  border-color: #42b983;
-  box-shadow: 0 0 0 2px rgba(66, 185, 131, 0.15);
-}
-
-.convert-result {
-  width: 100%;
-  min-height: 240px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 16px;
-  background-color: #fafafa;
-  font-size: 16px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-}
-
-.result-token {
-  display: inline;
-  color: #1f2329;
-}
-
-.result-token--error {
-  color: #d93025;
-  background: #fdecea;
-  border-radius: 4px;
-  padding: 0 4px;
-}
-
-.result-token--whitespace {
-  white-space: pre;
-}
-
-.result-placeholder {
-  color: #999;
-  margin: 0;
-}
-
-.error-hint {
-  margin-top: 12px;
-  font-size: 14px;
-  color: #d93025;
-}
-
-.error-items {
-  font-weight: 500;
-}
-</style>
