@@ -1,0 +1,68 @@
+<template>
+  <div class="relative">
+    <div
+      contenteditable="true"
+      ref="inputArea"
+      :class="['bg-transparent outline-none', inputAreaClass]"
+      @input="handleInput"
+      @keyup="handleKeyUp"
+      @blur="handleInput"
+      @cut="handleInput"
+    ></div>
+    <span
+      :class="[
+        'pointer-events-none absolute left-0 top-0 inline',
+        {
+          invisible: inputText.length > 0,
+        },
+        placeholderClass,
+      ]"
+      style="line-height: inherit;"
+    >
+      {{ props.placeholder }}
+      </span>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { defineProps, ref } from 'vue';
+
+const props = defineProps({
+  placeholder: {
+    type: String,
+    default: 'placeholder',
+  },
+  inputAreaClass: {
+    type: [String, Object, Array],
+    default: '',
+  },
+  placeholderClass: {
+    type: [String, Object, Array],
+    default: '',
+  },
+});
+
+const inputArea = ref<HTMLDivElement | null>(null);
+const inputText = ref('');
+
+const updateInputText = () => {
+  if (!inputArea.value) return;
+  let text = inputArea.value.textContent?.trim() || '';
+  inputText.value = text;
+};
+
+const handleInput = () => {
+  updateInputText();
+};
+
+const handleKeyUp = (e: KeyboardEvent) => {
+  const keyCodes = ['Backspace', 'Delete'];
+  if (keyCodes.includes(e.key) || (e.ctrlKey && e.key === 'a')) {
+    setTimeout(updateInputText, 0);
+  }
+};
+
+defineExpose({
+  data: () => inputText.value,
+});
+</script>
