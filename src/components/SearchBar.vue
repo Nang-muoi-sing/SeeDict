@@ -29,7 +29,7 @@
         @focus="filterHistory"
         @keydown.down.prevent="handleKeyDown('down')"
         @keydown.up.prevent="handleKeyDown('up')"
-        @keydown.enter.prevent="handleEnterKey"
+        @keydown.enter.prevent="handleKeyEnter"
       />
       <ul
         v-show="isHistoryVisible && filteredHistory.length > 0"
@@ -96,6 +96,8 @@ const isHistoryVisible = ref(false);
 const isInputFocused = ref(false);
 const selectedIndex = ref(-1);
 const isMouseHovering = ref(false);
+
+let queryCache = '';
 
 const handleScroll = () => {
   isHistoryVisible.value = false;
@@ -220,7 +222,7 @@ const handleKeyDown = (direction: 'up' | 'down') => {
   scrollToSelectedItem();
 };
 
-const handleEnterKey = () => {
+const handleKeyEnter = () => {
   if (selectedIndex.value !== -1 && filteredHistory.value.length > 0) {
     selectHistory(selectedIndex.value);
   } else {
@@ -231,11 +233,13 @@ const handleEnterKey = () => {
 const handleMouseEnter = (index: number) => {
   isMouseHovering.value = true;
   selectedIndex.value = index;
+  queryCache = searchQuery.value;
   searchQuery.value = filteredHistory.value[index];
 };
 
 const handleMouseLeave = () => {
   isMouseHovering.value = false;
+  searchQuery.value = queryCache;
 };
 
 const scrollToSelectedItem = () => {
