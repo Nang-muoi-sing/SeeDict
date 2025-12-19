@@ -224,7 +224,7 @@
 import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Badge from '../components/common/Badge.vue';
-import Explanations from '../components/common/Explanations.vue';
+import Explanations from '../components/common/ExplanationList.vue';
 import SeeSymbol from '../components/common/SeeSymbol.vue';
 import Subtitle from '../components/common/Subtitle.vue';
 import PageContent from '../components/PageContent.vue';
