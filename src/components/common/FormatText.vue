@@ -6,7 +6,7 @@
     <span v-if="node.type === 'text'">{{ node.content }}</span>
     <span
       v-else-if="node.type === 'marked'"
-      class="marked-char relative after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.2em] after:w-[0.2em] after:-translate-x-1/2 after:rounded-full after:content-['']"
+      class="marked-char relative after:absolute after:-bottom-[0.1em] after:left-1/2 after:h-[0.2em] after:w-[0.2em] after:-translate-x-1/2 after:rounded-full after:content-['']"
       :class="markedClass"
     >
       {{ node.content }}
@@ -19,7 +19,7 @@
         <span v-if="subNode.type === 'text'">{{ subNode.content }}</span>
         <span
           v-else-if="subNode.type === 'marked'"
-          class="marked-char relative after:absolute after:-bottom-[0.2em] after:left-1/2 after:h-[0.2em] after:w-[0.2em] after:-translate-x-1/2 after:rounded-full after:content-['']"
+          class="marked-char relative after:absolute after:-bottom-[0.1em] after:left-1/2 after:h-[0.2em] after:w-[0.2em] after:-translate-x-1/2 after:rounded-full after:content-['']"
           :class="markedClass"
         >
           {{ subNode.content }}
@@ -41,9 +41,9 @@ import {
 
 const correctionRulesMap = {
   quotes: correctChineseQuotes,
-  stops: correctStops,
   punctuation: correctChinesePunctuation,
   space: correctChineseSpace,
+  stops: correctStops,
 } as const;
 
 type TokenType = 'toggle' | 'marked';
@@ -77,7 +77,7 @@ const props = defineProps({
   },
   correctionRules: {
     type: Array as PropType<CorrectionRule[]>,
-    default: () => ['quotes', 'punctuation', 'space', 'stops'],
+    default: () => ['punctuation', 'space', 'stops'],
   },
 });
 

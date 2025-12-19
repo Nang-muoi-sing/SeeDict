@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { parseText, circleExplanations } from '../utils/typography';
+import { circleExplanations } from '../utils/typography';
 
 export type Word = {
   w: string;
@@ -18,7 +18,7 @@ export const useDeckStore = defineStore('deck', {
     cards(state) {
       return state.words.map((word) => ({
         ...word,
-        expl: parseText(circleExplanations(word.expl)),
+        expl: circleExplanations(word.expl),
       }));
     },
 

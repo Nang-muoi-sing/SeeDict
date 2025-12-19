@@ -39,7 +39,7 @@
             <p
               class="line-clamp-4 max-w-lg overflow-hidden text-ellipsis whitespace-normal text-base text-rosybrown-800 lg:line-clamp-2 lg:text-lg"
             >
-              释义：{{ card.expl }}
+              释义：<FormatText :text="card.expl" :correction-rules="['punctuation']"/>
             </p>
           </div>
         </div>
@@ -53,6 +53,7 @@ import gsap from 'gsap';
 import { onMounted, reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useDeckStore } from '../store/deckStore';
+import FormatText from './common/FormatText.vue';
 import RubyText from './common/RubyText.vue';
 
 const deckStore = useDeckStore();
