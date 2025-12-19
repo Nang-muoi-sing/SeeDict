@@ -18,6 +18,7 @@ declare module 'vue' {
     ExplSentence: typeof import('./src/components/common/ExplSentence.vue')['default']
     FloatingImages: typeof import('./src/components/FloatingImages.vue')['default']
     Footer: typeof import('./src/components/common/Footer.vue')['default']
+    FormatText: typeof import('./src/components/common/FormatText.vue')['default']
     IIcRoundWechat: typeof import('~icons/ic/round-wechat')['default']
     ILucideToolCase: typeof import('~icons/lucide/tool-case')['default']
     IMaterialSymbolsBook2Rounded: typeof import('~icons/material-symbols/book2-rounded')['default']
