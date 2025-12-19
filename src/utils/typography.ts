@@ -68,11 +68,11 @@ export const correctChineseSpace = (text: string): string => {
 // 替换文本中的 {A,B} 格式
 export const toggleGlyph = (
   text: string,
-  mode: 'first' | 'second' = 'second'
+  mode: 'original' | 'canonical' = 'canonical'
 ): string => {
   const regex = /\{([^,]+),([^}]+)\}/g;
-  return text.replace(regex, (_, first, second) => {
-    return mode === 'first' ? first : second;
+  return text.replace(regex, (_, original, canonical) => {
+    return mode === 'original' ? original : canonical;
   });
 };
 
@@ -82,7 +82,7 @@ export const correctText = (text: string): string => {
 
 export const parseText = (
   text: string,
-  mode: 'first' | 'second' = 'second'
+  mode: 'original' | 'canonical' = 'canonical'
 ): string => {
   return correctText(toggleGlyph(text, mode));
 };

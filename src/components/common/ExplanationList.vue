@@ -14,10 +14,10 @@ import type { FengExplNode } from '../../utils/typing';
 
 interface Props {
   data: FengExplNode[];
-  currentGlyph?: 'first' | 'second';
+  currentGlyph?: 'original' | 'canonical';
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  currentGlyph: 'second',
+  currentGlyph: 'canonical',
 });
 </script>

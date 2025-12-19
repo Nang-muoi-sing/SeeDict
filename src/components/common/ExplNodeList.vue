@@ -12,12 +12,12 @@
 </template>
 
 <script setup lang="ts">
-import ExplNode from './ExplNode.vue';
 import type { FengExplNode } from '../../utils/typing';
+import ExplNode from './ExplNode.vue';
 
 defineProps<{
   nodes: FengExplNode[];
   path: number[]; // 当前层级路径（ [1, 2] 表示 1.2）
-  currentGlyph?: 'first' | 'second';
+  currentGlyph?: 'original' | 'canonical';
 }>();
 </script>
