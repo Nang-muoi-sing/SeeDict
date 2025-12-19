@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="processedEntries?.length > 0"
-    class="mt-2 mb-5 rounded-lg bg-white px-8 py-6"
+    class="mb-5 mt-2 rounded-lg bg-white px-8 py-6"
   >
     <div class="mb-2 space-y-2">
       <WordCikLingEntry
@@ -10,27 +10,30 @@
         :key="index"
       ></WordCikLingEntry>
     </div>
-    <div class="text-rosybrown-800 space-y-1">
-      <template v-for="liAnnotation in processedLiAnnotations"
+    <div class="space-y-1 text-rosybrown-800">
+      <template
+        v-for="(liAnnotation, index) in processedLiAnnotations"
+        :key="index"
         ><p>
-          <Badge v-for="liAnnotationOrder in liAnnotation.order">{{
-            liAnnotationOrder
-          }}</Badge
+          <Badge
+            v-for="(liAnnotationOrder, orderIndex) in liAnnotation.order"
+            :key="orderIndex"
+            >{{ liAnnotationOrder }}</Badge
           >{{ liAnnotation.content }}
         </p>
       </template>
     </div>
 
-    <p class="text-rosybrown-200 mt-2 flex justify-end text-sm">
+    <p class="mt-2 flex justify-end text-sm text-rosybrown-200">
       李如龙, 王升魁. 戚林八音校注. 福州: 福建人民出版社, 2001.
     </p>
     <template v-if="props.isCommentedCikLing">
-      <hr class="border-rosybrown-100 my-2 border-t-2" />
-      <div class="text-rosybrown-800 space-y-1">
+      <hr class="my-2 border-t-2 border-rosybrown-100" />
+      <div class="space-y-1 text-rosybrown-800">
         <template v-for="(cikling, index) in processedEntries" :key="index"
           ><p v-if="cikling.comment">
-            <SeeSymbol class="text-rosybrown-700">校注</SeeSymbol
-            >{{ correctText(cikling.comment) }}
+            <SeeSymbol class="text-rosybrown-700">校注</SeeSymbol>
+            <FormatText :text="cikling.comment" />
           </p>
         </template>
       </div>
@@ -42,11 +45,10 @@
 import { computed } from 'vue';
 import { toneCikLingMap } from '../utils/mapping';
 import type { WordCikLing } from '../utils/typing';
-import { correctText } from '../utils/typography';
 import Badge from './common/Badge.vue';
 import SeeSymbol from './common/SeeSymbol.vue';
 import WordCikLingEntry from './WordCikLingEntry.vue';
-
+import FormatText from './common/FormatText.vue';
 const props = defineProps<{
   data: WordCikLing[];
   isCommentedCikLing: boolean;

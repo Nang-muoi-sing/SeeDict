@@ -3,7 +3,7 @@
     <SearchSkeleton v-if="loading"></SearchSkeleton>
     <template v-else>
       <div
-        class="bg-wheat-300 mb-2.5 w-fit rounded-lg px-2 py-1 text-xl text-white"
+        class="mb-2.5 w-fit rounded-lg bg-wheat-300 px-2 py-1 text-xl text-white"
       >
         查询：{{ searchedResponse.data.queries }}
       </div>
@@ -14,8 +14,8 @@
         :to="{ name: 'word', query: { w: result.w } }"
         :key="result.w"
       >
-        <div class="bg-wheat-100 my-5 px-5 py-4">
-          <div class="text-wheat-500 flex flex-wrap justify-end gap-2 text-sm">
+        <div class="my-5 bg-wheat-100 px-5 py-4">
+          <div class="flex flex-wrap justify-end gap-2 text-sm text-wheat-500">
             <span
               class="flex items-center"
               v-if="result.refs?.length == 0 && !result.brief"
@@ -35,26 +35,25 @@
             >
           </div>
           <div
-            class="text-rosybrown-800 xxl:text-4xl text-3xl font-bold break-all whitespace-normal"
+            class="xxl:text-4xl whitespace-normal break-all text-3xl font-bold text-rosybrown-800"
           >
             <RubyText :text="result.text" :yngping="result.pron"></RubyText>
           </div>
-          <p class="text-wheat-600 mt-2">
-            {{ correctStops(parseText(result.brief)) }}
-          </p>
-        </div></RouterLink
-      >
+          <p class="mt-2 text-wheat-600">
+            <FormatText :text="result.brief" />
+          </p></div
+      ></RouterLink>
 
-      <div class="text-wheat-400 mt-6 text-center text-sm">
+      <div class="mt-6 text-center text-sm text-wheat-400">
         没有找到想找的词汇？尝试<a
           href="https://jcnf40n3hvft.feishu.cn/share/base/form/shrcnfDrtD7nlpJdryFlYFUU3Lf"
           target="_blank"
-          class="hover:text-wheat-600 underline underline-offset-4 transition-all"
+          class="underline underline-offset-4 transition-all hover:text-wheat-600"
           >向我们反馈</a
         >或<a
           href="https://jcnf40n3hvft.feishu.cn/share/base/form/shrcnAQ3W3DjmPV7ycTJ1ekiFBf"
           target="_blank"
-          class="hover:text-wheat-600 underline underline-offset-4 transition-all"
+          class="underline underline-offset-4 transition-all hover:text-wheat-600"
           >向我们提交数据</a
         >
       </div>
@@ -63,7 +62,7 @@
         <button
           @click="loadMore"
           :disabled="loadingMore"
-          class="bg-wheat-300 hover:bg-wheat-400 disabled:bg-wheat-200 rounded-lg px-6 py-3 text-white"
+          class="rounded-lg bg-wheat-300 px-6 py-3 text-white hover:bg-wheat-400 disabled:bg-wheat-200"
         >
           <div :class="{ 'animate-bounce': loadingMore }">加载更多</div>
         </button>
@@ -71,7 +70,7 @@
 
       <div
         v-if="!hasMore && allResults.length > 0"
-        class="text-wheat-500 mt-6 text-center"
+        class="mt-6 text-center text-wheat-500"
       >
         已显示所有 {{ allResults.length }} 条相关结果
       </div>
@@ -87,7 +86,7 @@ import PageContent from '../components/PageContent.vue';
 import SearchSkeleton from '../components/SearchSkeleton.vue';
 import { sourceMap } from '../utils/mapping';
 import type { SearchResponse } from '../utils/typing';
-import { correctStops, parseText } from '../utils/typography';
+import FormatText from '../components/common/FormatText.vue';
 const apiUrl = import.meta.env.VITE_API_URL || '/';
 
 const route = useRoute();
