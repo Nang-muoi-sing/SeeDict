@@ -4,7 +4,7 @@
     :key="index"
     class="relative"
     :class="{
-      'after:absolute after:-bottom-[0.05em] after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:bg-rosybrown-700 after:content-[\'\']':
+      'after:absolute after:-bottom-0 after:left-1/2 after:h-[0.15em] after:w-[0.15em] after:-translate-x-1/2 after:rounded-full after:bg-rosybrown-700 after:content-[\'\']':
         markedChars[index],
     }"
     >{{ char }}
