@@ -14,10 +14,10 @@ const CHINESE_RANGE = [
 
 export const correctChineseQuotes = (text: string): string => {
   return text
-    .replace(/‘/g, '『') //左单引号 ‘ → 『
-    .replace(/’/g, '』') //右单引号 ’ → 』
-    .replace(/“/g, '「') // 左双引号 “ → 「
-    .replace(/”/g, '」'); // 右双引号 ” → 」
+    .replace(/‘/g, '『')
+    .replace(/’/g, '』')
+    .replace(/“/g, '「')
+    .replace(/”/g, '」');
 };
 
 export const correctStops = (text: string): string => {
