@@ -136,6 +136,7 @@
 </template>
 
 <script setup lang="ts">
+import { parseYngping } from '../utils/phonetics';
 import { initTooltips } from 'flowbite';
 import { computed, ref, watch } from 'vue';
 import PageContent from '../components/PageContent.vue';
@@ -251,6 +252,7 @@ function convertFragment(
   }
 
   const typingResult = convertToTyping(trimmed, source);
+
   if (!typingResult.success) {
     return {
       text: fragment,
@@ -261,6 +263,16 @@ function convertFragment(
   }
 
   const converted = convertFromTyping(typingResult.value, target);
+  if (!converted) {
+    return {
+      text: fragment,
+      raw: fragment,
+      type: 'error',
+      message: "未识别音节",
+    };
+  }
+
+
   return {
     text: converted,
     raw: fragment,
@@ -293,47 +305,37 @@ function convertToTyping(syllable: string, source: Scheme): ConvertResult {
 }
 
 function validateTypingSyllable(syllable: string): ConvertResult {
-  const lower = syllable.toLowerCase();
-  const toneMatch = lower.match(tonePattern);
+  const toneMatch = syllable.match(tonePattern);
   if (!toneMatch) {
-    return { success: false, message: '缺少声调数字' };
+    return { success: false, message: '缺少声调' };
   }
 
-  const tone = toneMatch[0];
-  const letterPart = lower.slice(0, lower.length - tone.length);
+  const letterPart = syllable.slice(0, syllable.length - toneMatch[0].length);
   if (!letterPart) {
-    return { success: false, message: '缺少韵母部分' };
+    return { success: false, message: '缺少韵母' };
   }
 
-  const initialMatch = letterPart.match(yngpingInitialPattern);
-  let initial = initialMatch ? initialMatch[0] : '';
-  let rest = letterPart.slice(initial.length);
+  const [initial, final, tone] = parseYngping(syllable);
 
-  if (initial === 'ng' && !rest) {
-    initial = '';
-    rest = 'ng';
-  }
-
-  if (!(initial in yngpingIPAInitialMap)) {
+  if (initial === null) {
     return { success: false, message: '声母不合法' };
   }
 
-  if (!rest || !(rest in yngpingIPAFinalMap)) {
+  if (final === null) {
     return { success: false, message: '韵母不合法' };
   }
 
-  if (!(tone in yngpingIPAToneMap)) {
+  if (tone === null) {
     return { success: false, message: '声调不合法' };
   }
 
-  return { success: true, value: `${initial}${rest}${tone}` };
+  return { success: true, value: `${initial}${final}${tone}` };
 }
 
 function convertCursiveToTyping(syllable: string): ConvertResult {
-  const lower = syllable.toLowerCase();
-  const initialMatch = lower.match(yngpingInitialPattern);
+  const initialMatch = syllable.match(yngpingInitialPattern);
   let initial = initialMatch ? initialMatch[0] : '';
-  let finalPart = lower.slice(initial.length);
+  let finalPart = syllable.slice(initial.length);
 
   if (initial === 'ng' && !finalPart) {
     initial = '';
@@ -341,12 +343,12 @@ function convertCursiveToTyping(syllable: string): ConvertResult {
   }
 
   if (!finalPart) {
-    return { success: false, message: '缺少韵母部分' };
+    return { success: false, message: '缺少韵母' };
   }
 
   const typingFinalTone = cursiveToTypingMap[finalPart];
   if (!typingFinalTone) {
-    return { success: false, message: '未识别的手写韵母' };
+    return { success: false, message: '未识别韵母' };
   }
 
   const toneMatch = typingFinalTone.match(tonePattern);
@@ -374,7 +376,7 @@ function convertIPAToTyping(syllable: string): ConvertResult {
     sanitized.endsWith(entry.ipa)
   );
   if (!toneEntry) {
-    return { success: false, message: '未识别的声调' };
+    return { success: false, message: '未识别声调' };
   }
 
   const tone = toneEntry.tone;
@@ -398,7 +400,7 @@ function convertIPAToTyping(syllable: string): ConvertResult {
 
   const finalTyping = ipaFinalMap[finalBody];
   if (!finalTyping) {
-    return { success: false, message: '未识别的韵母' };
+    return { success: false, message: '未识别韵母' };
   }
 
   return { success: true, value: `${initial}${finalTyping}${tone}` };
