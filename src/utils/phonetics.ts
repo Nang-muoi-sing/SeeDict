@@ -29,6 +29,44 @@ const parseBrace = (syllable: string): [string, boolean] => {
   return [syllable, true];
 };
 
+export const parseYngping = (
+  yngping: string
+): [string | null, string | null, string | null] => {
+  yngping = yngping.trim();
+  if (yngping.length === 0) {
+    return [null, null, null];
+  }
+
+  const tonePattern = /\d+$/;
+
+  const initialMatch = yngping.match(yngpingInitialPattern);
+  let initial: string | null = initialMatch ? initialMatch[0] : '';
+  const toneMatch = yngping.match(tonePattern);
+  let tone: string | null = toneMatch ? toneMatch[0] : null;
+
+  const remaining = initial ? yngping.slice(initial.length) : yngping;
+  let final: string | null = (() => {
+    if (!tone) return remaining;
+    if (tone.length < remaining.length) return remaining.slice(0, -tone.length);
+    return '';
+  })();
+
+  // ng 既作声母也作韵母，当没有其他韵母时就是韵母
+  if (initial === 'ng' && (final === '' || final === null)) {
+    initial = '';
+    final = 'ng';
+  }
+
+  // 声调 5 兼容 55
+  tone = tone === '5' ? '55' : tone;
+
+  initial = initial in yngpingIPAInitialMap ? initial : null;
+  final = final in yngpingIPAFinalMap ? final : null;
+  tone = tone && tone in yngpingIPAToneMap ? tone : null;
+
+  return [initial, final, tone];
+};
+
 export const yngpingToIPA = (
   yngping: string,
   feng_style: boolean = false
@@ -38,7 +76,7 @@ export const yngpingToIPA = (
     return '';
   }
 
-  let initialMap, finalMap, toneMap, endToneMap;
+  let initialMap, finalMap, toneMap;
   if (feng_style) {
     initialMap = yngpingFengIPAInitialMap;
     finalMap = yngpingFengIPAFinalMap;
@@ -48,45 +86,31 @@ export const yngpingToIPA = (
     finalMap = yngpingIPAFinalMap;
     toneMap = yngpingIPAToneMap;
   }
-  endToneMap = yngpingFengIPAEndToneMap;
+  const endToneMap = yngpingFengIPAEndToneMap;
 
   const syllables = rawYngping.split(' ');
-  const tonePattern = /\d+$/;
   const results = [];
 
   for (let i = 0; i < syllables.length; i++) {
-    let [syllable, _] = parseBrace(syllables[i]);
+    let [syllable] = parseBrace(syllables[i]);
     // 无声调，在 IPA 里视作 0
     if (endWithLowercase(syllable)) {
       syllable += '0';
     }
 
-    const initialMatch = syllable.match(yngpingInitialPattern);
-    let initial = initialMatch ? initialMatch[0] : '';
-    const toneMatch = syllable.match(tonePattern);
-    let tone: string | null = toneMatch ? toneMatch[0] : null;
+    const [initial, final, tone] = parseYngping(syllable);
 
-    let remaining = initial ? syllable.slice(initial.length) : syllable;
-    remaining = tone ? remaining.slice(0, -tone.length) : remaining;
-    let final = remaining || '';
-
-    if (tone === null) {
-      console.error(`音节 "${syllable}" 的声调信息不完整`);
+    if (initial === null || final === null || tone === null) {
+      console.error(`音节 "${syllable}" 无效`);
       return '';
     }
 
-    // ng 既作声母也作韵母，当没有其他韵母时就是韵母
-    if (initial === 'ng' && final === '') {
-      initial = '';
-      final = 'ng';
-    }
-
-    tone =
+    const ipaTone =
       !feng_style || syllables.length === 1 || i !== syllables.length - 1
         ? toneMap[tone]
         : endToneMap[tone];
 
-    results.push(`${initialMap[initial]}${finalMap[final]}${tone}`);
+    results.push(`${initialMap[initial]}${finalMap[final]}${ipaTone}`);
   }
   return results.join(' ');
 };
@@ -157,22 +181,26 @@ export const makeYngpingsSup = (yngping: string): string => {
 };
 
 export const makeYngpingCursive = (yngping: string): string => {
-  let [parsedYngping, shouldAddBrace] = parseBrace(yngping);
+  const [_parsedYngping, shouldAddBrace] = parseBrace(yngping);
+  let parsedYngping = _parsedYngping;
   // 有花括号且无声调，在手写里视作 55
   if (shouldAddBrace && endWithLowercase(parsedYngping)) {
     parsedYngping += '55';
   }
 
-  const initialMatch = parsedYngping.match(yngpingInitialPattern);
-  const initial = initialMatch ? initialMatch[0] : '';
-  const finalAndTone =
-    yngpingTypingCursiveFinalToneMap[parsedYngping.slice(initial.length)];
+  const [initial, final, tone] = parseYngping(parsedYngping);
 
-  return `${initial}${finalAndTone}` == ''
-    ? ''
-    : shouldAddBrace
-      ? `{${initial}${finalAndTone}}`
-      : `${initial}${finalAndTone}`;
+  if (initial === null || final === null || tone === null) {
+    console.error(`音节 "${yngping}" 无效`);
+    return '';
+  }
+  const finalAndTone = [final, tone].join('');
+  if (!(finalAndTone in yngpingTypingCursiveFinalToneMap)) {
+    console.error(`音节 "${yngping}" 无效`);
+    return '';
+  }
+
+  return `${initial}${yngpingTypingCursiveFinalToneMap[finalAndTone]}`;
 };
 
 export const makeYngpingsCursive = yngpingToCursive;
