@@ -2,7 +2,7 @@
   <PageContent :show-search-bar="false">
     <div>
       <div class="mb-5 flex flex-row text-4xl font-bold text-rosybrown-800">
-        <RubyText :text="'工具'" :yngping="'geoyng55 geoy242'"></RubyText>
+        <RubyText :text="'工具'" :yngping="'geoyng53 geoy242'"></RubyText>
       </div>
       <div class="space-y-2 text-sm font-semibold text-rosybrown-600">
         <p>
@@ -64,9 +64,11 @@
           <div class="bg-red mt-auto px-6 py-3">
             <button
               @click="handleDeleteClick"
-              class="rounded-lg bg-wheat-100 p-1.5 text-wheat-500 duration-300 hover:bg-wheat-200 active:bg-wheat-200"
+              class="origin-center rounded-lg bg-wheat-100 p-1.5 text-wheat-500 transition-transform duration-300 hover:bg-wheat-200 active:scale-95 active:bg-wheat-200"
             >
-              <i-material-symbols-delete />
+              <i-material-symbols-delete
+                class="scale-100 transition-transform duration-300 active:scale-95"
+              />
             </button>
           </div>
         </div>
@@ -123,9 +125,11 @@
           <div class="mt-auto px-6 py-3">
             <button
               @click="handleCopyClick"
-              class="rounded-lg bg-wheat-100 p-1.5 text-wheat-500 duration-300 hover:bg-wheat-200 active:bg-wheat-200"
+              class="origin-center rounded-lg bg-wheat-100 p-1.5 text-wheat-500 transition-transform duration-300 hover:bg-wheat-200 active:scale-95 active:bg-wheat-200"
             >
-              <i-material-symbols-content-copy />
+              <i-material-symbols-content-copy
+                class="scale-100 transition-transform duration-300 active:scale-95"
+              />
             </button>
           </div>
           <ToastTip ref="copyTip">已复制结果</ToastTip>
@@ -268,10 +272,9 @@ function convertFragment(
       text: fragment,
       raw: fragment,
       type: 'error',
-      message: "未识别音节",
+      message: '未识别音节',
     };
   }
-
 
   return {
     text: converted,
