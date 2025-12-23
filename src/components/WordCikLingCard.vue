@@ -12,8 +12,8 @@
     </div>
     <div class="space-y-1 text-rosybrown-800">
       <template
-        v-for="(liAnnotation, index) in processedLiAnnotations"
-        :key="index"
+        v-for="(liAnnotation, _) in processedLiAnnotations"
+        :key="_"
         ><p>
           <Badge
             v-for="(liAnnotationOrder, orderIndex) in liAnnotation.order"
