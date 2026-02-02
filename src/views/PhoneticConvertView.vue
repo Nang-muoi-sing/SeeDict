@@ -252,14 +252,25 @@
           <div class="mt-4 text-xs font-semibold text-wheat-500">
             福州话称呼
           </div>
-          <div class="mt-2 space-y-2">
+          <div
+            v-if="relationFuzhouItems.length === 0"
+            class="mt-2 text-wheat-500"
+          >
+            暂无福州话称呼。
+          </div>
+          <div v-else class="mt-2 space-y-2">
             <div
               v-for="item in relationFuzhouItems"
-              :key="item.name"
+              :key="`${item.name}-${item.reading}`"
               class="flex items-center justify-between rounded-lg bg-wheat-50 px-3 py-2"
             >
-              <div class="text-sm font-semibold text-rosybrown-800">
-                {{ item.name }}
+              <div>
+                <div class="text-sm font-semibold text-rosybrown-800">
+                  {{ item.name }}
+                </div>
+                <div class="text-xs text-wheat-500">
+                  {{ item.reading || '读音待补充' }}
+                </div>
               </div>
               <button
                 type="button"
@@ -290,7 +301,7 @@ import { computed, ref, watch } from 'vue';
 import PageContent from '../components/PageContent.vue';
 import TextareaCard from '../components/TextareaCard.vue';
 import ToastTip from '../components/ToastTip.vue';
-import { mapFuzhouNames } from '../utils/relationshipMapping';
+import { getFuzhouTerms, type FuzhouTerm } from '../utils/relationshipMapping';
 import {
   yngpingIPAFinalMap,
   yngpingIPAInitialMap,
@@ -585,23 +596,28 @@ const relationQuickKeys = [
   '女',
 ];
 
-type RelationResult =
-  | { mandarin: string; fuzhou: string[] }
-  | { error: string };
+type RelationResult = { mandarin: string } | { error: string };
 
 const relationResult = ref<RelationResult | null>(null);
+const audioBaseUrl = import.meta.env.VITE_RELATIONSHIP_AUDIO_URL || '';
 
-const getFuzhouAudioUrl = (_name: string): string | null => {
-  return null;
+const getFuzhouAudioUrl = (reading: string): string | null => {
+  if (!audioBaseUrl || !reading) return null;
+  const filename = reading
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_-]/g, '');
+  if (!filename) return null;
+  return `${audioBaseUrl}/${filename}.mp3`;
 };
 
 const relationFuzhouItems = computed(() => {
   if (!relationResult.value || 'error' in relationResult.value) {
-    return [];
+    return [] as (FuzhouTerm & { audioUrl: string | null })[];
   }
-  return relationResult.value.fuzhou.map((name) => ({
-    name,
-    audioUrl: getFuzhouAudioUrl(name),
+  return getFuzhouTerms(relationResult.value.mandarin).map((term) => ({
+    ...term,
+    audioUrl: getFuzhouAudioUrl(term.reading),
   }));
 });
 
@@ -644,7 +660,6 @@ const handleRelationCalculate = () => {
   }
   relationResult.value = {
     mandarin,
-    fuzhou: mapFuzhouNames(mandarin),
   };
 };
 

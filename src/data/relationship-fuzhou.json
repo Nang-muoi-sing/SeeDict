@@ -1,0 +1,1194 @@
+{
+  "自己": [
+    {
+      "name": "自家",
+      "reading": "zi55 a55",
+      "type": "formal"
+    }
+  ],
+  "丈夫": [
+    {
+      "name": "丈夫",
+      "reading": "doung55 muo55",
+      "type": "formal"
+    },
+    {
+      "name": "老公",
+      "reading": "lau55 ung55",
+      "type": "formal"
+    }
+  ],
+  "妻子": [
+    {
+      "name": "厝里",
+      "reading": "cuo53 lie33",
+      "type": "formal"
+    },
+    {
+      "name": "女么",
+      "reading": "muo33",
+      "type": "formal"
+    },
+    {
+      "name": "女么",
+      "reading": "mo33",
+      "type": "back"
+    },
+    {
+      "name": "老小",
+      "reading": "lo24 liu33",
+      "type": "formal"
+    },
+    {
+      "name": "老妈",
+      "reading": "lau53 ma33",
+      "type": "formal"
+    },
+    {
+      "name": "老妈（长乐永泰）",
+      "reading": "lou53 ma33",
+      "type": "formal"
+    },
+    {
+      "name": "老妈（连江）",
+      "reading": "lau33 wa33",
+      "type": "formal"
+    }
+  ],
+  "儿子": [
+    {
+      "name": "丈夫囝",
+      "reading": "doung21 muo53 iang33",
+      "type": "formal"
+    },
+    {
+      "name": "囝",
+      "reading": "giang33",
+      "type": "formal"
+    }
+  ],
+  "儿媳": [
+    {
+      "name": "新妇",
+      "reading": "sing53 mou242",
+      "type": "formal"
+    }
+  ],
+  "女儿": [
+    {
+      "name": "诸娘囝",
+      "reading": "zy53 neoyng33 giang33",
+      "type": "formal"
+    },
+    {
+      "name": "诸娘囝（长乐）",
+      "reading": "zeoyng53 giang33",
+      "type": "formal"
+    },
+    {
+      "name": "囝",
+      "reading": "giang33",
+      "type": "formal"
+    }
+  ],
+  "女婿": [
+    {
+      "name": "伲婿",
+      "reading": "nie21 lai21",
+      "type": "formal"
+    },
+    {
+      "name": "姑爷",
+      "reading": "gu55 ie53",
+      "type": "formal"
+    }
+  ],
+  "孙子": [
+    {
+      "name": "孙囝",
+      "reading": "soung53 iang33",
+      "type": "formal"
+    },
+    {
+      "name": "丈夫孙",
+      "reading": "doung21 mo55 loung55",
+      "type": "formal"
+    }
+  ],
+  "孙媳": [
+    {
+      "name": "孙新妇",
+      "reading": "soung21 ning53 mou24",
+      "type": "formal"
+    }
+  ],
+  "孙女": [
+    {
+      "name": "诸娘孙",
+      "reading": "zy55 neoyng55 noung55",
+      "type": "formal"
+    },
+    {
+      "name": "诸娘孙",
+      "reading": "zy55 noung55 noung55",
+      "type": "formal"
+    },
+    {
+      "name": "孙女",
+      "reading": "soung53 ny33",
+      "type": "formal"
+    }
+  ],
+  "孙女婿": [
+    {
+      "name": "孙婿",
+      "reading": "soung53 nai21",
+      "type": "formal"
+    },
+    {
+      "name": "孙伲婿",
+      "reading": "soung53 nie21 lai21",
+      "type": "formal"
+    },
+    {
+      "name": "孙侄婿",
+      "reading": "soung53 nie21 lai21",
+      "type": "formal"
+    },
+    {
+      "name": "孙女婿",
+      "reading": "soung21 ny55 lai21",
+      "type": "formal"
+    }
+  ],
+  "外孙": [
+    {
+      "name": "外甥",
+      "reading": "ngie55 leing55",
+      "type": "formal"
+    },
+    {
+      "name": "外甥孙",
+      "reading": "ngie21 leing55 noung55",
+      "type": "formal"
+    }
+  ],
+  "外孙女": [
+    {
+      "name": "外甥女",
+      "reading": "ngie21 leing53 ny33",
+      "type": "formal"
+    }
+  ],
+  "外孙媳": [
+    {
+      "name": "外甥孙人",
+      "reading": "ngie21 leing21 noung55",
+      "type": "formal"
+    }
+  ],
+  "外孙女婿": [
+    {
+      "name": "外甥孙婿",
+      "reading": "ngie21 leing21 loung53 nai21",
+      "type": "formal"
+    }
+  ],
+  "哥哥": [
+    {
+      "name": "依哥",
+      "reading": "i55 go55",
+      "type": "formal"
+    },
+    {
+      "name": "哥（儿）",
+      "reading": "o55",
+      "type": "formal"
+    }
+  ],
+  "兄嫂": [
+    {
+      "name": "依嫂",
+      "reading": "i53 so33",
+      "type": "formal"
+    }
+  ],
+  "弟弟": [
+    {
+      "name": "依弟",
+      "reading": "i53 die242",
+      "type": "formal"
+    }
+  ],
+  "弟媳": [
+    {
+      "name": "弟新妇",
+      "reading": "die21 ling53 mou242",
+      "type": "formal"
+    },
+    {
+      "name": "弟人",
+      "reading": "die55 ing53",
+      "type": "formal"
+    }
+  ],
+  "姐姐": [
+    {
+      "name": "依姐",
+      "reading": "i53 zia33",
+      "type": "formal"
+    },
+    {
+      "name": "姐姐",
+      "reading": "zia53 zia33",
+      "type": "formal"
+    }
+  ],
+  "妹妹": [
+    {
+      "name": "依妹",
+      "reading": "i53 mui21",
+      "type": "formal"
+    },
+    {
+      "name": "妹妹",
+      "reading": "mui53 mui21",
+      "type": "formal"
+    }
+  ],
+  "姐夫": [
+    {
+      "name": "姐夫",
+      "reading": "zia21 u55",
+      "type": "formal"
+    }
+  ],
+  "妹夫": [
+    {
+      "name": "妹夫",
+      "reading": "mui55 u55",
+      "type": "formal"
+    }
+  ],
+  "侄子": [
+    {
+      "name": "孙",
+      "reading": "soung55",
+      "type": "formal"
+    },
+    {
+      "name": "侄",
+      "reading": "dik5",
+      "type": "formal"
+    }
+  ],
+  "侄媳": [
+    {
+      "name": "孙新妇",
+      "reading": "soung21 ning53 mou242",
+      "type": "formal"
+    },
+    {
+      "name": "侄新妇",
+      "reading": "dik21 sing53 mou242",
+      "type": "formal"
+    }
+  ],
+  "侄女": [
+    {
+      "name": "侄女",
+      "reading": "dik33 ny33",
+      "type": "formal"
+    },
+    {
+      "name": "诸娘孙",
+      "reading": "zy55 noung55 noung55",
+      "type": "formal"
+    }
+  ],
+  "侄女婿": [
+    {
+      "name": "孙女婿",
+      "reading": "soung21 ny55 nai21",
+      "type": "formal"
+    },
+    {
+      "name": "孙伲婿",
+      "reading": "soung53 nie21 lai21",
+      "type": "formal"
+    },
+    {
+      "name": "孙婿",
+      "reading": "soung53 nai21",
+      "type": "formal"
+    },
+    {
+      "name": "侄女婿",
+      "reading": "dik21 ny55 lai21",
+      "type": "formal"
+    }
+  ],
+  "外甥": [
+    {
+      "name": "外甥",
+      "reading": "ngie55 leing55",
+      "type": "formal"
+    }
+  ],
+  "外甥女": [
+    {
+      "name": "外甥女",
+      "reading": "ngie21 leing53 ny33",
+      "type": "formal"
+    }
+  ],
+  "外甥媳": [
+    {
+      "name": "外甥人",
+      "reading": "ngie21 leing55 nging53",
+      "type": "formal"
+    }
+  ],
+  "外甥女婿": [
+    {
+      "name": "外甥女婿",
+      "reading": "ngie21 leing21 ny55 lai21",
+      "type": "formal"
+    }
+  ],
+  "表姐": [
+    {
+      "name": "表姐",
+      "reading": "biu24 jia33",
+      "type": "formal"
+    }
+  ],
+  "表妹": [
+    {
+      "name": "表妹",
+      "reading": "biu55 mui21",
+      "type": "formal"
+    }
+  ],
+  "表姐夫": [
+    {
+      "name": "表姐夫",
+      "reading": "biu21 jia21 u55",
+      "type": "formal"
+    }
+  ],
+  "表妹夫": [
+    {
+      "name": "表妹夫",
+      "reading": "biu21 mui55 u55",
+      "type": "formal"
+    }
+  ],
+  "表兄": [
+    {
+      "name": "表兄",
+      "reading": "biu21 ing55",
+      "type": "formal"
+    },
+    {
+      "name": "依表兄",
+      "reading": "i55 bing55",
+      "type": "formal"
+    }
+  ],
+  "表弟": [
+    {
+      "name": "表弟",
+      "reading": "biu55 la242",
+      "type": "formal"
+    },
+    {
+      "name": "依弟",
+      "reading": "i53 da242",
+      "type": "formal"
+    }
+  ],
+  "表兄嫂": [
+    {
+      "name": "表嫂",
+      "reading": "biu24 lo33",
+      "type": "formal"
+    }
+  ],
+  "表弟媳": [
+    {
+      "name": "表弟人",
+      "reading": "biu21 lie55 ing53",
+      "type": "formal"
+    }
+  ],
+  "姨母": [
+    {
+      "name": "姨",
+      "reading": "i53",
+      "type": "formal"
+    },
+    {
+      "name": "依姨",
+      "reading": "i55 i53",
+      "type": "formal"
+    }
+  ],
+  "姑姑": [
+    {
+      "name": "姑妈",
+      "reading": "gu55 ma55",
+      "type": "formal"
+    },
+    {
+      "name": "姑嬷",
+      "reading": "u55-ma55",
+      "type": "formal"
+    },
+    {
+      "name": "依姑",
+      "reading": "i55-gu55",
+      "type": "formal"
+    },
+    {
+      "name": "姑（儿）",
+      "reading": "u55",
+      "type": "formal"
+    }
+  ],
+  "姑丈": [
+    {
+      "name": "姑爹",
+      "reading": "gu55 lia55",
+      "type": "formal"
+    },
+    {
+      "name": "姑爹",
+      "reading": "lie55",
+      "type": "formal"
+    },
+    {
+      "name": "姑爹",
+      "reading": "u55 lia55",
+      "type": "formal"
+    },
+    {
+      "name": "姑爹",
+      "reading": "u55 lie55",
+      "type": "formal"
+    },
+    {
+      "name": "姑丈",
+      "reading": "gu53 luong242",
+      "type": "formal"
+    },
+    {
+      "name": "姑夫",
+      "reading": "gu55 u55",
+      "type": "formal"
+    },
+    {
+      "name": "姑夫",
+      "reading": "u55",
+      "type": "formal"
+    }
+  ],
+  "舅父": [
+    {
+      "name": "娘舅",
+      "reading": "nuong21 giu242",
+      "type": "formal"
+    },
+    {
+      "name": "依舅",
+      "reading": "i53 giu242",
+      "type": "formal"
+    },
+    {
+      "name": "阿舅",
+      "reading": "a21 giu242",
+      "type": "formal"
+    }
+  ],
+  "姨丈": [
+    {
+      "name": "姨夫",
+      "reading": "i55 u55",
+      "type": "formal"
+    },
+    {
+      "name": "姨丈",
+      "reading": "i21 luong242",
+      "type": "formal"
+    }
+  ],
+  "舅母": [
+    {
+      "name": "娘妗",
+      "reading": "nuong21 geing242",
+      "type": "formal"
+    },
+    {
+      "name": "依妗",
+      "reading": "i53 geing242",
+      "type": "formal"
+    }
+  ],
+  "婆婆": [
+    {
+      "name": "台家",
+      "reading": "dai55 a55",
+      "type": "formal"
+    }
+  ],
+  "岳母": [
+    {
+      "name": "丈奶",
+      "reading": "duong24 ne33",
+      "type": "formal"
+    }
+  ],
+  "母亲": [
+    {
+      "name": "娘奶",
+      "reading": "noung33 ne33",
+      "type": "formal"
+    },
+    {
+      "name": "依奶",
+      "reading": "i53 ne33",
+      "type": "formal"
+    },
+    {
+      "name": "依嬷",
+      "reading": "i55 ma55",
+      "type": "formal"
+    },
+    {
+      "name": "嬷嬷",
+      "reading": "ma55 ma55",
+      "type": "formal"
+    },
+    {
+      "name": "依老",
+      "reading": "i53 lo33",
+      "type": "formal"
+    }
+  ],
+  "姨公": [
+    {
+      "name": "姨公",
+      "reading": "i55 ung55",
+      "type": "formal"
+    }
+  ],
+  "姨婆": [
+    {
+      "name": "姨婆",
+      "reading": "i33 ma33",
+      "type": "formal"
+    }
+  ],
+  "表舅父": [
+    {
+      "name": "表舅",
+      "reading": "biu55 giu242",
+      "type": "formal"
+    }
+  ],
+  "表舅母": [
+    {
+      "name": "表妗",
+      "reading": "biu55 geing242",
+      "type": "formal"
+    }
+  ],
+  "舅爷爷": [
+    {
+      "name": "舅公",
+      "reading": "giu55 ung55",
+      "type": "formal"
+    }
+  ],
+  "舅奶奶": [
+    {
+      "name": "妗妈",
+      "reading": "ging53 ma33",
+      "type": "formal"
+    }
+  ],
+  "表姨母": [
+    {
+      "name": "表姨",
+      "reading": "biu21 i53",
+      "type": "formal"
+    }
+  ],
+  "表姨父": [
+    {
+      "name": "表姨夫",
+      "reading": "biu21 i55 u55",
+      "type": "formal"
+    }
+  ],
+  "表姑妈": [
+    {
+      "name": "表姑嬷",
+      "reading": "biu21 u55 ma55",
+      "type": "formal"
+    }
+  ],
+  "表姑": [
+    {
+      "name": "表姑",
+      "reading": "biu21 u55",
+      "type": "formal"
+    }
+  ],
+  "表姑丈": [
+    {
+      "name": "表姑爹",
+      "reading": "biu21 u55 lia55",
+      "type": "formal"
+    },
+    {
+      "name": "表姑爹",
+      "reading": "biu21 u55 lie55",
+      "type": "formal"
+    },
+    {
+      "name": "表姑丈",
+      "reading": "biu21 u53 luong242",
+      "type": "formal"
+    },
+    {
+      "name": "表姑夫",
+      "reading": "biu21 u55 u55",
+      "type": "formal"
+    },
+    {
+      "name": "表姑夫",
+      "reading": "biu21 u55",
+      "type": "formal"
+    }
+  ],
+  "表伯父": [
+    {
+      "name": "表伯",
+      "reading": "biu55 wah24",
+      "type": "formal"
+    }
+  ],
+  "表叔父": [
+    {
+      "name": "表叔",
+      "reading": "biu55 jeoyk24",
+      "type": "formal"
+    },
+    {
+      "name": "依叔",
+      "reading": "i53 zeoyk24",
+      "type": "formal"
+    },
+    {
+      "name": "依叔",
+      "reading": "ing53 njeoyk24",
+      "type": "formal"
+    }
+  ],
+  "表伯母": [
+    {
+      "name": "表姆",
+      "reading": "biu24 mu33",
+      "type": "formal"
+    }
+  ],
+  "表婶母": [
+    {
+      "name": "表婶",
+      "reading": "biu24 ling33",
+      "type": "formal"
+    }
+  ],
+  "公公": [
+    {
+      "name": "老官",
+      "reading": "lau55 uang55",
+      "type": "formal"
+    },
+    {
+      "name": "官郎（福清）",
+      "reading": "guang55 long55",
+      "type": "formal"
+    },
+    {
+      "name": "底官（连江）",
+      "reading": "de21 uang33",
+      "type": "formal"
+    }
+  ],
+  "岳父": [
+    {
+      "name": "丈侬",
+      "reading": "duong33 neoyng53",
+      "type": "formal"
+    }
+  ],
+  "父亲": [
+    {
+      "name": "郎罢",
+      "reading": "loung21 ma242",
+      "type": "formal"
+    },
+    {
+      "name": "依爹",
+      "reading": "i55 dia55",
+      "type": "formal"
+    },
+    {
+      "name": "依爹",
+      "reading": "i55 die55",
+      "type": "formal"
+    },
+    {
+      "name": "依爸",
+      "reading": "i55 ba55",
+      "type": "formal"
+    },
+    {
+      "name": "爸爸",
+      "reading": "ba55 ba55",
+      "type": "formal"
+    },
+    {
+      "name": "阿爷",
+      "reading": "a55 ie53",
+      "type": "formal"
+    },
+    {
+      "name": "依爷",
+      "reading": "i55 ie53",
+      "type": "formal"
+    }
+  ],
+  "伯父": [
+    {
+      "name": "依伯",
+      "reading": "i53 bah24",
+      "type": "formal"
+    },
+    {
+      "name": "伯伯",
+      "reading": "bah21 bah24",
+      "type": "formal"
+    }
+  ],
+  "叔父": [
+    {
+      "name": "家叔",
+      "reading": "ga53 jeoyk24",
+      "type": "formal"
+    },
+    {
+      "name": "家家",
+      "reading": "ga55 ga55",
+      "type": "formal"
+    },
+    {
+      "name": "依叔",
+      "reading": "i53 zeoyk24",
+      "type": "formal"
+    }
+  ],
+  "伯母": [
+    {
+      "name": "依姆",
+      "reading": "i53 mu33",
+      "type": "formal"
+    },
+    {
+      "name": "姆姆",
+      "reading": "mu53 mu33",
+      "type": "formal"
+    },
+    {
+      "name": "阿姆",
+      "reading": "a53 mu33",
+      "type": "formal"
+    }
+  ],
+  "叔母": [
+    {
+      "name": "家婶",
+      "reading": "ga53 ling33",
+      "type": "formal"
+    },
+    {
+      "name": "依婶",
+      "reading": "i53 ling33",
+      "type": "formal"
+    },
+    {
+      "name": "依婶",
+      "reading": "i53 ning33",
+      "type": "formal"
+    }
+  ],
+  "堂兄": [
+    {
+      "name": "叔伯哥",
+      "reading": "zyk21 bah55 go55",
+      "type": "formal"
+    },
+    {
+      "name": "依哥",
+      "reading": "i55 go55",
+      "type": "formal"
+    },
+    {
+      "name": "哥（儿）",
+      "reading": "o55",
+      "type": "formal"
+    }
+  ],
+  "堂弟": [
+    {
+      "name": "叔伯弟",
+      "reading": "zyk21 bah53 die242",
+      "type": "formal"
+    },
+    {
+      "name": "依弟",
+      "reading": "i53 die242",
+      "type": "formal"
+    }
+  ],
+  "堂兄嫂": [
+    {
+      "name": "叔伯嫂",
+      "reading": "zyk21 bah53 so33",
+      "type": "formal"
+    },
+    {
+      "name": "依嫂",
+      "reading": "i53 so33",
+      "type": "formal"
+    }
+  ],
+  "堂弟媳": [
+    {
+      "name": "叔伯弟人",
+      "reading": "zyk21 bah21 die55 ing53",
+      "type": "formal"
+    },
+    {
+      "name": "弟新妇",
+      "reading": "die21 ling53 mou242",
+      "type": "formal"
+    },
+    {
+      "name": "弟人",
+      "reading": "die55 ing53",
+      "type": "formal"
+    }
+  ],
+  "堂姐": [
+    {
+      "name": "叔伯姐",
+      "reading": "zyk21 bah53 zia33",
+      "type": "formal"
+    },
+    {
+      "name": "依姐",
+      "reading": "i53 zia33",
+      "type": "formal"
+    },
+    {
+      "name": "姐姐",
+      "reading": "zia53 zia33",
+      "type": "formal"
+    }
+  ],
+  "堂妹": [
+    {
+      "name": "叔伯妹",
+      "reading": "zyk21 bah53 mui21",
+      "type": "formal"
+    },
+    {
+      "name": "依妹",
+      "reading": "i53 mui21",
+      "type": "formal"
+    },
+    {
+      "name": "妹妹",
+      "reading": "mui53 mui21",
+      "type": "formal"
+    }
+  ],
+  "堂姐夫": [
+    {
+      "name": "叔伯姐夫",
+      "reading": "zyk55 bah24 zia21 u55",
+      "type": "formal"
+    },
+    {
+      "name": "姐夫",
+      "reading": "zia21 u55",
+      "type": "formal"
+    }
+  ],
+  "堂妹夫": [
+    {
+      "name": "叔伯妹夫",
+      "reading": "zyk55 bah24 mui55 u55",
+      "type": "formal"
+    },
+    {
+      "name": "妹夫",
+      "reading": "mui55 u55",
+      "type": "formal"
+    }
+  ],
+  "姑祖母": [
+    {
+      "name": "姑婆",
+      "reading": "gu55 wo53",
+      "type": "formal"
+    }
+  ],
+  "姑祖父": [
+    {
+      "name": "姑婆公",
+      "reading": "gu55 wo55 ung55",
+      "type": "formal"
+    }
+  ],
+  "伯祖父": [
+    {
+      "name": "伯公",
+      "reading": "bah55 ung55",
+      "type": "formal"
+    }
+  ],
+  "伯祖母": [
+    {
+      "name": "姆婆",
+      "reading": "mu21 wo53",
+      "type": "formal"
+    }
+  ],
+  "叔祖父": [
+    {
+      "name": "叔公",
+      "reading": "zyk21 gung55",
+      "type": "formal"
+    }
+  ],
+  "叔祖母": [
+    {
+      "name": "婶婆",
+      "reading": "sing21 mo53",
+      "type": "formal"
+    },
+    {
+      "name": "婶妈（连江）",
+      "reading": "sing24 ma33",
+      "type": "formal"
+    }
+  ],
+  "外曾祖父": [
+    {
+      "name": "外大公",
+      "reading": "ngie21 luai55 ung55",
+      "type": "formal"
+    }
+  ],
+  "外曾祖母": [
+    {
+      "name": "外大妈",
+      "reading": "ngie21 luai53 ma33",
+      "type": "formal"
+    }
+  ],
+  "曾祖父": [
+    {
+      "name": "大公",
+      "reading": "duai55 ung55",
+      "type": "formal"
+    }
+  ],
+  "曾祖母": [
+    {
+      "name": "大妈",
+      "reading": "duai53 ma33",
+      "type": "formal"
+    }
+  ],
+  "高祖父": [
+    {
+      "name": "老大公",
+      "reading": "lo21 luai55 ung55",
+      "type": "formal"
+    }
+  ],
+  "高祖母": [
+    {
+      "name": "老大妈",
+      "reading": "lo21 luai53 ma33",
+      "type": "formal"
+    }
+  ],
+  "外高祖父": [
+    {
+      "name": "外老大公",
+      "reading": "ngie21 lo21 luai55 ung55",
+      "type": "formal"
+    }
+  ],
+  "外高祖母": [
+    {
+      "name": "外老大妈",
+      "reading": "ngie21 lo21 luai53 ma33",
+      "type": "formal"
+    }
+  ],
+  "天祖父": [
+    {
+      "name": "老老大公",
+      "reading": "lo24 lo33 duai55 ung55",
+      "type": "formal"
+    },
+    {
+      "name": "老老大公",
+      "reading": "lo21 lo21 luai55 ung55",
+      "type": "formal"
+    }
+  ],
+  "天祖母": [
+    {
+      "name": "老老大妈",
+      "reading": "lo24 lo33 duai53 ma33",
+      "type": "formal"
+    },
+    {
+      "name": "老老大妈",
+      "reading": "lo21 lo21 luai53 ma33",
+      "type": "formal"
+    }
+  ],
+  "外天祖父": [
+    {
+      "name": "外老老大公",
+      "reading": "ngie242 lo24 lo33 duai55 ung55",
+      "type": "formal"
+    },
+    {
+      "name": "外老老大公",
+      "reading": "ngie21 lo21 lo21 luai55 ung55",
+      "type": "formal"
+    }
+  ],
+  "外天祖母": [
+    {
+      "name": "外老老大妈",
+      "reading": "ngie242 lo24 lo33 duai53 ma33",
+      "type": "formal"
+    },
+    {
+      "name": "外老老大妈",
+      "reading": "ngie21 lo21 lo21 luai53 ma33",
+      "type": "formal"
+    }
+  ],
+  "曾孙女": [
+    {
+      "name": "曾孙女",
+      "reading": "zeing21 noung53 ny33",
+      "type": "formal"
+    }
+  ],
+  "曾孙": [
+    {
+      "name": "曾孙",
+      "reading": "zeing55 noung55",
+      "type": "formal"
+    }
+  ],
+  "曾孙女婿": [
+    {
+      "name": "曾孙女婿",
+      "reading": "zeing21 noung53 nai21",
+      "type": "formal"
+    }
+  ],
+  "曾孙媳": [
+    {
+      "name": "曾孙新妇",
+      "reading": "zeing21 noung21 ning53 mou242",
+      "type": "formal"
+    }
+  ],
+  "玄孙": [
+    {
+      "name": "元孙",
+      "reading": "ngoung55 noung55",
+      "type": "formal"
+    }
+  ],
+  "玄孙女": [
+    {
+      "name": "元孙女",
+      "reading": "ngoung21 noung53 ny33",
+      "type": "formal"
+    }
+  ],
+  "爷爷": [
+    {
+      "name": "依公",
+      "reading": "i55 gung55",
+      "type": "formal"
+    },
+    {
+      "name": "翁",
+      "reading": "ung55",
+      "type": "formal"
+    }
+  ],
+  "奶奶": [
+    {
+      "name": "依妈",
+      "reading": "i53 ma33",
+      "type": "formal"
+    },
+    {
+      "name": "妈妈",
+      "reading": "ma53 ma33",
+      "type": "formal"
+    }
+  ],
+  "外公": [
+    {
+      "name": "外公",
+      "reading": "ngie55 ung55",
+      "type": "formal"
+    }
+  ],
+  "外祖岳母": [
+    {
+      "name": "外妈",
+      "reading": "ngie53 ma33",
+      "type": "formal"
+    },
+    {
+      "name": "妈妈",
+      "reading": "ma53 ma33",
+      "type": "formal"
+    },
+    {
+      "name": "依外（长乐金峰文岭）",
+      "reading": "i53-ngie242",
+      "type": "formal"
+    }
+  ]
+}
