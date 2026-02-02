@@ -1,26 +1,16 @@
-export const fuzhouNameMap: Record<string, string[]> = {
-  爸爸: ['爸爸'],
-  妈妈: ['妈妈'],
-  父亲: ['父亲'],
-  母亲: ['母亲'],
-  爷爷: ['爷爷'],
-  奶奶: ['奶奶'],
-  外公: ['外公'],
-  外婆: ['外婆'],
-  丈夫: ['丈夫'],
-  妻子: ['妻子'],
-  哥哥: ['哥哥'],
-  弟弟: ['弟弟'],
-  姐姐: ['姐姐'],
-  妹妹: ['妹妹'],
-  儿子: ['儿子'],
-  女儿: ['女儿'],
+import fuzhouMap from '../data/relationship-fuzhou.json';
+
+export type FuzhouTerm = {
+  name: string;
+  reading: string;
+  type: 'formal' | 'back' | 'rare';
 };
 
-export const mapFuzhouNames = (mandarin: string): string[] => {
-  const mapped = fuzhouNameMap[mandarin];
-  if (mapped && mapped.length) {
-    return mapped;
+const typedMap = fuzhouMap as Record<string, FuzhouTerm[]>;
+
+export const getFuzhouTerms = (mandarin: string): FuzhouTerm[] => {
+  if (typedMap[mandarin]) {
+    return typedMap[mandarin];
   }
-  return [mandarin];
+  return [];
 };
