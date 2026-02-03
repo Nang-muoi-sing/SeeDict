@@ -202,12 +202,12 @@
       <div class="mt-4 flex flex-wrap gap-2">
         <button
           v-for="item in relationQuickKeys"
-          :key="item"
+          :key="item.label"
           type="button"
           class="flex h-9 w-12 items-center justify-center rounded-md bg-wheat-100 text-sm font-semibold text-rosybrown-700 hover:bg-wheat-200"
-          @click="handleRelationQuickInsert(item)"
+          @click="handleRelationQuickInsert(item.value)"
         >
-          {{ item }}
+          {{ item.label }}
         </button>
       </div>
 
@@ -584,17 +584,17 @@ const relationText = ref('');
 const relationSex = ref<0 | 1>(1);
 const relationReverse = ref(false);
 const relationQuickKeys = [
-  '父',
-  '母',
-  '夫',
-  '妻',
-  '兄',
-  '弟',
-  '姐',
-  '妹',
-  '子',
-  '女',
-];
+  { label: '父', value: '爸爸' },
+  { label: '母', value: '妈妈' },
+  { label: '夫', value: '老公' },
+  { label: '妻', value: '老婆' },
+  { label: '兄', value: '哥哥' },
+  { label: '弟', value: '弟弟' },
+  { label: '姐', value: '姐姐' },
+  { label: '妹', value: '妹妹' },
+  { label: '子', value: '儿子' },
+  { label: '女', value: '女儿' },
+] as const;
 
 type RelationResult = { mandarin: string } | { error: string };
 
