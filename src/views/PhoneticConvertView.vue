@@ -241,13 +241,13 @@
       <div
         class="mt-2 min-h-[160px] rounded-xl border border-wheat-200 bg-white p-4 text-sm text-rosybrown-700"
       >
-        <div v-if="relationResult?.error" class="text-rosybrown-600">
-          {{ relationResult.error }}
+        <div v-if="relationHasError" class="text-rosybrown-600">
+          {{ relationError }}
         </div>
-        <div v-else-if="relationResult">
+        <div v-else-if="relationHasResult">
           <div class="text-xs font-semibold text-wheat-500">普通话称呼</div>
           <div class="mt-1 text-lg font-semibold text-rosybrown-800">
-            {{ relationResult.mandarin }}
+            {{ relationMandarin }}
           </div>
           <div class="mt-4 text-xs font-semibold text-wheat-500">
             福州话称呼
@@ -601,6 +601,24 @@ type RelationResult = { mandarin: string } | { error: string };
 const relationResult = ref<RelationResult | null>(null);
 const audioBaseUrl = import.meta.env.VITE_RELATIONSHIP_AUDIO_URL || '';
 
+const isErrorResult = (
+  value: RelationResult | null
+): value is { error: string } => !!value && 'error' in value;
+const isMandarinResult = (
+  value: RelationResult | null
+): value is { mandarin: string } => !!value && 'mandarin' in value;
+
+const relationHasError = computed(() => isErrorResult(relationResult.value));
+const relationHasResult = computed(() =>
+  isMandarinResult(relationResult.value)
+);
+const relationError = computed(() =>
+  isErrorResult(relationResult.value) ? relationResult.value.error : ''
+);
+const relationMandarin = computed(() =>
+  isMandarinResult(relationResult.value) ? relationResult.value.mandarin : ''
+);
+
 const getFuzhouAudioUrl = (reading: string): string | null => {
   if (!audioBaseUrl || !reading) return null;
   const filename = reading
@@ -612,10 +630,10 @@ const getFuzhouAudioUrl = (reading: string): string | null => {
 };
 
 const relationFuzhouItems = computed(() => {
-  if (!relationResult.value || 'error' in relationResult.value) {
+  if (!relationHasResult.value) {
     return [] as (FuzhouTerm & { audioUrl: string | null })[];
   }
-  return getFuzhouTerms(relationResult.value.mandarin).map((term) => ({
+  return getFuzhouTerms(relationMandarin.value).map((term) => ({
     ...term,
     audioUrl: getFuzhouAudioUrl(term.reading),
   }));
