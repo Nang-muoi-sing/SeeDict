@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting</title>
+    <script>
+      (function () {
+        var path = location.pathname || '/';
+        var search = location.search || '';
+        var hash = location.hash || '';
+        var parts = path.split('/');
+        var base = parts.length > 1 && parts[1] ? '/' + parts[1] + '/' : '/';
+        try {
+          sessionStorage.setItem('spa_redirect', path + search + hash);
+        } catch (e) {
+          // ignore
+        }
+        location.replace(base);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
