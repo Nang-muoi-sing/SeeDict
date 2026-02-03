@@ -18,5 +18,13 @@ export default defineConfig(({ mode }) => {
       legacy(),
     ],
     base: env.VITE_BASE_URL || "/",
+    server: {
+      proxy: {
+        "/api": {
+          target: env.VITE_API_HOST,
+          changeOrigin: true,
+        },
+      },
+    },
   };
 });
