@@ -274,13 +274,14 @@
               </div>
               <button
                 type="button"
-                :disabled="!item.audioUrl"
+                :disabled="!item.audioUrls.length"
                 class="flex items-center gap-1 text-wheat-400"
                 :class="{
-                  'cursor-not-allowed opacity-60': !item.audioUrl,
-                  'text-rosybrown-600 hover:text-rosybrown-700': item.audioUrl,
+                  'cursor-not-allowed opacity-60': !item.audioUrls.length,
+                  'text-rosybrown-600 hover:text-rosybrown-700':
+                    item.audioUrls.length,
                 }"
-                @click="handleRelationPlay(item.audioUrl)"
+                @click="handleRelationPlay(item.audioUrls)"
               >
                 <i-material-symbols-play-circle-rounded class="text-xl" />
               </button>
@@ -599,7 +600,7 @@ const relationQuickKeys = [
 type RelationResult = { mandarin: string } | { error: string };
 
 const relationResult = ref<RelationResult | null>(null);
-const audioBaseUrl = import.meta.env.VITE_RELATIONSHIP_AUDIO_URL || '';
+const relationAudioBaseUrl = `${import.meta.env.VITE_OSS_URL}/audio/relatives`;
 
 const isErrorResult = (
   value: RelationResult | null
@@ -619,23 +620,25 @@ const relationMandarin = computed(() =>
   isMandarinResult(relationResult.value) ? relationResult.value.mandarin : ''
 );
 
-const getFuzhouAudioUrl = (reading: string): string | null => {
-  if (!audioBaseUrl || !reading) return null;
-  const filename = reading
-    .toLowerCase()
-    .replace(/\s+/g, '_')
-    .replace(/[^a-z0-9_-]/g, '');
-  if (!filename) return null;
-  return `${audioBaseUrl}/${filename}.mp3`;
+const buildFuzhouAudioUrls = (reading: string): string[] => {
+  if (!reading) return [];
+  const readings = reading
+    .split('/')
+    .map((item) => item.replace(/\s+/g, '').trim())
+    .filter(Boolean);
+  return readings.map(
+    (item) =>
+      `${relationAudioBaseUrl}/${encodeURIComponent(item.toLowerCase())}.mp3`
+  );
 };
 
 const relationFuzhouItems = computed(() => {
   if (!relationHasResult.value) {
-    return [] as (FuzhouTerm & { audioUrl: string | null })[];
+    return [] as (FuzhouTerm & { audioUrls: string[] })[];
   }
   return getFuzhouTerms(relationMandarin.value).map((term) => ({
     ...term,
-    audioUrl: getFuzhouAudioUrl(term.reading),
+    audioUrls: buildFuzhouAudioUrls(term.reading),
   }));
 });
 
@@ -681,12 +684,27 @@ const handleRelationCalculate = () => {
   };
 };
 
-const handleRelationPlay = (audioUrl: string | null) => {
-  if (!audioUrl) return;
-  const audio = new Audio(audioUrl);
+const playRelationAudio = (audioUrls: string[], index = 0) => {
+  if (index >= audioUrls.length) {
+    console.error('播放失败: 未找到可用音频');
+    return;
+  }
+  const audio = new Audio(audioUrls[index]);
+  audio.addEventListener(
+    'error',
+    () => {
+      playRelationAudio(audioUrls, index + 1);
+    },
+    { once: true }
+  );
   audio.play().catch((err) => {
     console.error('播放失败:', err);
   });
+};
+
+const handleRelationPlay = (audioUrls: string[]) => {
+  if (!audioUrls.length) return;
+  playRelationAudio(audioUrls);
 };
 
 watch(
