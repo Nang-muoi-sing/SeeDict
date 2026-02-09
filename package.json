@@ -29,6 +29,7 @@
     "@babel/eslint-parser": "^7.28.4",
     "@eslint/create-config": "^1.10.0",
     "@iconify-json/ic": "^1.2.4",
+    "@iconify-json/icon-park-outline": "^1.2.4",
     "@iconify-json/line-md": "^1.2.11",
     "@iconify-json/lucide": "^1.2.80",
     "@iconify-json/material-symbols": "^1.2.29",

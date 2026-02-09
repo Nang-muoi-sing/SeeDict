@@ -22,7 +22,7 @@
     <div
       class="hover:bg-wheat-50 text-rosybrown-600 hover:text-rosybrown-800 m-1 content-center rounded-xs px-3 py-1.5 font-bold transition-all ease-in-out"
     >
-      <RouterLink :to="{ name: 'phoneticConvert' }">工具</RouterLink>
+      <RouterLink :to="{ name: 'tool' }">工具</RouterLink>
     </div>
     <div
       class="hover:bg-wheat-50 text-rosybrown-600 hover:text-rosybrown-800 m-1 content-center rounded-xs px-3 py-1.5 font-bold transition-all ease-in-out"

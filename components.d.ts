@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppIcon: typeof import('./src/components/AppIcon.vue')['default']
     Badge: typeof import('./src/components/common/Badge.vue')['default']
     BannerTitle: typeof import('./src/components/BannerTitle.vue')['default']
     ContactCard: typeof import('./src/components/ContactCard.vue')['default']
@@ -19,8 +20,11 @@ declare module 'vue' {
     FloatingImages: typeof import('./src/components/FloatingImages.vue')['default']
     Footer: typeof import('./src/components/common/Footer.vue')['default']
     FormatText: typeof import('./src/components/common/FormatText.vue')['default']
+    IIconParkOutlineFamily: typeof import('~icons/icon-park-outline/family')['default']
     IIcRoundWechat: typeof import('~icons/ic/round-wechat')['default']
     ILucideToolCase: typeof import('~icons/lucide/tool-case')['default']
+    IMaterialSymbolsAccessibility: typeof import('~icons/material-symbols/accessibility')['default']
+    IMaterialSymbolsAccessibilityNew: typeof import('~icons/material-symbols/accessibility-new')['default']
     IMaterialSymbolsBook2Rounded: typeof import('~icons/material-symbols/book2-rounded')['default']
     IMaterialSymbolsCheckCircleRounded: typeof import('~icons/material-symbols/check-circle-rounded')['default']
     IMaterialSymbolsCircle: typeof import('~icons/material-symbols/circle')['default']
@@ -33,6 +37,7 @@ declare module 'vue' {
     IMaterialSymbolsHelpRounded: typeof import('~icons/material-symbols/help-rounded')['default']
     IMaterialSymbolsHistoryRounded: typeof import('~icons/material-symbols/history-rounded')['default']
     IMaterialSymbolsHomeRounded: typeof import('~icons/material-symbols/home-rounded')['default']
+    IMaterialSymbolsLanguageChinesePinyin: typeof import('~icons/material-symbols/language-chinese-pinyin')['default']
     IMaterialSymbolsMailRounded: typeof import('~icons/material-symbols/mail-rounded')['default']
     IMaterialSymbolsMenuRounded: typeof import('~icons/material-symbols/menu-rounded')['default']
     IMaterialSymbolsPlayCircleRounded: typeof import('~icons/material-symbols/play-circle-rounded')['default']

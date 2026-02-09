@@ -32,9 +32,14 @@ const routes = [
     component: () => import('../views/AboutView.vue'),
   },
   {
-    path: '/phoneticConvert', 
-    name: 'phoneticConvert', 
-    component: () => import('../views/PhoneticConvertView.vue'), 
+    path: '/tool',
+    name: 'tool',
+    component: () => import('../views/ToolView.vue'),
+  },
+  {
+    path: '/tool/phonetic-convert',
+    name: 'phonetic-convert',
+    component: () => import('../views/PhoneticConvertView.vue'),
   },
 ];
 
