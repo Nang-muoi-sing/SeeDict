@@ -139,7 +139,7 @@
 
     <div class="mb-16 rounded-2xl border border-wheat-200 bg-white p-6">
       <div class="mb-4 text-lg font-semibold text-rosybrown-700">
-        亲戚称呼计算器（福州话）
+        福州话亲戚称呼计算器
       </div>
       <div class="space-y-3">
         <div
@@ -204,7 +204,14 @@
           v-for="item in relationQuickKeys"
           :key="item.label"
           type="button"
-          class="flex h-9 w-12 items-center justify-center rounded-md bg-wheat-100 text-sm font-semibold text-rosybrown-700 hover:bg-wheat-200"
+          :disabled="isRelationQuickKeyDisabled(item.label)"
+          class="flex h-9 w-12 items-center justify-center rounded-md bg-wheat-100 text-sm font-semibold text-rosybrown-700"
+          :class="{
+            'hover:bg-wheat-200': !isRelationQuickKeyDisabled(item.label),
+            'cursor-not-allowed opacity-50': isRelationQuickKeyDisabled(
+              item.label
+            ),
+          }"
           @click="handleRelationQuickInsert(item.value)"
         >
           {{ item.label }}
@@ -596,6 +603,19 @@ const relationQuickKeys = [
   { label: '子', value: '儿子' },
   { label: '女', value: '女儿' },
 ] as const;
+type Gender = 'male' | 'female';
+const maleQuickKeyLabels = new Set(['父', '夫', '兄', '弟', '子']);
+const femaleQuickKeyLabels = new Set(['母', '妻', '姐', '妹', '女']);
+const maleRelationTerms = new Set(
+  relationQuickKeys
+    .filter((item) => maleQuickKeyLabels.has(item.label))
+    .map((item) => item.value)
+);
+const femaleRelationTerms = new Set(
+  relationQuickKeys
+    .filter((item) => femaleQuickKeyLabels.has(item.label))
+    .map((item) => item.value)
+);
 
 type RelationResult = { mandarin: string } | { error: string };
 
@@ -642,7 +662,37 @@ const relationFuzhouItems = computed(() => {
   }));
 });
 
+const getLastRelationSegment = () => {
+  const trimmed = relationText.value.trim();
+  if (!trimmed) return '';
+  const segments = trimmed
+    .split('的')
+    .map((item) => item.trim())
+    .filter(Boolean);
+  return segments.length ? segments[segments.length - 1] : '';
+};
+
+const getCurrentRelationGender = (): Gender | null => {
+  const lastSegment = getLastRelationSegment();
+  if (!lastSegment) {
+    return relationSex.value === 1 ? 'male' : 'female';
+  }
+  if (maleRelationTerms.has(lastSegment)) return 'male';
+  if (femaleRelationTerms.has(lastSegment)) return 'female';
+  return null;
+};
+
+const isRelationQuickKeyDisabled = (label: string) => {
+  const gender = getCurrentRelationGender();
+  if (!gender) return false;
+  if (label === '夫') return gender === 'male';
+  if (label === '妻') return gender === 'female';
+  return false;
+};
+
 const handleRelationQuickInsert = (name: string) => {
+  if (name === '老公' && isRelationQuickKeyDisabled('夫')) return;
+  if (name === '老婆' && isRelationQuickKeyDisabled('妻')) return;
   const trimmed = relationText.value.trim();
   relationText.value = trimmed ? `${trimmed}的${name}` : name;
 };
