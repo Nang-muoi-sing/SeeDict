@@ -79,7 +79,7 @@
           >
             <RouterLink
               class="inline-flex w-full items-center"
-              :to="{ name: 'phoneticConvert' }"
+              :to="{ name: 'tool' }"
             >
               <i-lucide-tool-case class="mr-1" />工具</RouterLink
             >
