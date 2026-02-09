@@ -41,6 +41,11 @@ const routes = [
     name: 'phonetic-convert',
     component: () => import('../views/PhoneticConvertView.vue'),
   },
+  {
+    path: '/tool/relative-calculator',
+    name: 'relative-calculator',
+    component: () => import('../views/RelativeCalculatorView.vue'),
+  },
 ];
 
 const base = import.meta.env.VITE_BASE_URL || '/';

@@ -23,7 +23,6 @@ declare module 'vue' {
     IIconParkOutlineFamily: typeof import('~icons/icon-park-outline/family')['default']
     IIcRoundWechat: typeof import('~icons/ic/round-wechat')['default']
     ILucideToolCase: typeof import('~icons/lucide/tool-case')['default']
-    IMaterialSymbolsAccessibility: typeof import('~icons/material-symbols/accessibility')['default']
     IMaterialSymbolsAccessibilityNew: typeof import('~icons/material-symbols/accessibility-new')['default']
     IMaterialSymbolsBook2Rounded: typeof import('~icons/material-symbols/book2-rounded')['default']
     IMaterialSymbolsCheckCircleRounded: typeof import('~icons/material-symbols/check-circle-rounded')['default']
