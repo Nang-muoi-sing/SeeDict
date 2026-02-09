@@ -3,7 +3,7 @@
     <div class="h-fill flex">
       <LetterPaper>
         <div class="text-rosybrown-800 mb-5 flex flex-row text-4xl font-bold">
-          <RubyText :text="'关于'" :yngping="'guang55 y53'"></RubyText>
+          <RubyText :text="'关于'" :yngping="'guang55 y55'"></RubyText>
         </div>
 
         <div class="text-rosybrown-600 space-y-2 text-sm font-semibold">
