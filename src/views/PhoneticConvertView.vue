@@ -604,14 +604,14 @@ const relationQuickKeys = [
   { label: '女', value: '女儿' },
 ] as const;
 type Gender = 'male' | 'female';
-const maleQuickKeyLabels = new Set(['父', '夫', '兄', '弟', '子']);
-const femaleQuickKeyLabels = new Set(['母', '妻', '姐', '妹', '女']);
-const maleRelationTerms = new Set(
+const maleQuickKeyLabels = new Set<string>(['父', '夫', '兄', '弟', '子']);
+const femaleQuickKeyLabels = new Set<string>(['母', '妻', '姐', '妹', '女']);
+const maleRelationTerms = new Set<string>(
   relationQuickKeys
     .filter((item) => maleQuickKeyLabels.has(item.label))
     .map((item) => item.value)
 );
-const femaleRelationTerms = new Set(
+const femaleRelationTerms = new Set<string>(
   relationQuickKeys
     .filter((item) => femaleQuickKeyLabels.has(item.label))
     .map((item) => item.value)
