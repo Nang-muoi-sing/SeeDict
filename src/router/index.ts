@@ -42,9 +42,9 @@ const routes = [
     component: () => import('../views/PhoneticConvertView.vue'),
   },
   {
-    path: '/tool/relative-calculator',
-    name: 'relative-calculator',
-    component: () => import('../views/RelativeCalculatorView.vue'),
+    path: '/tool/relatives-calculator',
+    name: 'relatives-calculator',
+    component: () => import('../views/RelativesCalculatorView.vue'),
   },
 ];
 

@@ -10,7 +10,7 @@
         ><AppIcon :name="'榕拼转换'"
           ><i-material-symbols-language-chinese-pinyin /></AppIcon
       ></RouterLink>
-      <RouterLink :to="{ name: 'relative-calculator' }"
+      <RouterLink :to="{ name: 'relatives-calculator' }"
         ><AppIcon :name="'称谓计算'"><i-icon-park-outline-family /></AppIcon
       ></RouterLink>
     </div>

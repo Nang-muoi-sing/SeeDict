@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="mb-16 mt-5 rounded-2xl border border-wheat-200 bg-white p-6">
+    <div class="mb-16 mt-5 rounded-2xl bg-white p-6">
       <div class="space-y-3">
         <div
           class="flex flex-wrap items-center gap-4 text-sm text-rosybrown-600"
@@ -139,10 +139,7 @@
               <div class="mt-4 text-xs font-semibold text-wheat-500">
                 福州话称呼
               </div>
-              <div
-                v-if="group.items.length === 0"
-                class="mt-2 text-wheat-500"
-              >
+              <div v-if="group.items.length === 0" class="mt-2 text-wheat-500">
                 暂无福州话称呼。
               </div>
               <div v-else class="mt-2 space-y-2">
@@ -151,13 +148,53 @@
                   :key="`${group.fuzhouMandarin}-${item.name}-${item.reading}`"
                   class="flex items-center justify-between rounded-lg bg-wheat-50 px-3 py-2"
                 >
-                  <div>
-                    <div class="text-sm font-semibold text-rosybrown-800">
-                      {{ item.name }}
+                  <div class="flex items-baseline">
+                    <RouterLink
+                      v-if="item.wordId"
+                      :to="{ name: 'word', query: { w: item.wordId } }"
+                    >
+                      <div
+                        class="whitespace-normal break-all text-xl font-bold text-rosybrown-800"
+                      >
+                        <RubyText
+                          :text="item.name"
+                          :yngping="item.reading"
+                        ></RubyText>
+                      </div>
+                    </RouterLink>
+                    <div
+                      v-else
+                      class="whitespace-normal break-all text-xl font-bold text-rosybrown-800"
+                    >
+                      <RubyText
+                        :text="item.name"
+                        :yngping="item.reading"
+                      ></RubyText>
                     </div>
-                    <div class="text-xs text-wheat-500">
-                      {{ item.reading || '读音待补充' }}
+                    <Badge
+                      :data-tooltip-target="`tooltip-${item.name}-${item.reading}`"
+                      class="ml-4 cursor-pointer"
+                      >{{
+                        { formal: '面称', back: '背称', child: '儿语' }[
+                          item.type
+                        ]
+                      }}</Badge
+                    >
+                    <div
+                      :id="`tooltip-${item.name}-${item.reading}`"
+                      role="tooltip"
+                      class="tooltip invisible absolute z-50 inline-block rounded-xl bg-rosybrown-900 px-3 py-2 text-sm text-wheat-50 opacity-0 transition-opacity duration-500"
+                    >
+                      {{
+                        {
+                          formal: '当面称呼，直面称呼，一般面称的都可以背称',
+                          back: '背后称呼，向第三方说话时提到此人，背称的未必都可以面称',
+                          child: '儿时的说话习惯，模仿小孩的称呼',
+                        }[item.type]
+                      }}
+                      <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
+                    <span v-if="item.region">（{{ item.region }}）</span>
                   </div>
                   <button
                     type="button"
@@ -184,10 +221,13 @@
 </template>
 
 <script setup lang="ts">
+import { initTooltips } from 'flowbite';
 import relationship from 'relationship.js';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import PageContent from '../components/PageContent.vue';
 import { getFuzhouTerms, type FuzhouTerm } from '../utils/relationshipMapping';
+import RubyText from '../components/common/RubyText.vue';
+import Badge from '../components/common/Badge.vue';
 
 const relationText = ref('');
 const relationSex = ref<0 | 1>(1);
@@ -402,4 +442,13 @@ const handleRelationPlay = (audioUrls: string[]) => {
   if (!audioUrls.length) return;
   playRelationAudio(audioUrls);
 };
+
+watch(
+  () => relationResult.value,
+  () => {
+    setTimeout(() => {
+      initTooltips();
+    }, 0);
+  }
+);
 </script>
