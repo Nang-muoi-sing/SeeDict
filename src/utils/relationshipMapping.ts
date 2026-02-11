@@ -1,9 +1,14 @@
 import fuzhouMap from '../data/relationship-fuzhou.json';
 
+// ref: https://github.com/mumuy/relationship/blob/master/src/module/data/main.js
+
 export type FuzhouTerm = {
   name: string;
   reading: string;
-  type: 'formal' | 'back' | 'rare';
+  type: 'formal' | 'back' | 'child';
+  region?: string;
+  isOutdated?: boolean;
+  wordId?: string;
 };
 
 const typedMap = fuzhouMap as Record<string, FuzhouTerm[]>;
