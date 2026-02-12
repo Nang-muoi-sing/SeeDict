@@ -1253,7 +1253,7 @@
     {
       "name": "曾孙女",
       "reading": "zeing21 noung53 ny33",
-      "type": "formal",
+      "type": "back",
       "wordId": "z11KNM"
     }
   ],
@@ -1261,7 +1261,7 @@
     {
       "name": "曾孙",
       "reading": "zeing55 noung55",
-      "type": "formal",
+      "type": "back",
       "wordId": "RUUZ1F"
     }
   ],
@@ -1269,7 +1269,7 @@
     {
       "name": "曾孙婿",
       "reading": "zeing21 noung53 nai21",
-      "type": "formal",
+      "type": "back",
       "wordId": "yii3ae"
     }
   ],
@@ -1277,7 +1277,7 @@
     {
       "name": "曾孙新妇",
       "reading": "zeing21 noung21 ning53 mou242",
-      "type": "formal",
+      "type": "back",
       "wordId": "FZZCgZ"
     }
   ],
@@ -1285,7 +1285,7 @@
     {
       "name": "元孙",
       "reading": "ngoung55 noung55",
-      "type": "formal",
+      "type": "back",
       "wordId": "JWW5Rb"
     }
   ],
@@ -1293,7 +1293,7 @@
     {
       "name": "元孙女",
       "reading": "ngoung21 noung53 ny33",
-      "type": "formal",
+      "type": "back",
       "wordId": "xGG2mR"
     }
   ],
