@@ -53,6 +53,8 @@ export const relationAliasGroupedByTarget: Record<string, string[]> = {
   姑姑: ['小姑'],
   叔父: ['叔叔'],
   叔母: ['婶婶'],
+  堂兄: ['堂哥'],
+  堂兄嫂: ['堂嫂'],
 };
 
 const relationAliasMap = Object.entries(relationAliasGroupedByTarget).reduce<

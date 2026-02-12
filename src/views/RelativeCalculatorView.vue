@@ -126,46 +126,54 @@
           {{ relationError }}
         </div>
         <div v-else-if="relationHasResult">
-          <div class="text-xs font-semibold text-wheat-500">普通话称呼</div>
-          <div class="mt-1 text-lg font-semibold text-rosybrown-800">
-            {{ relationMandarin }}
-          </div>
-          <div class="mt-4 text-xs font-semibold text-wheat-500">
-            福州话称呼
-          </div>
-          <div
-            v-if="relationFuzhouItems.length === 0"
-            class="mt-2 text-wheat-500"
-          >
-            暂无福州话称呼。
-          </div>
-          <div v-else class="mt-2 space-y-2">
+          <div class="space-y-4">
             <div
-              v-for="item in relationFuzhouItems"
-              :key="`${item.name}-${item.reading}`"
-              class="flex items-center justify-between rounded-lg bg-wheat-50 px-3 py-2"
+              v-for="(group, index) in relationDisplayGroups"
+              :key="`${group.mandarin}-${index}`"
+              :class="{ 'border-t border-wheat-100 pt-4': index > 0 }"
             >
-              <div>
-                <div class="text-sm font-semibold text-rosybrown-800">
-                  {{ item.name }}
-                </div>
-                <div class="text-xs text-wheat-500">
-                  {{ item.reading || '读音待补充' }}
+              <div class="text-xs font-semibold text-wheat-500">普通话称呼</div>
+              <div class="mt-1 text-lg font-semibold text-rosybrown-800">
+                {{ group.mandarin }}
+              </div>
+              <div class="mt-4 text-xs font-semibold text-wheat-500">
+                福州话称呼
+              </div>
+              <div
+                v-if="group.items.length === 0"
+                class="mt-2 text-wheat-500"
+              >
+                暂无福州话称呼。
+              </div>
+              <div v-else class="mt-2 space-y-2">
+                <div
+                  v-for="item in group.items"
+                  :key="`${group.fuzhouMandarin}-${item.name}-${item.reading}`"
+                  class="flex items-center justify-between rounded-lg bg-wheat-50 px-3 py-2"
+                >
+                  <div>
+                    <div class="text-sm font-semibold text-rosybrown-800">
+                      {{ item.name }}
+                    </div>
+                    <div class="text-xs text-wheat-500">
+                      {{ item.reading || '读音待补充' }}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    :disabled="!item.audioUrls.length"
+                    class="flex items-center gap-1 text-wheat-400"
+                    :class="{
+                      'cursor-not-allowed opacity-60': !item.audioUrls.length,
+                      'text-rosybrown-600 hover:text-rosybrown-700':
+                        item.audioUrls.length,
+                    }"
+                    @click="handleRelationPlay(item.audioUrls)"
+                  >
+                    <i-material-symbols-play-circle-rounded class="text-xl" />
+                  </button>
                 </div>
               </div>
-              <button
-                type="button"
-                :disabled="!item.audioUrls.length"
-                class="flex items-center gap-1 text-wheat-400"
-                :class="{
-                  'cursor-not-allowed opacity-60': !item.audioUrls.length,
-                  'text-rosybrown-600 hover:text-rosybrown-700':
-                    item.audioUrls.length,
-                }"
-                @click="handleRelationPlay(item.audioUrls)"
-              >
-                <i-material-symbols-play-circle-rounded class="text-xl" />
-              </button>
             </div>
           </div>
         </div>
@@ -211,28 +219,33 @@ const femaleRelationTerms = new Set(
     .map((item) => item.value)
 );
 
-type RelationResult = { mandarin: string } | { error: string };
+type RelationResult =
+  | { mandarins: string[]; fuzhouMandarins: string[] }
+  | { error: string };
 
 const relationResult = ref<RelationResult | null>(null);
-const relationFuzhouMandarin = ref('');
 const relationAudioBaseUrl = `${import.meta.env.VITE_OSS_URL}/audio/relatives`;
 
 const isErrorResult = (
   value: RelationResult | null
 ): value is { error: string } => !!value && 'error' in value;
-const isMandarinResult = (
+const isSuccessResult = (
   value: RelationResult | null
-): value is { mandarin: string } => !!value && 'mandarin' in value;
+): value is { mandarins: string[]; fuzhouMandarins: string[] } =>
+  !!value && 'mandarins' in value;
 
 const relationHasError = computed(() => isErrorResult(relationResult.value));
-const relationHasResult = computed(() =>
-  isMandarinResult(relationResult.value)
-);
+const relationHasResult = computed(() => isSuccessResult(relationResult.value));
 const relationError = computed(() =>
   isErrorResult(relationResult.value) ? relationResult.value.error : ''
 );
-const relationMandarin = computed(() =>
-  isMandarinResult(relationResult.value) ? relationResult.value.mandarin : ''
+const relationMandarins = computed(() =>
+  isSuccessResult(relationResult.value) ? relationResult.value.mandarins : []
+);
+const relationFuzhouMandarins = computed(() =>
+  isSuccessResult(relationResult.value)
+    ? relationResult.value.fuzhouMandarins
+    : []
 );
 
 const buildFuzhouAudioUrls = (reading: string): string[] => {
@@ -247,15 +260,30 @@ const buildFuzhouAudioUrls = (reading: string): string[] => {
   );
 };
 
-const relationFuzhouItems = computed(() => {
+const relationDisplayGroups = computed(() => {
   if (!relationHasResult.value) {
-    return [] as (FuzhouTerm & { audioUrls: string[] })[];
+    return [] as {
+      mandarin: string;
+      fuzhouMandarin: string;
+      items: (FuzhouTerm & { audioUrls: string[] })[];
+    }[];
   }
-  const mandarinForFuzhou = relationFuzhouMandarin.value || relationMandarin.value;
-  return getFuzhouTerms(mandarinForFuzhou).map((term) => ({
-    ...term,
-    audioUrls: buildFuzhouAudioUrls(term.reading),
-  }));
+
+  return relationMandarins.value.map((mandarin, index) => {
+    const fuzhouMandarin =
+      relationFuzhouMandarins.value[index] ||
+      relationFuzhouMandarins.value[0] ||
+      mandarin;
+
+    return {
+      mandarin,
+      fuzhouMandarin,
+      items: getFuzhouTerms(fuzhouMandarin).map((term) => ({
+        ...term,
+        audioUrls: buildFuzhouAudioUrls(term.reading),
+      })),
+    };
+  });
 });
 
 const shouldKeepSpouseParentPrefix = (text: string) => {
@@ -267,13 +295,14 @@ const getFuzhouCalculationText = (text: string) => {
   return text.replace(/^(老公|老婆)的/, '');
 };
 
-const calculateMandarinRelation = (text: string) => {
+const calculateMandarinRelations = (text: string) => {
   const results = relationship({
     text,
     sex: relationSex.value,
     reverse: relationReverse.value,
   });
-  return Array.isArray(results) ? results[0] || '' : '';
+  if (!Array.isArray(results)) return [];
+  return [...new Set(results.map((item) => item.trim()).filter(Boolean))];
 };
 
 const getLastRelationSegment = () => {
@@ -326,28 +355,28 @@ const handleRelationBackspace = () => {
 const handleRelationClear = () => {
   relationText.value = '';
   relationResult.value = null;
-  relationFuzhouMandarin.value = '';
 };
 
 const handleRelationCalculate = () => {
   const trimmed = relationText.value.trim();
   if (!trimmed) {
     relationResult.value = { error: '请输入称呼。' };
-    relationFuzhouMandarin.value = '';
     return;
   }
-  const mandarin = calculateMandarinRelation(trimmed);
-  if (!mandarin) {
+
+  const mandarins = calculateMandarinRelations(trimmed);
+  if (!mandarins.length) {
     relationResult.value = { error: '未找到结果。' };
-    relationFuzhouMandarin.value = '';
     return;
   }
+
   const fuzhouText = getFuzhouCalculationText(trimmed);
-  const fuzhouMandarin =
-    fuzhouText === trimmed ? mandarin : calculateMandarinRelation(fuzhouText);
-  relationFuzhouMandarin.value = fuzhouMandarin || mandarin;
+  const fuzhouMandarins =
+    fuzhouText === trimmed ? mandarins : calculateMandarinRelations(fuzhouText);
+
   relationResult.value = {
-    mandarin,
+    mandarins,
+    fuzhouMandarins: fuzhouMandarins.length ? fuzhouMandarins : mandarins,
   };
 };
 
