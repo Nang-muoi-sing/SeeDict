@@ -214,6 +214,7 @@ const femaleRelationTerms = new Set(
 type RelationResult = { mandarin: string } | { error: string };
 
 const relationResult = ref<RelationResult | null>(null);
+const relationFuzhouMandarin = ref('');
 const relationAudioBaseUrl = `${import.meta.env.VITE_OSS_URL}/audio/relatives`;
 
 const isErrorResult = (
@@ -250,11 +251,30 @@ const relationFuzhouItems = computed(() => {
   if (!relationHasResult.value) {
     return [] as (FuzhouTerm & { audioUrls: string[] })[];
   }
-  return getFuzhouTerms(relationMandarin.value).map((term) => ({
+  const mandarinForFuzhou = relationFuzhouMandarin.value || relationMandarin.value;
+  return getFuzhouTerms(mandarinForFuzhou).map((term) => ({
     ...term,
     audioUrls: buildFuzhouAudioUrls(term.reading),
   }));
 });
+
+const shouldKeepSpouseParentPrefix = (text: string) => {
+  return /^(老公|老婆)的(爸爸|妈妈)$/.test(text.trim());
+};
+
+const getFuzhouCalculationText = (text: string) => {
+  if (shouldKeepSpouseParentPrefix(text)) return text;
+  return text.replace(/^(老公|老婆)的/, '');
+};
+
+const calculateMandarinRelation = (text: string) => {
+  const results = relationship({
+    text,
+    sex: relationSex.value,
+    reverse: relationReverse.value,
+  });
+  return Array.isArray(results) ? results[0] || '' : '';
+};
 
 const getLastRelationSegment = () => {
   const trimmed = relationText.value.trim();
@@ -306,24 +326,26 @@ const handleRelationBackspace = () => {
 const handleRelationClear = () => {
   relationText.value = '';
   relationResult.value = null;
+  relationFuzhouMandarin.value = '';
 };
 
 const handleRelationCalculate = () => {
   const trimmed = relationText.value.trim();
   if (!trimmed) {
     relationResult.value = { error: '请输入称呼。' };
+    relationFuzhouMandarin.value = '';
     return;
   }
-  const results = relationship({
-    text: trimmed,
-    sex: relationSex.value,
-    reverse: relationReverse.value,
-  });
-  const mandarin = Array.isArray(results) ? results[0] : '';
+  const mandarin = calculateMandarinRelation(trimmed);
   if (!mandarin) {
     relationResult.value = { error: '未找到结果。' };
+    relationFuzhouMandarin.value = '';
     return;
   }
+  const fuzhouText = getFuzhouCalculationText(trimmed);
+  const fuzhouMandarin =
+    fuzhouText === trimmed ? mandarin : calculateMandarinRelation(fuzhouText);
+  relationFuzhouMandarin.value = fuzhouMandarin || mandarin;
   relationResult.value = {
     mandarin,
   };

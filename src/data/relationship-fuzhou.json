@@ -77,12 +77,12 @@
   "女儿": [
     {
       "name": "诸娘囝",
-      "reading": "zy53 neoyng33 giang33",
+      "reading": "zy53 neoyng33 ngiang33",
       "type": "formal"
     },
     {
       "name": "诸娘囝（长乐）",
-      "reading": "zeoyng53 giang33",
+      "reading": "zeoyng53 ngiang33",
       "type": "formal"
     },
     {
@@ -118,16 +118,11 @@
   "孙媳": [
     {
       "name": "孙新妇",
-      "reading": "soung21 ning53 mou24",
+      "reading": "soung21 ning53 mou242",
       "type": "formal"
     }
   ],
   "孙女": [
-    {
-      "name": "诸娘孙",
-      "reading": "zy55 neoyng55 noung55",
-      "type": "formal"
-    },
     {
       "name": "诸娘孙",
       "reading": "zy55 noung55 noung55",
@@ -147,11 +142,6 @@
     },
     {
       "name": "孙伲婿",
-      "reading": "soung53 nie21 lai21",
-      "type": "formal"
-    },
-    {
-      "name": "孙侄婿",
       "reading": "soung53 nie21 lai21",
       "type": "formal"
     },
@@ -183,7 +173,7 @@
   "外孙媳": [
     {
       "name": "外甥孙人",
-      "reading": "ngie21 leing21 noung55",
+      "reading": "ngie21 leing21 noung55 nging53",
       "type": "formal"
     }
   ],
@@ -434,7 +424,7 @@
       "type": "formal"
     }
   ],
-  "姑姑": [
+  "姑妈": [
     {
       "name": "姑妈",
       "reading": "gu55 ma55",
@@ -444,7 +434,9 @@
       "name": "姑嬷",
       "reading": "u55-ma55",
       "type": "formal"
-    },
+    }
+  ],
+  "姑姑": [
     {
       "name": "依姑",
       "reading": "i55-gu55",
@@ -603,14 +595,14 @@
       "type": "formal"
     }
   ],
-  "舅爷爷": [
+  "舅公": [
     {
       "name": "舅公",
       "reading": "giu55 ung55",
       "type": "formal"
     }
   ],
-  "舅奶奶": [
+  "舅婆": [
     {
       "name": "妗妈",
       "reading": "ging53 ma33",
@@ -1117,7 +1109,7 @@
   ],
   "曾孙女婿": [
     {
-      "name": "曾孙女婿",
+      "name": "曾孙婿",
       "reading": "zeing21 noung53 nai21",
       "type": "formal"
     }
@@ -1167,14 +1159,14 @@
       "type": "formal"
     }
   ],
-  "外公": [
+  "外祖父": [
     {
       "name": "外公",
       "reading": "ngie55 ung55",
       "type": "formal"
     }
   ],
-  "外祖岳母": [
+  "外祖母": [
     {
       "name": "外妈",
       "reading": "ngie53 ma33",
@@ -1187,7 +1179,7 @@
     },
     {
       "name": "依外（长乐金峰文岭）",
-      "reading": "i53-ngie242",
+      "reading": "i53 ngie242",
       "type": "formal"
     }
   ]
