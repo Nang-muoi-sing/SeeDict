@@ -42,7 +42,9 @@ const build404Html = (pathSegmentsToKeep: number) => `<!doctype html>
             .split('/')
             .slice(1 + pathSegmentsToKeep)
             .join('/') +
-          l.search +
+          (l.search
+            ? '&' + l.search.slice(1).replace(/&/g, '~and~')
+            : '') +
           l.hash
       );
     </script>
