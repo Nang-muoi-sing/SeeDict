@@ -224,6 +224,7 @@
 import { initTooltips } from 'flowbite';
 import relationship from 'relationship.js';
 import { computed, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import PageContent from '../components/PageContent.vue';
 import { getFuzhouTerms, type FuzhouTerm } from '../utils/relationshipMapping';
 import RubyText from '../components/common/RubyText.vue';
@@ -244,6 +245,24 @@ const relationQuickKeys = [
   { label: '子', value: '儿子' },
   { label: '女', value: '女儿' },
 ] as const;
+
+const relationUiToQuerySegmentMap: Record<string, string> = {
+  爸爸: '父',
+  妈妈: '母',
+  老公: '夫',
+  老婆: '妻',
+  哥哥: '兄',
+  弟弟: '弟',
+  姐姐: '姐',
+  妹妹: '妹',
+  儿子: '子',
+  女儿: '女',
+};
+
+const relationQueryToUiSegmentMap = Object.fromEntries(
+  Object.entries(relationUiToQuerySegmentMap).map(([ui, query]) => [query, ui])
+) as Record<string, string>;
+
 type Gender = 'male' | 'female';
 type RelationQuickValue = (typeof relationQuickKeys)[number]['value'];
 const maleQuickKeyLabels = new Set(['父', '夫', '兄', '弟', '子']);
@@ -264,6 +283,10 @@ type RelationResult =
   | { error: string };
 
 const relationResult = ref<RelationResult | null>(null);
+const route = useRoute();
+const router = useRouter();
+const isSyncingRouteState = ref(false);
+const shouldRestoreResult = ref(false);
 const relationAudioBaseUrl = `${import.meta.env.VITE_OSS_URL}/audio/relatives`;
 
 const isErrorResult = (
@@ -345,6 +368,96 @@ const calculateMandarinRelations = (text: string) => {
   return [...new Set(results.map((item) => item.trim()).filter(Boolean))];
 };
 
+const getQueryValue = (value: unknown): string => {
+  if (Array.isArray(value)) {
+    return typeof value[0] === 'string' ? value[0] : '';
+  }
+  return typeof value === 'string' ? value : '';
+};
+
+const normalizeRelationForQuery = (text: string) => {
+  return text
+    .split('的')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((item) => relationUiToQuerySegmentMap[item] ?? item)
+    .join('的');
+};
+
+const restoreRelationFromQuery = (text: string) => {
+  return text
+    .split('的')
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((item) => relationQueryToUiSegmentMap[item] ?? item)
+    .join('的');
+};
+
+const buildRelationQuery = () => {
+  const query: Record<string, string> = {};
+  const trimmed = relationText.value.trim();
+  const relationQueryText = normalizeRelationForQuery(trimmed);
+
+  if (relationQueryText) {
+    query.relation = relationQueryText;
+  }
+
+  if (relationSex.value === 0) {
+    query.sex = '0';
+  }
+
+  if (relationReverse.value) {
+    query.reverse = '1';
+  }
+
+  if (shouldRestoreResult.value && trimmed) {
+    query.calc = '1';
+  }
+
+  return query;
+};
+
+const isSameRelationQuery = (nextQuery: Record<string, string>) => {
+  return (
+    getQueryValue(route.query.relation) === (nextQuery.relation ?? '') &&
+    getQueryValue(route.query.sex) === (nextQuery.sex ?? '') &&
+    getQueryValue(route.query.reverse) === (nextQuery.reverse ?? '') &&
+    getQueryValue(route.query.calc) === (nextQuery.calc ?? '')
+  );
+};
+
+const syncRelationQuery = () => {
+  if (isSyncingRouteState.value) return;
+
+  const nextQuery = buildRelationQuery();
+  if (isSameRelationQuery(nextQuery)) return;
+
+  router.replace({
+    name: 'relatives-calculator',
+    query: nextQuery,
+  });
+};
+
+const hydrateRelationStateFromQuery = () => {
+  isSyncingRouteState.value = true;
+
+  relationText.value = restoreRelationFromQuery(getQueryValue(route.query.relation));
+  relationSex.value = getQueryValue(route.query.sex) === '0' ? 0 : 1;
+  relationReverse.value = getQueryValue(route.query.reverse) === '1';
+  shouldRestoreResult.value =
+    getQueryValue(route.query.calc) === '1' && !!relationText.value.trim();
+
+  if (!shouldRestoreResult.value) {
+    relationResult.value = null;
+  }
+
+  isSyncingRouteState.value = false;
+
+  if (shouldRestoreResult.value) {
+    handleRelationCalculate();
+  }
+};
+
 const getLastRelationSegment = () => {
   const trimmed = relationText.value.trim();
   if (!trimmed) return '';
@@ -395,18 +508,21 @@ const handleRelationBackspace = () => {
 const handleRelationClear = () => {
   relationText.value = '';
   relationResult.value = null;
+  shouldRestoreResult.value = false;
 };
 
 const handleRelationCalculate = () => {
   const trimmed = relationText.value.trim();
   if (!trimmed) {
     relationResult.value = { error: '请输入称呼。' };
+    shouldRestoreResult.value = false;
     return;
   }
 
   const mandarins = calculateMandarinRelations(trimmed);
   if (!mandarins.length) {
     relationResult.value = { error: '未找到结果。' };
+    shouldRestoreResult.value = true;
     return;
   }
 
@@ -418,6 +534,7 @@ const handleRelationCalculate = () => {
     mandarins,
     fuzhouMandarins: fuzhouMandarins.length ? fuzhouMandarins : mandarins,
   };
+  shouldRestoreResult.value = true;
 };
 
 const playRelationAudio = (audioUrls: string[], index = 0) => {
@@ -442,6 +559,21 @@ const handleRelationPlay = (audioUrls: string[]) => {
   if (!audioUrls.length) return;
   playRelationAudio(audioUrls);
 };
+
+watch(
+  () => route.query,
+  () => {
+    hydrateRelationStateFromQuery();
+  },
+  { immediate: true }
+);
+
+watch(
+  [relationText, relationSex, relationReverse, shouldRestoreResult],
+  () => {
+    syncRelationQuery();
+  }
+);
 
 watch(
   () => relationResult.value,
