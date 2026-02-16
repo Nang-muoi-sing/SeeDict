@@ -54,13 +54,6 @@
     },
     {
       "name": "老妈",
-      "reading": "lou53 ma33",
-      "type": "formal",
-      "region": "长乐、永泰",
-      "wordId": "JWILRb"
-    },
-    {
-      "name": "老妈",
       "reading": "lau33 wa33",
       "type": "formal",
       "region": "连江",
@@ -92,13 +85,13 @@
   "女儿": [
     {
       "name": "诸娘囝",
-      "reading": "zy53 neoyng33 giang33",
+      "reading": "zy53 neoyng33 ngiang33",
       "type": "back",
       "wordId": "LxpP9z"
     },
     {
       "name": "诸娘囝",
-      "reading": "zeoyng53 giang33",
+      "reading": "zeoyng53 ngiang33",
       "type": "back",
       "region": "长乐",
       "wordId": "LxpP9z"
@@ -128,20 +121,20 @@
   "孙子": [
     {
       "name": "孙囝",
-      "reading": "soung53 iang33",
+      "reading": "soung53 ngiang33",
       "type": "back",
       "wordId": "NjjW8y"
     },
     {
       "name": "丈夫孙",
-      "reading": "doung21 mo55 loung55",
+      "reading": "doung21 muo55 loung55",
       "type": "back"
     }
   ],
   "孙媳": [
     {
       "name": "孙新妇",
-      "reading": "soung21 ning53 mou24",
+      "reading": "soung21 ning53 mou242",
       "type": "back",
       "wordId": "nPPBKH"
     }
@@ -179,11 +172,6 @@
       "type": "back"
     },
     {
-      "name": "孙侄婿",
-      "reading": "soung53 nie21 lai21",
-      "type": "back"
-    },
-    {
       "name": "孙女婿",
       "reading": "soung21 ny55 lai21",
       "type": "back"
@@ -214,14 +202,14 @@
   "外孙媳": [
     {
       "name": "外甥孙人",
-      "reading": "ngie21 leing21 noung55",
+      "reading": "ngie21 leing21 noung55 ing53",
       "type": "back"
     }
   ],
   "外孙女婿": [
     {
       "name": "外甥孙婿",
-      "reading": "ngie21 leing21 loung53 nai21",
+      "reading": "ngie21 leing21 noung53 nai21",
       "type": "back",
       "wordId": "MJJnXl"
     }
@@ -412,7 +400,7 @@
   "表姐": [
     {
       "name": "表姐",
-      "reading": "biu24 jia33",
+      "reading": "biu24 ia33",
       "type": "formal",
       "wordId": "mlGosJ"
     }
@@ -428,7 +416,7 @@
   "表姐夫": [
     {
       "name": "表姐夫",
-      "reading": "biu21 jia21 u55",
+      "reading": "biu21 ia21 u55",
       "type": "formal"
     }
   ],
@@ -500,7 +488,7 @@
     {
       "name": "姑嬷",
       "reading": "gu55 ma55",
-      "type": "formal",
+      "type": "child",
       "wordId": "arPaZS"
     },
     {
@@ -671,7 +659,7 @@
   ],
   "姨婆": [
     {
-      "name": "姨婆",
+      "name": "姨妈",
       "reading": "i33 ma33",
       "type": "formal"
     }
@@ -817,12 +805,6 @@
       "wordId": "Ao1mJZ"
     },
     {
-      "name": "官郎",
-      "reading": "guang55 long55",
-      "type": "back",
-      "region": "福清"
-    },
-    {
       "name": "底官",
       "reading": "de21 uang33",
       "type": "back",
@@ -832,7 +814,7 @@
   "岳父": [
     {
       "name": "丈侬",
-      "reading": "duong33 neoyng53",
+      "reading": "duong55 neoyng53",
       "type": "formal",
       "wordId": "KpZ2y6"
     }
