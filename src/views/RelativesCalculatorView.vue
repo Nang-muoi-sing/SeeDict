@@ -136,16 +136,13 @@
               <div class="mt-1 text-lg font-semibold text-rosybrown-800">
                 {{ group.mandarin }}
               </div>
-              <div class="mt-4 text-xs font-semibold text-wheat-500">
-                福州话称呼
-              </div>
               <div v-if="group.items.length === 0" class="mt-2 text-wheat-500">
-                暂无福州话称呼。
+                😮 关系可能有些远，我们还不知道怎么称呼 TA
               </div>
               <div v-else class="mt-2 space-y-2">
                 <div
                   v-for="item in group.items"
-                  :key="`${group.fuzhouMandarin}-${item.name}-${item.reading}`"
+                  :key="`${group.mandarin}-${item.name}-${item.reading}`"
                   class="flex items-center justify-between rounded-lg bg-wheat-50 px-3 py-2"
                 >
                   <div class="flex items-baseline">
@@ -187,8 +184,8 @@
                     >
                       {{
                         {
-                          formal: '当面称呼，直面称呼，一般面称的都可以背称',
-                          back: '背后称呼，向第三方说话时提到此人，背称的未必都可以面称',
+                          formal: '当面称呼，直面称呼，面称一般都可以背称',
+                          back: '背后称呼，向第三方提及此人，背称未必可以面称',
                           child: '儿时的说话习惯，模仿小孩的称呼',
                         }[item.type]
                       }}
@@ -226,13 +223,14 @@ import relationship from 'relationship.js';
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import PageContent from '../components/PageContent.vue';
-import { getFuzhouTerms, type FuzhouTerm } from '../utils/relationshipMapping';
+import { getFuzhouTerms } from '../utils/relationshipMapping';
 import RubyText from '../components/common/RubyText.vue';
 import Badge from '../components/common/Badge.vue';
 
 const relationText = ref('');
 const relationSex = ref<0 | 1>(1);
 const relationReverse = ref(false);
+
 const relationQuickKeys = [
   { label: '父', value: '爸爸' },
   { label: '母', value: '妈妈' },
@@ -265,6 +263,7 @@ const relationQueryToUiSegmentMap = Object.fromEntries(
 
 type Gender = 'male' | 'female';
 type RelationQuickValue = (typeof relationQuickKeys)[number]['value'];
+
 const maleQuickKeyLabels = new Set(['父', '夫', '兄', '弟', '子']);
 const femaleQuickKeyLabels = new Set(['母', '妻', '姐', '妹', '女']);
 const maleRelationTerms = new Set<RelationQuickValue>(
@@ -278,9 +277,7 @@ const femaleRelationTerms = new Set(
     .map((item) => item.value)
 );
 
-type RelationResult =
-  | { mandarins: string[]; fuzhouMandarins: string[] }
-  | { error: string };
+type RelationResult = { mandarins: string[] } | { error: string };
 
 const relationResult = ref<RelationResult | null>(null);
 const route = useRoute();
@@ -292,10 +289,10 @@ const relationAudioBaseUrl = `${import.meta.env.VITE_OSS_URL}/audio/relatives`;
 const isErrorResult = (
   value: RelationResult | null
 ): value is { error: string } => !!value && 'error' in value;
+
 const isSuccessResult = (
   value: RelationResult | null
-): value is { mandarins: string[]; fuzhouMandarins: string[] } =>
-  !!value && 'mandarins' in value;
+): value is { mandarins: string[] } => !!value && 'mandarins' in value;
 
 const relationHasError = computed(() => isErrorResult(relationResult.value));
 const relationHasResult = computed(() => isSuccessResult(relationResult.value));
@@ -305,11 +302,22 @@ const relationError = computed(() =>
 const relationMandarins = computed(() =>
   isSuccessResult(relationResult.value) ? relationResult.value.mandarins : []
 );
-const relationFuzhouMandarins = computed(() =>
-  isSuccessResult(relationResult.value)
-    ? relationResult.value.fuzhouMandarins
-    : []
-);
+
+const relationDisplayGroups = computed(() => {
+  if (!relationHasResult.value) return [];
+
+  return relationMandarins.value.map((mandarin) => {
+    const terms = getFuzhouTerms(mandarin);
+
+    return {
+      mandarin,
+      items: terms.map((term) => ({
+        ...term,
+        audioUrls: buildFuzhouAudioUrls(term.reading),
+      })),
+    };
+  });
+});
 
 const buildFuzhouAudioUrls = (reading: string): string[] => {
   if (!reading) return [];
@@ -323,41 +331,6 @@ const buildFuzhouAudioUrls = (reading: string): string[] => {
   );
 };
 
-const relationDisplayGroups = computed(() => {
-  if (!relationHasResult.value) {
-    return [] as {
-      mandarin: string;
-      fuzhouMandarin: string;
-      items: (FuzhouTerm & { audioUrls: string[] })[];
-    }[];
-  }
-
-  return relationMandarins.value.map((mandarin, index) => {
-    const fuzhouMandarin =
-      relationFuzhouMandarins.value[index] ||
-      relationFuzhouMandarins.value[0] ||
-      mandarin;
-
-    return {
-      mandarin,
-      fuzhouMandarin,
-      items: getFuzhouTerms(fuzhouMandarin).map((term) => ({
-        ...term,
-        audioUrls: buildFuzhouAudioUrls(term.reading),
-      })),
-    };
-  });
-});
-
-const shouldKeepSpouseParentPrefix = (text: string) => {
-  return /^(老公|老婆)的(爸爸|妈妈)$/.test(text.trim());
-};
-
-const getFuzhouCalculationText = (text: string) => {
-  if (shouldKeepSpouseParentPrefix(text)) return text;
-  return text.replace(/^(老公|老婆)的/, '');
-};
-
 const calculateMandarinRelations = (text: string) => {
   const results = relationship({
     text,
@@ -369,9 +342,7 @@ const calculateMandarinRelations = (text: string) => {
 };
 
 const getQueryValue = (value: unknown): string => {
-  if (Array.isArray(value)) {
-    return typeof value[0] === 'string' ? value[0] : '';
-  }
+  if (Array.isArray(value)) return typeof value[0] === 'string' ? value[0] : '';
   return typeof value === 'string' ? value : '';
 };
 
@@ -398,59 +369,29 @@ const buildRelationQuery = () => {
   const trimmed = relationText.value.trim();
   const relationQueryText = normalizeRelationForQuery(trimmed);
 
-  if (relationQueryText) {
-    query.relation = relationQueryText;
-  }
-
-  if (relationSex.value === 0) {
-    query.sex = '0';
-  }
-
-  if (relationReverse.value) {
-    query.reverse = '1';
-  }
-
-  if (shouldRestoreResult.value && trimmed) {
+  if (relationQueryText) query.relation = relationQueryText;
+  if (relationSex.value === 0) query.sex = '0';
+  if (relationReverse.value) query.reverse = '1';
+  if (shouldRestoreResult.value && (trimmed || relationResult.value))
     query.calc = '1';
-  }
 
   return query;
 };
 
-const isSameRelationQuery = (nextQuery: Record<string, string>) => {
-  return (
-    getQueryValue(route.query.relation) === (nextQuery.relation ?? '') &&
-    getQueryValue(route.query.sex) === (nextQuery.sex ?? '') &&
-    getQueryValue(route.query.reverse) === (nextQuery.reverse ?? '') &&
-    getQueryValue(route.query.calc) === (nextQuery.calc ?? '')
-  );
-};
-
 const syncRelationQuery = () => {
   if (isSyncingRouteState.value) return;
-
   const nextQuery = buildRelationQuery();
-  if (isSameRelationQuery(nextQuery)) return;
-
-  router.replace({
-    name: 'relatives-calculator',
-    query: nextQuery,
-  });
+  router.replace({ name: 'relatives-calculator', query: nextQuery });
 };
 
 const hydrateRelationStateFromQuery = () => {
   isSyncingRouteState.value = true;
-
-  relationText.value = restoreRelationFromQuery(getQueryValue(route.query.relation));
+  relationText.value = restoreRelationFromQuery(
+    getQueryValue(route.query.relation)
+  );
   relationSex.value = getQueryValue(route.query.sex) === '0' ? 0 : 1;
   relationReverse.value = getQueryValue(route.query.reverse) === '1';
-  shouldRestoreResult.value =
-    getQueryValue(route.query.calc) === '1' && !!relationText.value.trim();
-
-  if (!shouldRestoreResult.value) {
-    relationResult.value = null;
-  }
-
+  shouldRestoreResult.value = getQueryValue(route.query.calc) === '1';
   isSyncingRouteState.value = false;
 
   if (shouldRestoreResult.value) {
@@ -458,49 +399,33 @@ const hydrateRelationStateFromQuery = () => {
   }
 };
 
-const getLastRelationSegment = () => {
-  const trimmed = relationText.value.trim();
-  if (!trimmed) return '';
-  const segments = trimmed
-    .split('的')
-    .map((item) => item.trim())
-    .filter(Boolean);
-  return segments.length ? segments[segments.length - 1] : '';
-};
-
-const getCurrentRelationGender = (): Gender | null => {
-  const lastSegment = getLastRelationSegment();
-  if (!lastSegment) {
-    return relationSex.value === 1 ? 'male' : 'female';
-  }
-  if (maleRelationTerms.has(lastSegment as RelationQuickValue)) return 'male';
-  if (femaleRelationTerms.has(lastSegment as RelationQuickValue))
-    return 'female';
-  return null;
-};
-
 const isRelationQuickKeyDisabled = (label: string) => {
-  const gender = getCurrentRelationGender();
-  if (!gender) return false;
+  const trimmed = relationText.value.trim();
+  const segments = trimmed.split('的').filter(Boolean);
+  const lastSegment = segments.length ? segments[segments.length - 1] : '';
+
+  let gender: Gender = relationSex.value === 1 ? 'male' : 'female';
+
+  if (lastSegment) {
+    if (maleRelationTerms.has(lastSegment as RelationQuickValue))
+      gender = 'male';
+    else if (femaleRelationTerms.has(lastSegment as RelationQuickValue))
+      gender = 'female';
+    else return false;
+  }
+
   if (label === '夫') return gender === 'male';
   if (label === '妻') return gender === 'female';
   return false;
 };
 
 const handleRelationQuickInsert = (name: string) => {
-  if (name === '老公' && isRelationQuickKeyDisabled('夫')) return;
-  if (name === '老婆' && isRelationQuickKeyDisabled('妻')) return;
   const trimmed = relationText.value.trim();
   relationText.value = trimmed ? `${trimmed}的${name}` : name;
 };
 
 const handleRelationBackspace = () => {
-  const trimmed = relationText.value.trim();
-  if (!trimmed) {
-    relationText.value = '';
-    return;
-  }
-  const segments = trimmed.split('的');
+  const segments = relationText.value.trim().split('的');
   segments.pop();
   relationText.value = segments.join('的');
 };
@@ -513,74 +438,45 @@ const handleRelationClear = () => {
 
 const handleRelationCalculate = () => {
   const trimmed = relationText.value.trim();
-  if (!trimmed) {
-    relationResult.value = { error: '请输入称呼。' };
-    shouldRestoreResult.value = false;
-    return;
-  }
+  let mandarins = calculateMandarinRelations(trimmed);
 
-  const mandarins = calculateMandarinRelations(trimmed);
   if (!mandarins.length) {
     relationResult.value = { error: '未找到结果。' };
     shouldRestoreResult.value = true;
     return;
   }
 
-  const fuzhouText = getFuzhouCalculationText(trimmed);
-  const fuzhouMandarins =
-    fuzhouText === trimmed ? mandarins : calculateMandarinRelations(fuzhouText);
-
-  relationResult.value = {
-    mandarins,
-    fuzhouMandarins: fuzhouMandarins.length ? fuzhouMandarins : mandarins,
-  };
+  relationResult.value = { mandarins };
   shouldRestoreResult.value = true;
 };
 
 const playRelationAudio = (audioUrls: string[], index = 0) => {
-  if (index >= audioUrls.length) {
-    console.error('播放失败: 未找到可用音频');
-    return;
-  }
+  if (index >= audioUrls.length) return;
   const audio = new Audio(audioUrls[index]);
   audio.addEventListener(
     'error',
-    () => {
-      playRelationAudio(audioUrls, index + 1);
-    },
+    () => playRelationAudio(audioUrls, index + 1),
     { once: true }
   );
-  audio.play().catch((err) => {
-    console.error('播放失败:', err);
-  });
+  audio.play().catch((err) => console.error('播放失败:', err));
 };
 
 const handleRelationPlay = (audioUrls: string[]) => {
-  if (!audioUrls.length) return;
-  playRelationAudio(audioUrls);
+  if (audioUrls.length) playRelationAudio(audioUrls);
 };
 
 watch(
   () => route.query,
-  () => {
-    hydrateRelationStateFromQuery();
-  },
+  () => hydrateRelationStateFromQuery(),
   { immediate: true }
 );
-
-watch(
-  [relationText, relationSex, relationReverse, shouldRestoreResult],
-  () => {
-    syncRelationQuery();
-  }
+watch([relationText, relationSex, relationReverse, shouldRestoreResult], () =>
+  syncRelationQuery()
 );
-
 watch(
   () => relationResult.value,
   () => {
-    setTimeout(() => {
-      initTooltips();
-    }, 0);
+    setTimeout(() => initTooltips(), 0);
   }
 );
 </script>
