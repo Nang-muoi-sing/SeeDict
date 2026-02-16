@@ -44,6 +44,7 @@ const routes = [
   {
     path: '/tool/relatives-calculator',
     name: 'relatives-calculator',
+    meta: { noScroll: true },
     component: () => import('../views/RelativesCalculatorView.vue'),
   },
 ];
@@ -53,9 +54,14 @@ const router = createRouter({
   history: createWebHistory(base),
   routes,
   scrollBehavior(to, _from, savedPosition) {
+    if (to.meta.noScroll) {
+      return false;
+    }
+
     if (savedPosition) {
       return savedPosition;
     }
+
     if (!to.hash) {
       return { top: 0 };
     }
