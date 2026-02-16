@@ -3,9 +3,10 @@ declare module 'relationship.js' {
     text?: string;
     target?: string;
     sex?: 0 | 1 | -1;
-    type?: string;
+    type?: 'default' | 'chain' | 'pair';
     reverse?: boolean;
     mode?: string;
+    optimal?: boolean
   }
 
   export default function relationship(options?: RelationshipOptions): string[];
