@@ -176,37 +176,22 @@
                       〈旧〉
                     </span>
                     <span class="w-3" v-else></span>
-                    <div
+                    <InfoTooltip
                       :id="`tooltip-${item.name}-${item.reading}-isOutdated`"
-                      role="tooltip"
-                      class="tooltip invisible absolute z-50 inline-block rounded-xl bg-rosybrown-900 px-3 py-2 text-sm text-wheat-50 opacity-0 transition-opacity duration-500"
                     >
                       旧称呼，如今已经很少使用
-                      <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                    </InfoTooltip>
                     <Badge
                       :data-tooltip-target="`tooltip-${item.name}-${item.reading}`"
                       class="cursor-pointer"
-                      >{{
-                        { formal: '面称', back: '背称', child: '儿语' }[
-                          item.type
-                        ]
-                      }}</Badge
+                      >{{ getTermTypeLabel(item.type) }}</Badge
                     >
-                    <div
-                      :id="`tooltip-${item.name}-${item.reading}`"
-                      role="tooltip"
-                      class="tooltip invisible absolute z-50 inline-block rounded-xl bg-rosybrown-900 px-3 py-2 text-sm text-wheat-50 opacity-0 transition-opacity duration-500"
+                    <InfoTooltip
+                      :id="`tooltip-${item.name}-${item.reading}-type`"
                     >
-                      {{
-                        {
-                          formal: '当面称呼，直面称呼，面称一般都可以背称',
-                          back: '背后称呼，向第三方提及此人，背称未必可以面称',
-                          child: '儿时的说话习惯，模仿小孩的称呼',
-                        }[item.type]
-                      }}
-                      <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
+                      {{ getTermTypeTooltip(item.type) }}
+                    </InfoTooltip>
+
                     <span v-if="item.region">（{{ item.region }}）</span>
                   </div>
                   <button
@@ -246,10 +231,11 @@ import { initTooltips } from 'flowbite';
 import relationship from 'relationship.js';
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import Badge from '../components/common/Badge.vue';
+import RubyText from '../components/common/RubyText.vue';
+import InfoTooltip from '../components/InfoTooltip.vue';
 import PageContent from '../components/PageContent.vue';
 import { getFuzhouTerms } from '../utils/relationshipMapping';
-import RubyText from '../components/common/RubyText.vue';
-import Badge from '../components/common/Badge.vue';
 
 const relationText = ref('');
 const relationSex = ref<0 | 1>(1);
@@ -309,6 +295,18 @@ const router = useRouter();
 const isSyncingRouteState = ref(false);
 const shouldRestoreResult = ref(false);
 const relationAudioBaseUrl = `${import.meta.env.VITE_OSS_URL}/audio/relatives`;
+
+const getTermTypeLabel = (type: 'formal' | 'back' | 'child'): string => {
+  return { formal: '面称', back: '背称', child: '儿语' }[type];
+};
+
+const getTermTypeTooltip = (type: 'formal' | 'back' | 'child'): string => {
+  return {
+    formal: '当面称呼，直面称呼，面称一般都可以背称',
+    back: '背后称呼，向第三方提及此人，背称未必可以面称',
+    child: '儿时的说话习惯，模仿小孩的称呼',
+  }[type];
+};
 
 const isErrorResult = (
   value: RelationResult | null
