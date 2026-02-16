@@ -168,9 +168,25 @@
                         :yngping="item.reading"
                       ></RubyText>
                     </div>
+                    <span
+                      v-if="item.isOutdated"
+                      class="cursor-pointer"
+                      :data-tooltip-target="`tooltip-${item.name}-${item.reading}-isOutdated`"
+                    >
+                      〈旧〉
+                    </span>
+                    <span class="w-3" v-else></span>
+                    <div
+                      :id="`tooltip-${item.name}-${item.reading}-isOutdated`"
+                      role="tooltip"
+                      class="tooltip invisible absolute z-50 inline-block rounded-xl bg-rosybrown-900 px-3 py-2 text-sm text-wheat-50 opacity-0 transition-opacity duration-500"
+                    >
+                      旧称呼，如今已经很少使用
+                      <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
                     <Badge
                       :data-tooltip-target="`tooltip-${item.name}-${item.reading}`"
-                      class="ml-4 cursor-pointer"
+                      class="cursor-pointer"
                       >{{
                         { formal: '面称', back: '背称', child: '儿语' }[
                           item.type
@@ -305,10 +321,8 @@ const relationMandarins = computed(() =>
 
 const relationDisplayGroups = computed(() => {
   if (!relationHasResult.value) return [];
-
   return relationMandarins.value.map((mandarin) => {
     const terms = getFuzhouTerms(mandarin);
-
     return {
       mandarin,
       items: terms.map((term) => ({
@@ -337,6 +351,7 @@ const calculateMandarinRelations = (text: string) => {
     sex: relationSex.value,
     reverse: relationReverse.value,
   });
+  console.log(results);
   if (!Array.isArray(results)) return [];
   return [...new Set(results.map((item) => item.trim()).filter(Boolean))];
 };
@@ -372,8 +387,7 @@ const buildRelationQuery = () => {
   if (relationQueryText) query.relation = relationQueryText;
   if (relationSex.value === 0) query.sex = '0';
   if (relationReverse.value) query.reverse = '1';
-  if (shouldRestoreResult.value && (trimmed || relationResult.value))
-    query.calc = '1';
+  if (shouldRestoreResult.value) query.calc = '1';
 
   return query;
 };
@@ -395,7 +409,7 @@ const hydrateRelationStateFromQuery = () => {
   isSyncingRouteState.value = false;
 
   if (shouldRestoreResult.value) {
-    handleRelationCalculate();
+    handleRelationCalculate(false);
   }
 };
 
@@ -434,20 +448,27 @@ const handleRelationClear = () => {
   relationText.value = '';
   relationResult.value = null;
   shouldRestoreResult.value = false;
+  syncRelationQuery();
 };
 
-const handleRelationCalculate = () => {
+const handleRelationCalculate = (syncOrEvent?: boolean | Event) => {
+  const shouldSyncUrl = syncOrEvent !== false;
   const trimmed = relationText.value.trim();
-  let mandarins = calculateMandarinRelations(trimmed);
 
+  let mandarins = calculateMandarinRelations(trimmed);
   if (!mandarins.length) {
     relationResult.value = { error: '未找到结果。' };
     shouldRestoreResult.value = true;
+    if (shouldSyncUrl) syncRelationQuery();
     return;
   }
 
   relationResult.value = { mandarins };
   shouldRestoreResult.value = true;
+
+  if (shouldSyncUrl) {
+    syncRelationQuery();
+  }
 };
 
 const playRelationAudio = (audioUrls: string[], index = 0) => {
@@ -470,9 +491,7 @@ watch(
   () => hydrateRelationStateFromQuery(),
   { immediate: true }
 );
-watch([relationText, relationSex, relationReverse, shouldRestoreResult], () =>
-  syncRelationQuery()
-);
+
 watch(
   () => relationResult.value,
   () => {
