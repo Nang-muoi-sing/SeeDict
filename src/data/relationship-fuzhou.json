@@ -29,24 +29,6 @@
       "wordId": "wThjuA"
     },
     {
-      "name": "𡚸",
-      "reading": "muo33",
-      "type": "back",
-      "wordId": "L3229z"
-    },
-    {
-      "name": "𡚸",
-      "reading": "mo33",
-      "type": "back",
-      "wordId": "L3229z"
-    },
-    {
-      "name": "老小",
-      "reading": "lo24 liu33",
-      "type": "back",
-      "wordId": "KpShy6"
-    },
-    {
       "name": "老妈",
       "reading": "lau53 ma33",
       "type": "formal",
@@ -58,6 +40,27 @@
       "type": "formal",
       "region": "连江",
       "wordId": "JWILRb"
+    },
+    {
+      "name": "𡚸",
+      "reading": "muo33",
+      "type": "back",
+      "wordId": "L3229z",
+      "isOutdated": true
+    },
+    {
+      "name": "𡚸",
+      "reading": "mo33",
+      "type": "back",
+      "wordId": "L3229z",
+      "isOutdated": true
+    },
+    {
+      "name": "老小",
+      "reading": "lo24 liu33",
+      "type": "back",
+      "wordId": "KpShy6",
+      "isOutdated": true
     }
   ],
   "儿子": [
@@ -70,7 +73,7 @@
     {
       "name": "囝",
       "reading": "giang33",
-      "type": "formal",
+      "type": "back",
       "wordId": "6c3vnz"
     }
   ],
@@ -99,7 +102,7 @@
     {
       "name": "囝",
       "reading": "giang33",
-      "type": "formal",
+      "type": "back",
       "wordId": "6c3vnz"
     }
   ],
@@ -248,13 +251,13 @@
     {
       "name": "俤新妇",
       "reading": "die21 ling53 mou242",
-      "type": "formal",
+      "type": "back",
       "wordId": "RUWa1F"
     },
     {
       "name": "俤人",
       "reading": "die55 ing53",
-      "type": "formal",
+      "type": "back",
       "wordId": "FZaBgZ"
     }
   ],
@@ -304,13 +307,13 @@
     {
       "name": "孙",
       "reading": "soung55",
-      "type": "formal",
+      "type": "back",
       "wordId": "jU27IN"
     },
     {
       "name": "侄",
       "reading": "dik5",
-      "type": "formal",
+      "type": "back",
       "wordId": "3I4xTY"
     }
   ],
@@ -318,13 +321,13 @@
     {
       "name": "孙新妇",
       "reading": "soung21 ning53 mou242",
-      "type": "formal",
+      "type": "back",
       "wordId": "nPPBKH"
     },
     {
       "name": "侄新妇",
       "reading": "dik21 sing53 mou242",
-      "type": "formal",
+      "type": "back",
       "wordId": "Igg3oH"
     }
   ],
@@ -332,13 +335,13 @@
     {
       "name": "侄女",
       "reading": "dik33 ny33",
-      "type": "formal",
+      "type": "back",
       "wordId": "JWWHRb"
     },
     {
       "name": "诸娘孙",
       "reading": "zy55 noung55 noung55",
-      "type": "formal",
+      "type": "back",
       "wordId": "jFFZIN"
     }
   ],
@@ -346,23 +349,23 @@
     {
       "name": "孙女婿",
       "reading": "soung21 ny55 nai21",
-      "type": "formal"
+      "type": "back"
     },
     {
       "name": "孙伲婿",
       "reading": "soung53 nie21 lai21",
-      "type": "formal"
+      "type": "back"
     },
     {
       "name": "孙婿",
       "reading": "soung53 nai21",
-      "type": "formal",
-      "wordId": "8o4jAr"
+      "type": "back",
+      "wordId": "back"
     },
     {
       "name": "侄女婿",
       "reading": "dik21 ny55 lai21",
-      "type": "formal",
+      "type": "back",
       "wordId": "vAApMA"
     }
   ],
@@ -370,7 +373,7 @@
     {
       "name": "外甥",
       "reading": "ngie55 leing55",
-      "type": "formal",
+      "type": "back",
       "wordId": "ObbQ33"
     }
   ],
@@ -378,7 +381,7 @@
     {
       "name": "外甥女",
       "reading": "ngie21 leing53 ny33",
-      "type": "formal",
+      "type": "back",
       "wordId": "077ATr"
     }
   ],
@@ -386,7 +389,7 @@
     {
       "name": "外甥人",
       "reading": "ngie21 leing55 nging53",
-      "type": "formal",
+      "type": "back",
       "wordId": "ZBBlSj"
     }
   ],
@@ -394,7 +397,7 @@
     {
       "name": "外甥女婿",
       "reading": "ngie21 leing21 ny55 lai21",
-      "type": "formal"
+      "type": "back"
     }
   ],
   "表姐": [
@@ -452,6 +455,11 @@
       "name": "依弟",
       "reading": "i53 da242",
       "type": "formal"
+    },
+    {
+      "name": "弟弟",
+      "reading": "da53 da242",
+      "type": "child"
     }
   ],
   "表兄嫂": [
@@ -466,7 +474,7 @@
     {
       "name": "表俤人",
       "reading": "biu21 lie55 ing53",
-      "type": "formal",
+      "type": "back",
       "wordId": "RUWl1F"
     }
   ],
@@ -615,7 +623,7 @@
     {
       "name": "丈奶",
       "reading": "duong24 ne33",
-      "type": "formal",
+      "type": "back",
       "wordId": "qD4yQv"
     }
   ],
@@ -817,7 +825,7 @@
     {
       "name": "丈侬",
       "reading": "duong55 neoyng53",
-      "type": "formal",
+      "type": "back",
       "wordId": "KpZ2y6"
     }
   ],
@@ -994,13 +1002,13 @@
     {
       "name": "俤新妇",
       "reading": "die21 ling53 mou242",
-      "type": "formal",
+      "type": "back",
       "wordId": "RUWa1F"
     },
     {
       "name": "俤人",
       "reading": "die55 ing53",
-      "type": "formal",
+      "type": "back",
       "wordId": "FZaBgZ"
     }
   ],
@@ -1334,6 +1342,12 @@
       "name": "依外",
       "reading": "i53 ngie242",
       "type": "formal",
+      "region": "长乐"
+    },
+    {
+      "name": "外外",
+      "reading": "ngie53 ngie242",
+      "type": "child",
       "region": "长乐"
     }
   ]

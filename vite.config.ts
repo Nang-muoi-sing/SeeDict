@@ -5,6 +5,7 @@ import Icons from "unplugin-icons/vite";
 import Components from "unplugin-vue-components/vite";
 import { defineConfig, loadEnv } from "vite";
 import { createGhPagesSpaPlugin } from "./scripts/gh-pages-spa";
+import { fileURLToPath, URL } from "node:url";
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
@@ -25,6 +26,13 @@ export default defineConfig(({ mode }) => {
   return {
     plugins,
     base: baseUrl,
+    resolve: {
+      alias: {
+        "relationship.js": fileURLToPath(
+          new URL("src/libs/relationship/src/relationship.js", import.meta.url)
+        ),
+      },
+    },
     server: {
       proxy: {
         "/api": {

@@ -15,13 +15,17 @@ const fuzhouRelativesMap = fuzhouMap as Record<string, FuzhouTerm[]>;
 const mandarinRelativesMap = mandarinMap as Record<string, string[]>;
 
 export const getFuzhouTerms = (mandarin: string): FuzhouTerm[] => {
-  const aliases = mandarinRelativesMap[mandarin] || [];
+  if (mandarin in fuzhouRelativesMap) {
+    return fuzhouRelativesMap[mandarin];
+  }
 
+  const aliases = mandarinRelativesMap[mandarin] || [];
   const termMap = aliases.reduce((acc, key) => {
     if (key && fuzhouRelativesMap[key]) {
-      fuzhouRelativesMap[key].forEach(term => {
-        if (!acc.has(term.name)) {
-          acc.set(term.name, term);
+      fuzhouRelativesMap[key].forEach((term) => {
+        const uniqueKey = `${term.name}|${term.reading}|${term.type}`;
+        if (!acc.has(uniqueKey)) {
+          acc.set(uniqueKey, term);
         }
       });
     }
