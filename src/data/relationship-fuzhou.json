@@ -484,7 +484,7 @@
       "wordId": "z1JJNM"
     }
   ],
-  "姑妈": [
+  "大姑母": [
     {
       "name": "姑嬷",
       "reading": "gu55 ma55",
@@ -494,9 +494,11 @@
     {
       "name": "姑嬷",
       "reading": "u55 ma55",
-      "type": "formal",
+      "type": "child",
       "wordId": "arPaZS"
-    },
+    }
+  ],
+  "姑母": [
     {
       "name": "依姑",
       "reading": "i55 gu55",
