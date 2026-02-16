@@ -230,6 +230,14 @@
         <div v-else class="text-wheat-500">暂无结果。</div>
       </div>
     </div>
+    <div class="mt-6 text-center text-sm text-wheat-400">
+      希望改善功能？可以尝试<a
+        href="https://jcnf40n3hvft.feishu.cn/share/base/form/shrcnfDrtD7nlpJdryFlYFUU3Lf"
+        target="_blank"
+        class="underline underline-offset-4 transition-all hover:text-wheat-600"
+        >向我们反馈</a
+      >
+    </div>
   </PageContent>
 </template>
 
