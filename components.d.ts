@@ -46,6 +46,7 @@ declare module 'vue' {
     IMdiLinkVariant: typeof import('~icons/mdi/link-variant')['default']
     IMdiQqchat: typeof import('~icons/mdi/qqchat')['default']
     IMiSwitch: typeof import('~icons/mi/switch')['default']
+    InfoTooltip: typeof import('./src/components/InfoTooltip.vue')['default']
     ISimpleIconsBilibili: typeof import('~icons/simple-icons/bilibili')['default']
     ISimpleIconsXiaohongshu: typeof import('~icons/simple-icons/xiaohongshu')['default']
     ISimpleIconsZhihu: typeof import('~icons/simple-icons/zhihu')['default']
