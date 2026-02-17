@@ -137,7 +137,7 @@
                 {{ group.mandarin }}
               </div>
               <div v-if="group.items.length === 0" class="mt-2 text-wheat-500">
-                😮 关系可能有些远，我们还不知道怎么称呼 TA
+                😮 关系有些复杂，我们还不知道怎么称呼伊
               </div>
               <div v-else class="mt-2 space-y-2">
                 <div
@@ -181,16 +181,18 @@
                     >
                       旧称呼，如今已经很少使用
                     </InfoTooltip>
-                    <Badge
-                      :data-tooltip-target="`tooltip-${item.name}-${item.reading}`"
-                      class="cursor-pointer"
-                      >{{ getTermTypeLabel(item.type) }}</Badge
+                    <template v-if="item.type != 'formal'">
+                      <Badge
+                        :data-tooltip-target="`tooltip-${item.name}-${item.reading}-type`"
+                        class="cursor-pointer"
+                        >{{ getTermTypeLabel(item.type) }}</Badge
+                      >
+                      <InfoTooltip
+                        :id="`tooltip-${item.name}-${item.reading}-type`"
+                      >
+                        {{ getTermTypeTooltip(item.type) }}
+                      </InfoTooltip></template
                     >
-                    <InfoTooltip
-                      :id="`tooltip-${item.name}-${item.reading}-type`"
-                    >
-                      {{ getTermTypeTooltip(item.type) }}
-                    </InfoTooltip>
 
                     <span v-if="item.region">（{{ item.region }}）</span>
                   </div>
