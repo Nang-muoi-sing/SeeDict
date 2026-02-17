@@ -205,7 +205,7 @@
   "外孙媳": [
     {
       "name": "外甥孙人",
-      "reading": "ngie21 leing21 noung55 ing53",
+      "reading": "ngie21 leing21 noung55 nging53",
       "type": "back"
     }
   ],
@@ -496,7 +496,7 @@
     {
       "name": "姑嬷",
       "reading": "gu55 ma55",
-      "type": "child",
+      "type": "formal",
       "wordId": "arPaZS"
     },
     {
@@ -832,7 +832,7 @@
   "父亲": [
     {
       "name": "郎罢",
-      "reading": "loung21 ma242",
+      "reading": "noung21 ma242",
       "type": "back",
       "wordId": "yiS9ae"
     },
@@ -932,12 +932,6 @@
       "reading": "ga53 ling33",
       "type": "formal",
       "wordId": "XR87zr"
-    },
-    {
-      "name": "依婶",
-      "reading": "i53 ling33",
-      "type": "formal",
-      "wordId": "76cu4S"
     },
     {
       "name": "依婶",
@@ -1255,6 +1249,11 @@
       "reading": "zeing55 noung55",
       "type": "back",
       "wordId": "RUUZ1F"
+    },
+    {
+      "name": "橄榄孙",
+      "reading": "ga21 lang21 noung55",
+      "type": "back"
     }
   ],
   "曾孙女婿": [
