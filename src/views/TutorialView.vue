@@ -76,25 +76,8 @@
     <ul class="text-wheat-600 space-y-1.5">
       <li class="flex items-center gap-2">
         <i-mdi-link-variant /><Link
-          href="https://jcnf40n3hvft.feishu.cn/wiki/QJ9WwaEHvihROKkEJ6uc2kzsnCc?fromScene=spaceOverview"
-          >榕拼方案规范文档</Link
-        >
-      </li>
-      <li class="flex items-center gap-2">
-        <i-mdi-link-variant /><Link
-          href="https://jcnf40n3hvft.feishu.cn/wiki/Xs7HwuxwUiV4cmkzrrPck9uTnne?fromScene=spaceOverview"
-          >榕拼方案规范文档分册：福州城里</Link
-        >
-      </li>
-      <li class="flex items-center gap-2">
-        <i-mdi-link-variant /><Link href="https://rime.im/"
-          >RIME | 中州韻輸入法引擎</Link
-        >
-      </li>
-      <li class="flex items-center gap-2">
-        <i-mdi-link-variant /><Link
           href="https://github.com/Nang-muoi-sing/Input-method"
-          >Nang-muoi-sing/Input-method | GitHub</Link
+          >榕拼输入法 Nang-muoi-sing/Input-method | GitHub</Link
         >
       </li>
     </ul>
